@@ -1,0 +1,13 @@
+export { accountDescription } from './account';
+export { crmDescription } from './crm';
+export { hrDescription } from './hr';
+export { mailDescription } from './mail';
+export { mrpDescription } from './mrp';
+export { posDescription } from './pos';
+export { productDescription } from './product';
+export { projectDescription } from './project';
+export { purchaseDescription } from './purchase';
+export { resDescription } from './res';
+export { saleDescription } from './sale';
+export { stockDescription } from './stock';
+export { uomDescription } from './uom';
