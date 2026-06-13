@@ -27,13 +27,13 @@ export const uomDescription: INodeProperties[] = [
 					}
 				},
 				{
-					"name": "Create Uom Category",
-					"value": "Create Uom Category",
-					"action": "Create Product UoM Categories",
-					"description": "Create a new uom.category record. Uses Odoo `create` method.",
+					"name": "Upsert Uom Category",
+					"value": "Upsert Uom Category",
+					"action": "Upsert Category",
+					"description": "Create or update uom.category record.\n\nSearch by name (UoM Category Name) from `_key`. If found → update with data fields, if not → create new record.",
 					"routing": {
 						"request": {
-							"method": "POST",
+							"method": "PUT",
 							"url": "=/api/uom.category"
 						}
 					}
@@ -46,18 +46,6 @@ export const uomDescription: INodeProperties[] = [
 					"routing": {
 						"request": {
 							"method": "GET",
-							"url": "=/api/uom.category/{{$parameter[\"id\"]}}"
-						}
-					}
-				},
-				{
-					"name": "Update Uom Category",
-					"value": "Update Uom Category",
-					"action": "Update Product UoM Categories",
-					"description": "Update an existing uom.category record. Uses Odoo `write` method.",
-					"routing": {
-						"request": {
-							"method": "PUT",
 							"url": "=/api/uom.category/{{$parameter[\"id\"]}}"
 						}
 					}
@@ -99,13 +87,13 @@ export const uomDescription: INodeProperties[] = [
 					}
 				},
 				{
-					"name": "Create Uom Uom",
-					"value": "Create Uom Uom",
-					"action": "Create Product Unit of Measure",
-					"description": "Create a new uom.uom record. Uses Odoo `create` method.",
+					"name": "Upsert Uom Uom",
+					"value": "Upsert Uom Uom",
+					"action": "Upsert Uom",
+					"description": "Create or update uom.uom record.\n\nSearch by name (UoM Name) from `_key`. If found → update with data fields, if not → create new record.",
 					"routing": {
 						"request": {
-							"method": "POST",
+							"method": "PUT",
 							"url": "=/api/uom.uom"
 						}
 					}
@@ -118,18 +106,6 @@ export const uomDescription: INodeProperties[] = [
 					"routing": {
 						"request": {
 							"method": "GET",
-							"url": "=/api/uom.uom/{{$parameter[\"id\"]}}"
-						}
-					}
-				},
-				{
-					"name": "Update Uom Uom",
-					"value": "Update Uom Uom",
-					"action": "Update Product Unit of Measure",
-					"description": "Update an existing uom.uom record. Uses Odoo `write` method.",
-					"routing": {
-						"request": {
-							"method": "PUT",
 							"url": "=/api/uom.uom/{{$parameter[\"id\"]}}"
 						}
 					}
@@ -329,7 +305,7 @@ export const uomDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "POST /api/uom.category",
+			"displayName": "PUT /api/uom.category",
 			"name": "operation",
 			"type": "notice",
 			"typeOptions": {
@@ -342,7 +318,33 @@ export const uomDescription: INodeProperties[] = [
 						"Uom"
 					],
 					"operation": [
-						"Create Uom Category"
+						"Upsert Uom Category"
+					]
+				}
+			}
+		},
+		{
+			"required": true,
+			"displayName": "Key",
+			"name": "_key",
+			"type": "json",
+			"default": "{}",
+			"description": "Search criteria to find existing record by UoM Category Name",
+			"routing": {
+				"send": {
+					"property": "_key",
+					"propertyInDotNotation": false,
+					"type": "body",
+					"value": "={{ JSON.parse($value) }}"
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Uom"
+					],
+					"operation": [
+						"Upsert Uom Category"
 					]
 				}
 			}
@@ -367,13 +369,12 @@ export const uomDescription: INodeProperties[] = [
 						"Uom"
 					],
 					"operation": [
-						"Create Uom Category"
+						"Upsert Uom Category"
 					]
 				}
 			}
 		},
 		{
-			"required": true,
 			"displayName": "Name",
 			"name": "name",
 			"type": "string",
@@ -393,7 +394,7 @@ export const uomDescription: INodeProperties[] = [
 						"Uom"
 					],
 					"operation": [
-						"Create Uom Category"
+						"Upsert Uom Category"
 					]
 				}
 			}
@@ -418,7 +419,7 @@ export const uomDescription: INodeProperties[] = [
 						"Uom"
 					],
 					"operation": [
-						"Create Uom Category"
+						"Upsert Uom Category"
 					]
 				}
 			}
@@ -443,7 +444,7 @@ export const uomDescription: INodeProperties[] = [
 						"Uom"
 					],
 					"operation": [
-						"Create Uom Category"
+						"Upsert Uom Category"
 					]
 				}
 			}
@@ -531,143 +532,6 @@ export const uomDescription: INodeProperties[] = [
 					],
 					"operation": [
 						"Get Uom Category"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "PUT /api/uom.category/{id}",
-			"name": "operation",
-			"type": "notice",
-			"typeOptions": {
-				"theme": "info"
-			},
-			"default": "",
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Uom"
-					],
-					"operation": [
-						"Update Uom Category"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "ID",
-			"name": "id",
-			"required": true,
-			"description": "Record ID to update",
-			"default": 0,
-			"type": "number",
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Uom"
-					],
-					"operation": [
-						"Update Uom Category"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Is Pos Groupable",
-			"name": "is_pos_groupable",
-			"type": "boolean",
-			"default": true,
-			"description": "Group Products in POS",
-			"routing": {
-				"send": {
-					"property": "is_pos_groupable",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ $value }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Uom"
-					],
-					"operation": [
-						"Update Uom Category"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Name",
-			"name": "name",
-			"type": "string",
-			"default": "",
-			"description": "Unit of Measure Category",
-			"routing": {
-				"send": {
-					"property": "name",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ $value }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Uom"
-					],
-					"operation": [
-						"Update Uom Category"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Reference Uom ID",
-			"name": "reference_uom_id",
-			"type": "number",
-			"default": 0,
-			"description": "ID of related uom.uom",
-			"routing": {
-				"send": {
-					"property": "reference_uom_id",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ $value }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Uom"
-					],
-					"operation": [
-						"Update Uom Category"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
-			"type": "string",
-			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
-			"required": false,
-			"routing": {
-				"request": {
-					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
-					}
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Uom"
-					],
-					"operation": [
-						"Update Uom Category"
 					]
 				}
 			}
@@ -1039,7 +903,7 @@ export const uomDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "POST /api/uom.uom",
+			"displayName": "PUT /api/uom.uom",
 			"name": "operation",
 			"type": "notice",
 			"typeOptions": {
@@ -1052,7 +916,33 @@ export const uomDescription: INodeProperties[] = [
 						"Uom"
 					],
 					"operation": [
-						"Create Uom Uom"
+						"Upsert Uom Uom"
+					]
+				}
+			}
+		},
+		{
+			"required": true,
+			"displayName": "Key",
+			"name": "_key",
+			"type": "json",
+			"default": "{}",
+			"description": "Search criteria to find existing record by UoM Name",
+			"routing": {
+				"send": {
+					"property": "_key",
+					"propertyInDotNotation": false,
+					"type": "body",
+					"value": "={{ JSON.parse($value) }}"
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Uom"
+					],
+					"operation": [
+						"Upsert Uom Uom"
 					]
 				}
 			}
@@ -1077,13 +967,12 @@ export const uomDescription: INodeProperties[] = [
 						"Uom"
 					],
 					"operation": [
-						"Create Uom Uom"
+						"Upsert Uom Uom"
 					]
 				}
 			}
 		},
 		{
-			"required": true,
 			"displayName": "Category ID",
 			"name": "category_id",
 			"type": "number",
@@ -1103,7 +992,7 @@ export const uomDescription: INodeProperties[] = [
 						"Uom"
 					],
 					"operation": [
-						"Create Uom Uom"
+						"Upsert Uom Uom"
 					]
 				}
 			}
@@ -1128,13 +1017,12 @@ export const uomDescription: INodeProperties[] = [
 						"Uom"
 					],
 					"operation": [
-						"Create Uom Uom"
+						"Upsert Uom Uom"
 					]
 				}
 			}
 		},
 		{
-			"required": true,
 			"displayName": "Factor",
 			"name": "factor",
 			"type": "number",
@@ -1154,13 +1042,12 @@ export const uomDescription: INodeProperties[] = [
 						"Uom"
 					],
 					"operation": [
-						"Create Uom Uom"
+						"Upsert Uom Uom"
 					]
 				}
 			}
 		},
 		{
-			"required": true,
 			"displayName": "Factor Inv",
 			"name": "factor_inv",
 			"type": "number",
@@ -1180,7 +1067,7 @@ export const uomDescription: INodeProperties[] = [
 						"Uom"
 					],
 					"operation": [
-						"Create Uom Uom"
+						"Upsert Uom Uom"
 					]
 				}
 			}
@@ -1205,7 +1092,7 @@ export const uomDescription: INodeProperties[] = [
 						"Uom"
 					],
 					"operation": [
-						"Create Uom Uom"
+						"Upsert Uom Uom"
 					]
 				}
 			}
@@ -1230,7 +1117,7 @@ export const uomDescription: INodeProperties[] = [
 						"Uom"
 					],
 					"operation": [
-						"Create Uom Uom"
+						"Upsert Uom Uom"
 					]
 				}
 			}
@@ -1255,13 +1142,12 @@ export const uomDescription: INodeProperties[] = [
 						"Uom"
 					],
 					"operation": [
-						"Create Uom Uom"
+						"Upsert Uom Uom"
 					]
 				}
 			}
 		},
 		{
-			"required": true,
 			"displayName": "Name",
 			"name": "name",
 			"type": "string",
@@ -1281,7 +1167,7 @@ export const uomDescription: INodeProperties[] = [
 						"Uom"
 					],
 					"operation": [
-						"Create Uom Uom"
+						"Upsert Uom Uom"
 					]
 				}
 			}
@@ -1306,13 +1192,12 @@ export const uomDescription: INodeProperties[] = [
 						"Uom"
 					],
 					"operation": [
-						"Create Uom Uom"
+						"Upsert Uom Uom"
 					]
 				}
 			}
 		},
 		{
-			"required": true,
 			"displayName": "Rounding",
 			"name": "rounding",
 			"type": "number",
@@ -1332,13 +1217,12 @@ export const uomDescription: INodeProperties[] = [
 						"Uom"
 					],
 					"operation": [
-						"Create Uom Uom"
+						"Upsert Uom Uom"
 					]
 				}
 			}
 		},
 		{
-			"required": true,
 			"displayName": "Uom Type",
 			"name": "uom_type",
 			"type": "string",
@@ -1358,7 +1242,7 @@ export const uomDescription: INodeProperties[] = [
 						"Uom"
 					],
 					"operation": [
-						"Create Uom Uom"
+						"Upsert Uom Uom"
 					]
 				}
 			}
@@ -1383,7 +1267,7 @@ export const uomDescription: INodeProperties[] = [
 						"Uom"
 					],
 					"operation": [
-						"Create Uom Uom"
+						"Upsert Uom Uom"
 					]
 				}
 			}
@@ -1471,368 +1355,6 @@ export const uomDescription: INodeProperties[] = [
 					],
 					"operation": [
 						"Get Uom Uom"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "PUT /api/uom.uom/{id}",
-			"name": "operation",
-			"type": "notice",
-			"typeOptions": {
-				"theme": "info"
-			},
-			"default": "",
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Uom"
-					],
-					"operation": [
-						"Update Uom Uom"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "ID",
-			"name": "id",
-			"required": true,
-			"description": "Record ID to update",
-			"default": 0,
-			"type": "number",
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Uom"
-					],
-					"operation": [
-						"Update Uom Uom"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Active",
-			"name": "active",
-			"type": "boolean",
-			"default": true,
-			"description": "Active",
-			"routing": {
-				"send": {
-					"property": "active",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ $value }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Uom"
-					],
-					"operation": [
-						"Update Uom Uom"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Category ID",
-			"name": "category_id",
-			"type": "number",
-			"default": 0,
-			"description": "ID of related uom.category",
-			"routing": {
-				"send": {
-					"property": "category_id",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ $value }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Uom"
-					],
-					"operation": [
-						"Update Uom Uom"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Color",
-			"name": "color",
-			"type": "number",
-			"default": 0,
-			"description": "Color",
-			"routing": {
-				"send": {
-					"property": "color",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ $value }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Uom"
-					],
-					"operation": [
-						"Update Uom Uom"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Factor",
-			"name": "factor",
-			"type": "number",
-			"default": 0,
-			"description": "Ratio",
-			"routing": {
-				"send": {
-					"property": "factor",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ $value }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Uom"
-					],
-					"operation": [
-						"Update Uom Uom"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Factor Inv",
-			"name": "factor_inv",
-			"type": "number",
-			"default": 0,
-			"description": "Bigger Ratio",
-			"routing": {
-				"send": {
-					"property": "factor_inv",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ $value }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Uom"
-					],
-					"operation": [
-						"Update Uom Uom"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Fiscal Country Codes",
-			"name": "fiscal_country_codes",
-			"type": "string",
-			"default": "",
-			"description": "Fiscal Country Codes",
-			"routing": {
-				"send": {
-					"property": "fiscal_country_codes",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ $value }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Uom"
-					],
-					"operation": [
-						"Update Uom Uom"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Is Pos Groupable",
-			"name": "is_pos_groupable",
-			"type": "boolean",
-			"default": true,
-			"description": "Group Products in POS",
-			"routing": {
-				"send": {
-					"property": "is_pos_groupable",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ $value }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Uom"
-					],
-					"operation": [
-						"Update Uom Uom"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "L 10 N ID Uom Code",
-			"name": "l10n_id_uom_code",
-			"type": "number",
-			"default": 0,
-			"description": "ID of related l10n_id_efaktur_coretax.uom.code",
-			"routing": {
-				"send": {
-					"property": "l10n_id_uom_code",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ $value }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Uom"
-					],
-					"operation": [
-						"Update Uom Uom"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Name",
-			"name": "name",
-			"type": "string",
-			"default": "",
-			"description": "Unit of Measure",
-			"routing": {
-				"send": {
-					"property": "name",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ $value }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Uom"
-					],
-					"operation": [
-						"Update Uom Uom"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Ratio",
-			"name": "ratio",
-			"type": "number",
-			"default": 0,
-			"description": "Combined Ratio",
-			"routing": {
-				"send": {
-					"property": "ratio",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ $value }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Uom"
-					],
-					"operation": [
-						"Update Uom Uom"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Rounding",
-			"name": "rounding",
-			"type": "number",
-			"default": 0,
-			"description": "Rounding Precision",
-			"routing": {
-				"send": {
-					"property": "rounding",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ $value }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Uom"
-					],
-					"operation": [
-						"Update Uom Uom"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Uom Type",
-			"name": "uom_type",
-			"type": "string",
-			"default": "",
-			"description": "Type",
-			"routing": {
-				"send": {
-					"property": "uom_type",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ $value }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Uom"
-					],
-					"operation": [
-						"Update Uom Uom"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
-			"type": "string",
-			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
-			"required": false,
-			"routing": {
-				"request": {
-					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
-					}
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Uom"
-					],
-					"operation": [
-						"Update Uom Uom"
 					]
 				}
 			}
