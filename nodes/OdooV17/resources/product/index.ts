@@ -63,18 +63,6 @@ export const productDescription: INodeProperties[] = [
 					}
 				},
 				{
-					"name": "Call Product Attribute",
-					"value": "Call Product Attribute",
-					"action": "Call method on Product Attribute",
-					"description": "Call any method on a product.attribute record. Uses Odoo `execute_kw` with method name.",
-					"routing": {
-						"request": {
-							"method": "POST",
-							"url": "=/api/product.attribute/{{$parameter[\"id\"]}}/call"
-						}
-					}
-				},
-				{
 					"name": "Search Product Attribute Value",
 					"value": "Search Product Attribute Value",
 					"action": "Search & read Attribute Value",
@@ -119,18 +107,6 @@ export const productDescription: INodeProperties[] = [
 						"request": {
 							"method": "DELETE",
 							"url": "=/api/product.attribute.value/{{$parameter[\"id\"]}}"
-						}
-					}
-				},
-				{
-					"name": "Call Product Attribute Value",
-					"value": "Call Product Attribute Value",
-					"action": "Call method on Attribute Value",
-					"description": "Call any method on a product.attribute.value record. Uses Odoo `execute_kw` with method name.",
-					"routing": {
-						"request": {
-							"method": "POST",
-							"url": "=/api/product.attribute.value/{{$parameter[\"id\"]}}/call"
 						}
 					}
 				},
@@ -183,18 +159,6 @@ export const productDescription: INodeProperties[] = [
 					}
 				},
 				{
-					"name": "Call Product Category",
-					"value": "Call Product Category",
-					"action": "Call method on Product Category",
-					"description": "Call any method on a product.category record. Uses Odoo `execute_kw` with method name.",
-					"routing": {
-						"request": {
-							"method": "POST",
-							"url": "=/api/product.category/{{$parameter[\"id\"]}}/call"
-						}
-					}
-				},
-				{
 					"name": "Search Product Product",
 					"value": "Search Product Product",
 					"action": "Search & read Product Variant",
@@ -243,18 +207,6 @@ export const productDescription: INodeProperties[] = [
 					}
 				},
 				{
-					"name": "Call Product Product",
-					"value": "Call Product Product",
-					"action": "Call method on Product Variant",
-					"description": "Call any method on a product.product record. Uses Odoo `execute_kw` with method name.",
-					"routing": {
-						"request": {
-							"method": "POST",
-							"url": "=/api/product.product/{{$parameter[\"id\"]}}/call"
-						}
-					}
-				},
-				{
 					"name": "Search Product Template",
 					"value": "Search Product Template",
 					"action": "Search & read Product",
@@ -299,18 +251,6 @@ export const productDescription: INodeProperties[] = [
 						"request": {
 							"method": "DELETE",
 							"url": "=/api/product.template/{{$parameter[\"id\"]}}"
-						}
-					}
-				},
-				{
-					"name": "Call Product Template",
-					"value": "Call Product Template",
-					"action": "Call method on Product",
-					"description": "Call any method on a product.template record. Uses Odoo `execute_kw` with method name.",
-					"routing": {
-						"request": {
-							"method": "POST",
-							"url": "=/api/product.template/{{$parameter[\"id\"]}}/call"
 						}
 					}
 				}
@@ -365,7 +305,7 @@ export const productDescription: INodeProperties[] = [
 			"displayName": "Fields",
 			"name": "fields",
 			"description": "Comma-separated field names to return",
-			"default": "name,default_code,list_price",
+			"default": "name,create_variant,id",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -389,7 +329,7 @@ export const productDescription: INodeProperties[] = [
 		{
 			"displayName": "Limit",
 			"name": "limit",
-			"default": 80,
+			"default": 20,
 			"type": "number",
 			"routing": {
 				"send": {
@@ -438,7 +378,7 @@ export const productDescription: INodeProperties[] = [
 			"displayName": "Order",
 			"name": "order",
 			"description": "Sort order, e.g. 'name asc' or 'create_date desc'",
-			"default": "",
+			"default": "name asc",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -460,16 +400,16 @@ export const productDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -705,16 +645,16 @@ export const productDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -770,7 +710,7 @@ export const productDescription: INodeProperties[] = [
 			"displayName": "Fields",
 			"name": "fields",
 			"description": "Comma-separated field names to return",
-			"default": "",
+			"default": "name,create_variant,id",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -792,16 +732,16 @@ export const productDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -854,16 +794,16 @@ export const productDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -874,143 +814,6 @@ export const productDescription: INodeProperties[] = [
 					],
 					"operation": [
 						"Delete Product Attribute"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "POST /api/product.attribute/{id}/call",
-			"name": "operation",
-			"type": "notice",
-			"typeOptions": {
-				"theme": "info"
-			},
-			"default": "",
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Product"
-					],
-					"operation": [
-						"Call Product Attribute"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "ID",
-			"name": "id",
-			"required": true,
-			"default": 0,
-			"type": "number",
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Product"
-					],
-					"operation": [
-						"Call Product Attribute"
-					]
-				}
-			}
-		},
-		{
-			"required": true,
-			"displayName": "Method",
-			"name": "method",
-			"type": "string",
-			"default": "action_confirm",
-			"description": "Method name to call",
-			"routing": {
-				"send": {
-					"property": "method",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ $value }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Product"
-					],
-					"operation": [
-						"Call Product Attribute"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Args",
-			"name": "args",
-			"type": "json",
-			"default": "[\n  null\n]",
-			"description": "Positional arguments",
-			"routing": {
-				"send": {
-					"property": "args",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ JSON.parse($value) }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Product"
-					],
-					"operation": [
-						"Call Product Attribute"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Kwargs",
-			"name": "kwargs",
-			"type": "json",
-			"default": "{}",
-			"description": "Keyword arguments",
-			"routing": {
-				"send": {
-					"property": "kwargs",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ JSON.parse($value) }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Product"
-					],
-					"operation": [
-						"Call Product Attribute"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
-			"type": "string",
-			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
-			"required": false,
-			"routing": {
-				"request": {
-					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
-					}
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Product"
-					],
-					"operation": [
-						"Call Product Attribute"
 					]
 				}
 			}
@@ -1063,7 +866,7 @@ export const productDescription: INodeProperties[] = [
 			"displayName": "Fields",
 			"name": "fields",
 			"description": "Comma-separated field names to return",
-			"default": "name,default_code,list_price",
+			"default": "name,attribute_id,color,id",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -1087,7 +890,7 @@ export const productDescription: INodeProperties[] = [
 		{
 			"displayName": "Limit",
 			"name": "limit",
-			"default": 80,
+			"default": 20,
 			"type": "number",
 			"routing": {
 				"send": {
@@ -1136,7 +939,7 @@ export const productDescription: INodeProperties[] = [
 			"displayName": "Order",
 			"name": "order",
 			"description": "Sort order, e.g. 'name asc' or 'create_date desc'",
-			"default": "",
+			"default": "sequence asc",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -1158,16 +961,16 @@ export const productDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -1503,16 +1306,16 @@ export const productDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -1568,7 +1371,7 @@ export const productDescription: INodeProperties[] = [
 			"displayName": "Fields",
 			"name": "fields",
 			"description": "Comma-separated field names to return",
-			"default": "",
+			"default": "name,attribute_id,color,id",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -1590,16 +1393,16 @@ export const productDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -1652,16 +1455,16 @@ export const productDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -1672,143 +1475,6 @@ export const productDescription: INodeProperties[] = [
 					],
 					"operation": [
 						"Delete Product Attribute Value"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "POST /api/product.attribute.value/{id}/call",
-			"name": "operation",
-			"type": "notice",
-			"typeOptions": {
-				"theme": "info"
-			},
-			"default": "",
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Product"
-					],
-					"operation": [
-						"Call Product Attribute Value"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "ID",
-			"name": "id",
-			"required": true,
-			"default": 0,
-			"type": "number",
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Product"
-					],
-					"operation": [
-						"Call Product Attribute Value"
-					]
-				}
-			}
-		},
-		{
-			"required": true,
-			"displayName": "Method",
-			"name": "method",
-			"type": "string",
-			"default": "action_confirm",
-			"description": "Method name to call",
-			"routing": {
-				"send": {
-					"property": "method",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ $value }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Product"
-					],
-					"operation": [
-						"Call Product Attribute Value"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Args",
-			"name": "args",
-			"type": "json",
-			"default": "[\n  null\n]",
-			"description": "Positional arguments",
-			"routing": {
-				"send": {
-					"property": "args",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ JSON.parse($value) }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Product"
-					],
-					"operation": [
-						"Call Product Attribute Value"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Kwargs",
-			"name": "kwargs",
-			"type": "json",
-			"default": "{}",
-			"description": "Keyword arguments",
-			"routing": {
-				"send": {
-					"property": "kwargs",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ JSON.parse($value) }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Product"
-					],
-					"operation": [
-						"Call Product Attribute Value"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
-			"type": "string",
-			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
-			"required": false,
-			"routing": {
-				"request": {
-					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
-					}
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Product"
-					],
-					"operation": [
-						"Call Product Attribute Value"
 					]
 				}
 			}
@@ -1861,7 +1527,7 @@ export const productDescription: INodeProperties[] = [
 			"displayName": "Fields",
 			"name": "fields",
 			"description": "Comma-separated field names to return",
-			"default": "name,default_code,list_price",
+			"default": "name,parent_id,id",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -1885,7 +1551,7 @@ export const productDescription: INodeProperties[] = [
 		{
 			"displayName": "Limit",
 			"name": "limit",
-			"default": 80,
+			"default": 20,
 			"type": "number",
 			"routing": {
 				"send": {
@@ -1934,7 +1600,7 @@ export const productDescription: INodeProperties[] = [
 			"displayName": "Order",
 			"name": "order",
 			"description": "Sort order, e.g. 'name asc' or 'create_date desc'",
-			"default": "",
+			"default": "name asc",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -1956,16 +1622,16 @@ export const productDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -2551,16 +2217,16 @@ export const productDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -2616,7 +2282,7 @@ export const productDescription: INodeProperties[] = [
 			"displayName": "Fields",
 			"name": "fields",
 			"description": "Comma-separated field names to return",
-			"default": "",
+			"default": "name,parent_id,id",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -2638,16 +2304,16 @@ export const productDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -2700,16 +2366,16 @@ export const productDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -2720,143 +2386,6 @@ export const productDescription: INodeProperties[] = [
 					],
 					"operation": [
 						"Delete Product Category"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "POST /api/product.category/{id}/call",
-			"name": "operation",
-			"type": "notice",
-			"typeOptions": {
-				"theme": "info"
-			},
-			"default": "",
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Product"
-					],
-					"operation": [
-						"Call Product Category"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "ID",
-			"name": "id",
-			"required": true,
-			"default": 0,
-			"type": "number",
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Product"
-					],
-					"operation": [
-						"Call Product Category"
-					]
-				}
-			}
-		},
-		{
-			"required": true,
-			"displayName": "Method",
-			"name": "method",
-			"type": "string",
-			"default": "action_confirm",
-			"description": "Method name to call",
-			"routing": {
-				"send": {
-					"property": "method",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ $value }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Product"
-					],
-					"operation": [
-						"Call Product Category"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Args",
-			"name": "args",
-			"type": "json",
-			"default": "[\n  null\n]",
-			"description": "Positional arguments",
-			"routing": {
-				"send": {
-					"property": "args",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ JSON.parse($value) }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Product"
-					],
-					"operation": [
-						"Call Product Category"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Kwargs",
-			"name": "kwargs",
-			"type": "json",
-			"default": "{}",
-			"description": "Keyword arguments",
-			"routing": {
-				"send": {
-					"property": "kwargs",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ JSON.parse($value) }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Product"
-					],
-					"operation": [
-						"Call Product Category"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
-			"type": "string",
-			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
-			"required": false,
-			"routing": {
-				"request": {
-					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
-					}
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Product"
-					],
-					"operation": [
-						"Call Product Category"
 					]
 				}
 			}
@@ -2909,7 +2438,7 @@ export const productDescription: INodeProperties[] = [
 			"displayName": "Fields",
 			"name": "fields",
 			"description": "Comma-separated field names to return",
-			"default": "name,default_code,list_price",
+			"default": "name,default_code,barcode,list_price,id",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -2933,7 +2462,7 @@ export const productDescription: INodeProperties[] = [
 		{
 			"displayName": "Limit",
 			"name": "limit",
-			"default": 80,
+			"default": 20,
 			"type": "number",
 			"routing": {
 				"send": {
@@ -2982,7 +2511,7 @@ export const productDescription: INodeProperties[] = [
 			"displayName": "Order",
 			"name": "order",
 			"description": "Sort order, e.g. 'name asc' or 'create_date desc'",
-			"default": "",
+			"default": "name asc",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -3004,16 +2533,16 @@ export const productDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -7899,16 +7428,16 @@ export const productDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -7964,7 +7493,7 @@ export const productDescription: INodeProperties[] = [
 			"displayName": "Fields",
 			"name": "fields",
 			"description": "Comma-separated field names to return",
-			"default": "",
+			"default": "name,default_code,barcode,list_price,id",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -7986,16 +7515,16 @@ export const productDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -8048,16 +7577,16 @@ export const productDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -8068,143 +7597,6 @@ export const productDescription: INodeProperties[] = [
 					],
 					"operation": [
 						"Delete Product Product"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "POST /api/product.product/{id}/call",
-			"name": "operation",
-			"type": "notice",
-			"typeOptions": {
-				"theme": "info"
-			},
-			"default": "",
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Product"
-					],
-					"operation": [
-						"Call Product Product"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "ID",
-			"name": "id",
-			"required": true,
-			"default": 0,
-			"type": "number",
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Product"
-					],
-					"operation": [
-						"Call Product Product"
-					]
-				}
-			}
-		},
-		{
-			"required": true,
-			"displayName": "Method",
-			"name": "method",
-			"type": "string",
-			"default": "action_confirm",
-			"description": "Method name to call",
-			"routing": {
-				"send": {
-					"property": "method",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ $value }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Product"
-					],
-					"operation": [
-						"Call Product Product"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Args",
-			"name": "args",
-			"type": "json",
-			"default": "[\n  null\n]",
-			"description": "Positional arguments",
-			"routing": {
-				"send": {
-					"property": "args",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ JSON.parse($value) }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Product"
-					],
-					"operation": [
-						"Call Product Product"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Kwargs",
-			"name": "kwargs",
-			"type": "json",
-			"default": "{}",
-			"description": "Keyword arguments",
-			"routing": {
-				"send": {
-					"property": "kwargs",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ JSON.parse($value) }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Product"
-					],
-					"operation": [
-						"Call Product Product"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
-			"type": "string",
-			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
-			"required": false,
-			"routing": {
-				"request": {
-					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
-					}
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Product"
-					],
-					"operation": [
-						"Call Product Product"
 					]
 				}
 			}
@@ -8257,7 +7649,7 @@ export const productDescription: INodeProperties[] = [
 			"displayName": "Fields",
 			"name": "fields",
 			"description": "Comma-separated field names to return",
-			"default": "name,default_code,list_price",
+			"default": "name,default_code,barcode,list_price,id",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -8281,7 +7673,7 @@ export const productDescription: INodeProperties[] = [
 		{
 			"displayName": "Limit",
 			"name": "limit",
-			"default": 80,
+			"default": 20,
 			"type": "number",
 			"routing": {
 				"send": {
@@ -8330,7 +7722,7 @@ export const productDescription: INodeProperties[] = [
 			"displayName": "Order",
 			"name": "order",
 			"description": "Sort order, e.g. 'name asc' or 'create_date desc'",
-			"default": "",
+			"default": "name asc",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -8352,16 +7744,16 @@ export const productDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -12547,16 +11939,16 @@ export const productDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -12612,7 +12004,7 @@ export const productDescription: INodeProperties[] = [
 			"displayName": "Fields",
 			"name": "fields",
 			"description": "Comma-separated field names to return",
-			"default": "",
+			"default": "name,default_code,barcode,list_price,id",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -12634,16 +12026,16 @@ export const productDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -12696,16 +12088,16 @@ export const productDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -12716,143 +12108,6 @@ export const productDescription: INodeProperties[] = [
 					],
 					"operation": [
 						"Delete Product Template"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "POST /api/product.template/{id}/call",
-			"name": "operation",
-			"type": "notice",
-			"typeOptions": {
-				"theme": "info"
-			},
-			"default": "",
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Product"
-					],
-					"operation": [
-						"Call Product Template"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "ID",
-			"name": "id",
-			"required": true,
-			"default": 0,
-			"type": "number",
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Product"
-					],
-					"operation": [
-						"Call Product Template"
-					]
-				}
-			}
-		},
-		{
-			"required": true,
-			"displayName": "Method",
-			"name": "method",
-			"type": "string",
-			"default": "action_confirm",
-			"description": "Method name to call",
-			"routing": {
-				"send": {
-					"property": "method",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ $value }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Product"
-					],
-					"operation": [
-						"Call Product Template"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Args",
-			"name": "args",
-			"type": "json",
-			"default": "[\n  null\n]",
-			"description": "Positional arguments",
-			"routing": {
-				"send": {
-					"property": "args",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ JSON.parse($value) }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Product"
-					],
-					"operation": [
-						"Call Product Template"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Kwargs",
-			"name": "kwargs",
-			"type": "json",
-			"default": "{}",
-			"description": "Keyword arguments",
-			"routing": {
-				"send": {
-					"property": "kwargs",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ JSON.parse($value) }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Product"
-					],
-					"operation": [
-						"Call Product Template"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
-			"type": "string",
-			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
-			"required": false,
-			"routing": {
-				"request": {
-					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
-					}
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Product"
-					],
-					"operation": [
-						"Call Product Template"
 					]
 				}
 			}

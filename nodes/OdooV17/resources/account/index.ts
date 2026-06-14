@@ -63,18 +63,6 @@ export const accountDescription: INodeProperties[] = [
 					}
 				},
 				{
-					"name": "Call Account Account",
-					"value": "Call Account Account",
-					"action": "Call method on Account",
-					"description": "Call any method on a account.account record. Uses Odoo `execute_kw` with method name.",
-					"routing": {
-						"request": {
-							"method": "POST",
-							"url": "=/api/account.account/{{$parameter[\"id\"]}}/call"
-						}
-					}
-				},
-				{
 					"name": "Search Account Journal",
 					"value": "Search Account Journal",
 					"action": "Search & read Journal",
@@ -119,18 +107,6 @@ export const accountDescription: INodeProperties[] = [
 						"request": {
 							"method": "DELETE",
 							"url": "=/api/account.journal/{{$parameter[\"id\"]}}"
-						}
-					}
-				},
-				{
-					"name": "Call Account Journal",
-					"value": "Call Account Journal",
-					"action": "Call method on Journal",
-					"description": "Call any method on a account.journal record. Uses Odoo `execute_kw` with method name.",
-					"routing": {
-						"request": {
-							"method": "POST",
-							"url": "=/api/account.journal/{{$parameter[\"id\"]}}/call"
 						}
 					}
 				},
@@ -183,18 +159,6 @@ export const accountDescription: INodeProperties[] = [
 					}
 				},
 				{
-					"name": "Call Account Move",
-					"value": "Call Account Move",
-					"action": "Call method on Journal Entry",
-					"description": "Call any method on a account.move record. Uses Odoo `execute_kw` with method name.",
-					"routing": {
-						"request": {
-							"method": "POST",
-							"url": "=/api/account.move/{{$parameter[\"id\"]}}/call"
-						}
-					}
-				},
-				{
 					"name": "Search Account Move Line",
 					"value": "Search Account Move Line",
 					"action": "Search & read Journal Item",
@@ -239,18 +203,6 @@ export const accountDescription: INodeProperties[] = [
 						"request": {
 							"method": "DELETE",
 							"url": "=/api/account.move.line/{{$parameter[\"id\"]}}"
-						}
-					}
-				},
-				{
-					"name": "Call Account Move Line",
-					"value": "Call Account Move Line",
-					"action": "Call method on Journal Item",
-					"description": "Call any method on a account.move.line record. Uses Odoo `execute_kw` with method name.",
-					"routing": {
-						"request": {
-							"method": "POST",
-							"url": "=/api/account.move.line/{{$parameter[\"id\"]}}/call"
 						}
 					}
 				},
@@ -303,18 +255,6 @@ export const accountDescription: INodeProperties[] = [
 					}
 				},
 				{
-					"name": "Call Account Payment",
-					"value": "Call Account Payment",
-					"action": "Call method on Payments",
-					"description": "Call any method on a account.payment record. Uses Odoo `execute_kw` with method name.",
-					"routing": {
-						"request": {
-							"method": "POST",
-							"url": "=/api/account.payment/{{$parameter[\"id\"]}}/call"
-						}
-					}
-				},
-				{
 					"name": "Search Account Tax",
 					"value": "Search Account Tax",
 					"action": "Search & read Tax",
@@ -363,18 +303,6 @@ export const accountDescription: INodeProperties[] = [
 					}
 				},
 				{
-					"name": "Call Account Tax",
-					"value": "Call Account Tax",
-					"action": "Call method on Tax",
-					"description": "Call any method on a account.tax record. Uses Odoo `execute_kw` with method name.",
-					"routing": {
-						"request": {
-							"method": "POST",
-							"url": "=/api/account.tax/{{$parameter[\"id\"]}}/call"
-						}
-					}
-				},
-				{
 					"name": "Search Account Tax Group",
 					"value": "Search Account Tax Group",
 					"action": "Search & read Tax Group",
@@ -419,18 +347,6 @@ export const accountDescription: INodeProperties[] = [
 						"request": {
 							"method": "DELETE",
 							"url": "=/api/account.tax.group/{{$parameter[\"id\"]}}"
-						}
-					}
-				},
-				{
-					"name": "Call Account Tax Group",
-					"value": "Call Account Tax Group",
-					"action": "Call method on Tax Group",
-					"description": "Call any method on a account.tax.group record. Uses Odoo `execute_kw` with method name.",
-					"routing": {
-						"request": {
-							"method": "POST",
-							"url": "=/api/account.tax.group/{{$parameter[\"id\"]}}/call"
 						}
 					}
 				}
@@ -485,7 +401,7 @@ export const accountDescription: INodeProperties[] = [
 			"displayName": "Fields",
 			"name": "fields",
 			"description": "Comma-separated field names to return",
-			"default": "name,default_code,list_price",
+			"default": "name,code,id",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -509,7 +425,7 @@ export const accountDescription: INodeProperties[] = [
 		{
 			"displayName": "Limit",
 			"name": "limit",
-			"default": 80,
+			"default": 20,
 			"type": "number",
 			"routing": {
 				"send": {
@@ -558,7 +474,7 @@ export const accountDescription: INodeProperties[] = [
 			"displayName": "Order",
 			"name": "order",
 			"description": "Sort order, e.g. 'name asc' or 'create_date desc'",
-			"default": "",
+			"default": "code asc",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -580,16 +496,16 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -1450,16 +1366,16 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -1515,7 +1431,7 @@ export const accountDescription: INodeProperties[] = [
 			"displayName": "Fields",
 			"name": "fields",
 			"description": "Comma-separated field names to return",
-			"default": "",
+			"default": "name,code,id",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -1537,16 +1453,16 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -1599,16 +1515,16 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -1619,143 +1535,6 @@ export const accountDescription: INodeProperties[] = [
 					],
 					"operation": [
 						"Delete Account Account"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "POST /api/account.account/{id}/call",
-			"name": "operation",
-			"type": "notice",
-			"typeOptions": {
-				"theme": "info"
-			},
-			"default": "",
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Account"
-					],
-					"operation": [
-						"Call Account Account"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "ID",
-			"name": "id",
-			"required": true,
-			"default": 0,
-			"type": "number",
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Account"
-					],
-					"operation": [
-						"Call Account Account"
-					]
-				}
-			}
-		},
-		{
-			"required": true,
-			"displayName": "Method",
-			"name": "method",
-			"type": "string",
-			"default": "action_confirm",
-			"description": "Method name to call",
-			"routing": {
-				"send": {
-					"property": "method",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ $value }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Account"
-					],
-					"operation": [
-						"Call Account Account"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Args",
-			"name": "args",
-			"type": "json",
-			"default": "[\n  null\n]",
-			"description": "Positional arguments",
-			"routing": {
-				"send": {
-					"property": "args",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ JSON.parse($value) }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Account"
-					],
-					"operation": [
-						"Call Account Account"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Kwargs",
-			"name": "kwargs",
-			"type": "json",
-			"default": "{}",
-			"description": "Keyword arguments",
-			"routing": {
-				"send": {
-					"property": "kwargs",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ JSON.parse($value) }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Account"
-					],
-					"operation": [
-						"Call Account Account"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
-			"type": "string",
-			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
-			"required": false,
-			"routing": {
-				"request": {
-					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
-					}
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Account"
-					],
-					"operation": [
-						"Call Account Account"
 					]
 				}
 			}
@@ -1808,7 +1587,7 @@ export const accountDescription: INodeProperties[] = [
 			"displayName": "Fields",
 			"name": "fields",
 			"description": "Comma-separated field names to return",
-			"default": "name,default_code,list_price",
+			"default": "name,code,type,id",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -1832,7 +1611,7 @@ export const accountDescription: INodeProperties[] = [
 		{
 			"displayName": "Limit",
 			"name": "limit",
-			"default": 80,
+			"default": 20,
 			"type": "number",
 			"routing": {
 				"send": {
@@ -1881,7 +1660,7 @@ export const accountDescription: INodeProperties[] = [
 			"displayName": "Order",
 			"name": "order",
 			"description": "Sort order, e.g. 'name asc' or 'create_date desc'",
-			"default": "",
+			"default": "name asc",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -1903,16 +1682,16 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -3773,16 +3552,16 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -3838,7 +3617,7 @@ export const accountDescription: INodeProperties[] = [
 			"displayName": "Fields",
 			"name": "fields",
 			"description": "Comma-separated field names to return",
-			"default": "",
+			"default": "name,code,type,id",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -3860,16 +3639,16 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -3922,16 +3701,16 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -3942,143 +3721,6 @@ export const accountDescription: INodeProperties[] = [
 					],
 					"operation": [
 						"Delete Account Journal"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "POST /api/account.journal/{id}/call",
-			"name": "operation",
-			"type": "notice",
-			"typeOptions": {
-				"theme": "info"
-			},
-			"default": "",
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Account"
-					],
-					"operation": [
-						"Call Account Journal"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "ID",
-			"name": "id",
-			"required": true,
-			"default": 0,
-			"type": "number",
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Account"
-					],
-					"operation": [
-						"Call Account Journal"
-					]
-				}
-			}
-		},
-		{
-			"required": true,
-			"displayName": "Method",
-			"name": "method",
-			"type": "string",
-			"default": "action_confirm",
-			"description": "Method name to call",
-			"routing": {
-				"send": {
-					"property": "method",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ $value }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Account"
-					],
-					"operation": [
-						"Call Account Journal"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Args",
-			"name": "args",
-			"type": "json",
-			"default": "[\n  null\n]",
-			"description": "Positional arguments",
-			"routing": {
-				"send": {
-					"property": "args",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ JSON.parse($value) }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Account"
-					],
-					"operation": [
-						"Call Account Journal"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Kwargs",
-			"name": "kwargs",
-			"type": "json",
-			"default": "{}",
-			"description": "Keyword arguments",
-			"routing": {
-				"send": {
-					"property": "kwargs",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ JSON.parse($value) }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Account"
-					],
-					"operation": [
-						"Call Account Journal"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
-			"type": "string",
-			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
-			"required": false,
-			"routing": {
-				"request": {
-					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
-					}
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Account"
-					],
-					"operation": [
-						"Call Account Journal"
 					]
 				}
 			}
@@ -4131,7 +3773,7 @@ export const accountDescription: INodeProperties[] = [
 			"displayName": "Fields",
 			"name": "fields",
 			"description": "Comma-separated field names to return",
-			"default": "name,default_code,list_price",
+			"default": "name,partner_id,state,amount_total,id",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -4155,7 +3797,7 @@ export const accountDescription: INodeProperties[] = [
 		{
 			"displayName": "Limit",
 			"name": "limit",
-			"default": 80,
+			"default": 20,
 			"type": "number",
 			"routing": {
 				"send": {
@@ -4204,7 +3846,7 @@ export const accountDescription: INodeProperties[] = [
 			"displayName": "Order",
 			"name": "order",
 			"description": "Sort order, e.g. 'name asc' or 'create_date desc'",
-			"default": "",
+			"default": "date desc",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -4226,16 +3868,16 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -8171,16 +7813,16 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -8236,7 +7878,7 @@ export const accountDescription: INodeProperties[] = [
 			"displayName": "Fields",
 			"name": "fields",
 			"description": "Comma-separated field names to return",
-			"default": "",
+			"default": "name,partner_id,state,amount_total,id",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -8258,16 +7900,16 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -8320,16 +7962,16 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -8340,143 +7982,6 @@ export const accountDescription: INodeProperties[] = [
 					],
 					"operation": [
 						"Delete Account Move"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "POST /api/account.move/{id}/call",
-			"name": "operation",
-			"type": "notice",
-			"typeOptions": {
-				"theme": "info"
-			},
-			"default": "",
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Account"
-					],
-					"operation": [
-						"Call Account Move"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "ID",
-			"name": "id",
-			"required": true,
-			"default": 0,
-			"type": "number",
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Account"
-					],
-					"operation": [
-						"Call Account Move"
-					]
-				}
-			}
-		},
-		{
-			"required": true,
-			"displayName": "Method",
-			"name": "method",
-			"type": "string",
-			"default": "action_confirm",
-			"description": "Method name to call",
-			"routing": {
-				"send": {
-					"property": "method",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ $value }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Account"
-					],
-					"operation": [
-						"Call Account Move"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Args",
-			"name": "args",
-			"type": "json",
-			"default": "[\n  null\n]",
-			"description": "Positional arguments",
-			"routing": {
-				"send": {
-					"property": "args",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ JSON.parse($value) }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Account"
-					],
-					"operation": [
-						"Call Account Move"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Kwargs",
-			"name": "kwargs",
-			"type": "json",
-			"default": "{}",
-			"description": "Keyword arguments",
-			"routing": {
-				"send": {
-					"property": "kwargs",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ JSON.parse($value) }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Account"
-					],
-					"operation": [
-						"Call Account Move"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
-			"type": "string",
-			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
-			"required": false,
-			"routing": {
-				"request": {
-					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
-					}
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Account"
-					],
-					"operation": [
-						"Call Account Move"
 					]
 				}
 			}
@@ -8529,7 +8034,7 @@ export const accountDescription: INodeProperties[] = [
 			"displayName": "Fields",
 			"name": "fields",
 			"description": "Comma-separated field names to return",
-			"default": "name,default_code,list_price",
+			"default": "name,account_id,debit,credit,id",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -8553,7 +8058,7 @@ export const accountDescription: INodeProperties[] = [
 		{
 			"displayName": "Limit",
 			"name": "limit",
-			"default": 80,
+			"default": 20,
 			"type": "number",
 			"routing": {
 				"send": {
@@ -8602,7 +8107,7 @@ export const accountDescription: INodeProperties[] = [
 			"displayName": "Order",
 			"name": "order",
 			"description": "Sort order, e.g. 'name asc' or 'create_date desc'",
-			"default": "",
+			"default": "id asc",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -8624,16 +8129,16 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -10769,16 +10274,16 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -10834,7 +10339,7 @@ export const accountDescription: INodeProperties[] = [
 			"displayName": "Fields",
 			"name": "fields",
 			"description": "Comma-separated field names to return",
-			"default": "",
+			"default": "name,account_id,debit,credit,id",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -10856,16 +10361,16 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -10918,16 +10423,16 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -10938,143 +10443,6 @@ export const accountDescription: INodeProperties[] = [
 					],
 					"operation": [
 						"Delete Account Move Line"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "POST /api/account.move.line/{id}/call",
-			"name": "operation",
-			"type": "notice",
-			"typeOptions": {
-				"theme": "info"
-			},
-			"default": "",
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Account"
-					],
-					"operation": [
-						"Call Account Move Line"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "ID",
-			"name": "id",
-			"required": true,
-			"default": 0,
-			"type": "number",
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Account"
-					],
-					"operation": [
-						"Call Account Move Line"
-					]
-				}
-			}
-		},
-		{
-			"required": true,
-			"displayName": "Method",
-			"name": "method",
-			"type": "string",
-			"default": "action_confirm",
-			"description": "Method name to call",
-			"routing": {
-				"send": {
-					"property": "method",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ $value }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Account"
-					],
-					"operation": [
-						"Call Account Move Line"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Args",
-			"name": "args",
-			"type": "json",
-			"default": "[\n  null\n]",
-			"description": "Positional arguments",
-			"routing": {
-				"send": {
-					"property": "args",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ JSON.parse($value) }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Account"
-					],
-					"operation": [
-						"Call Account Move Line"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Kwargs",
-			"name": "kwargs",
-			"type": "json",
-			"default": "{}",
-			"description": "Keyword arguments",
-			"routing": {
-				"send": {
-					"property": "kwargs",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ JSON.parse($value) }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Account"
-					],
-					"operation": [
-						"Call Account Move Line"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
-			"type": "string",
-			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
-			"required": false,
-			"routing": {
-				"request": {
-					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
-					}
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Account"
-					],
-					"operation": [
-						"Call Account Move Line"
 					]
 				}
 			}
@@ -11127,7 +10495,7 @@ export const accountDescription: INodeProperties[] = [
 			"displayName": "Fields",
 			"name": "fields",
 			"description": "Comma-separated field names to return",
-			"default": "name,default_code,list_price",
+			"default": "name,state,amount,id",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -11151,7 +10519,7 @@ export const accountDescription: INodeProperties[] = [
 		{
 			"displayName": "Limit",
 			"name": "limit",
-			"default": 80,
+			"default": 20,
 			"type": "number",
 			"routing": {
 				"send": {
@@ -11200,7 +10568,7 @@ export const accountDescription: INodeProperties[] = [
 			"displayName": "Order",
 			"name": "order",
 			"description": "Sort order, e.g. 'name asc' or 'create_date desc'",
-			"default": "",
+			"default": "date desc",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -11222,16 +10590,16 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -16192,16 +15560,16 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -16257,7 +15625,7 @@ export const accountDescription: INodeProperties[] = [
 			"displayName": "Fields",
 			"name": "fields",
 			"description": "Comma-separated field names to return",
-			"default": "",
+			"default": "name,state,amount,id",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -16279,16 +15647,16 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -16341,16 +15709,16 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -16361,143 +15729,6 @@ export const accountDescription: INodeProperties[] = [
 					],
 					"operation": [
 						"Delete Account Payment"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "POST /api/account.payment/{id}/call",
-			"name": "operation",
-			"type": "notice",
-			"typeOptions": {
-				"theme": "info"
-			},
-			"default": "",
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Account"
-					],
-					"operation": [
-						"Call Account Payment"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "ID",
-			"name": "id",
-			"required": true,
-			"default": 0,
-			"type": "number",
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Account"
-					],
-					"operation": [
-						"Call Account Payment"
-					]
-				}
-			}
-		},
-		{
-			"required": true,
-			"displayName": "Method",
-			"name": "method",
-			"type": "string",
-			"default": "action_confirm",
-			"description": "Method name to call",
-			"routing": {
-				"send": {
-					"property": "method",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ $value }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Account"
-					],
-					"operation": [
-						"Call Account Payment"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Args",
-			"name": "args",
-			"type": "json",
-			"default": "[\n  null\n]",
-			"description": "Positional arguments",
-			"routing": {
-				"send": {
-					"property": "args",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ JSON.parse($value) }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Account"
-					],
-					"operation": [
-						"Call Account Payment"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Kwargs",
-			"name": "kwargs",
-			"type": "json",
-			"default": "{}",
-			"description": "Keyword arguments",
-			"routing": {
-				"send": {
-					"property": "kwargs",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ JSON.parse($value) }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Account"
-					],
-					"operation": [
-						"Call Account Payment"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
-			"type": "string",
-			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
-			"required": false,
-			"routing": {
-				"request": {
-					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
-					}
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Account"
-					],
-					"operation": [
-						"Call Account Payment"
 					]
 				}
 			}
@@ -16550,7 +15781,7 @@ export const accountDescription: INodeProperties[] = [
 			"displayName": "Fields",
 			"name": "fields",
 			"description": "Comma-separated field names to return",
-			"default": "name,default_code,list_price",
+			"default": "name,amount,type,id",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -16574,7 +15805,7 @@ export const accountDescription: INodeProperties[] = [
 		{
 			"displayName": "Limit",
 			"name": "limit",
-			"default": 80,
+			"default": 20,
 			"type": "number",
 			"routing": {
 				"send": {
@@ -16623,7 +15854,7 @@ export const accountDescription: INodeProperties[] = [
 			"displayName": "Order",
 			"name": "order",
 			"description": "Sort order, e.g. 'name asc' or 'create_date desc'",
-			"default": "",
+			"default": "name asc",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -16645,16 +15876,16 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -17540,16 +16771,16 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -17605,7 +16836,7 @@ export const accountDescription: INodeProperties[] = [
 			"displayName": "Fields",
 			"name": "fields",
 			"description": "Comma-separated field names to return",
-			"default": "",
+			"default": "name,amount,type,id",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -17627,16 +16858,16 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -17689,16 +16920,16 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -17709,143 +16940,6 @@ export const accountDescription: INodeProperties[] = [
 					],
 					"operation": [
 						"Delete Account Tax"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "POST /api/account.tax/{id}/call",
-			"name": "operation",
-			"type": "notice",
-			"typeOptions": {
-				"theme": "info"
-			},
-			"default": "",
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Account"
-					],
-					"operation": [
-						"Call Account Tax"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "ID",
-			"name": "id",
-			"required": true,
-			"default": 0,
-			"type": "number",
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Account"
-					],
-					"operation": [
-						"Call Account Tax"
-					]
-				}
-			}
-		},
-		{
-			"required": true,
-			"displayName": "Method",
-			"name": "method",
-			"type": "string",
-			"default": "action_confirm",
-			"description": "Method name to call",
-			"routing": {
-				"send": {
-					"property": "method",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ $value }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Account"
-					],
-					"operation": [
-						"Call Account Tax"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Args",
-			"name": "args",
-			"type": "json",
-			"default": "[\n  null\n]",
-			"description": "Positional arguments",
-			"routing": {
-				"send": {
-					"property": "args",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ JSON.parse($value) }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Account"
-					],
-					"operation": [
-						"Call Account Tax"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Kwargs",
-			"name": "kwargs",
-			"type": "json",
-			"default": "{}",
-			"description": "Keyword arguments",
-			"routing": {
-				"send": {
-					"property": "kwargs",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ JSON.parse($value) }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Account"
-					],
-					"operation": [
-						"Call Account Tax"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
-			"type": "string",
-			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
-			"required": false,
-			"routing": {
-				"request": {
-					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
-					}
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Account"
-					],
-					"operation": [
-						"Call Account Tax"
 					]
 				}
 			}
@@ -17898,7 +16992,7 @@ export const accountDescription: INodeProperties[] = [
 			"displayName": "Fields",
 			"name": "fields",
 			"description": "Comma-separated field names to return",
-			"default": "name,default_code,list_price",
+			"default": "name,id",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -17922,7 +17016,7 @@ export const accountDescription: INodeProperties[] = [
 		{
 			"displayName": "Limit",
 			"name": "limit",
-			"default": 80,
+			"default": 20,
 			"type": "number",
 			"routing": {
 				"send": {
@@ -17971,7 +17065,7 @@ export const accountDescription: INodeProperties[] = [
 			"displayName": "Order",
 			"name": "order",
 			"description": "Sort order, e.g. 'name asc' or 'create_date desc'",
-			"default": "",
+			"default": "name asc",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -17993,16 +17087,16 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -18288,16 +17382,16 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -18353,7 +17447,7 @@ export const accountDescription: INodeProperties[] = [
 			"displayName": "Fields",
 			"name": "fields",
 			"description": "Comma-separated field names to return",
-			"default": "",
+			"default": "name,id",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -18375,16 +17469,16 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -18437,16 +17531,16 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -18457,143 +17551,6 @@ export const accountDescription: INodeProperties[] = [
 					],
 					"operation": [
 						"Delete Account Tax Group"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "POST /api/account.tax.group/{id}/call",
-			"name": "operation",
-			"type": "notice",
-			"typeOptions": {
-				"theme": "info"
-			},
-			"default": "",
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Account"
-					],
-					"operation": [
-						"Call Account Tax Group"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "ID",
-			"name": "id",
-			"required": true,
-			"default": 0,
-			"type": "number",
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Account"
-					],
-					"operation": [
-						"Call Account Tax Group"
-					]
-				}
-			}
-		},
-		{
-			"required": true,
-			"displayName": "Method",
-			"name": "method",
-			"type": "string",
-			"default": "action_confirm",
-			"description": "Method name to call",
-			"routing": {
-				"send": {
-					"property": "method",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ $value }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Account"
-					],
-					"operation": [
-						"Call Account Tax Group"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Args",
-			"name": "args",
-			"type": "json",
-			"default": "[\n  null\n]",
-			"description": "Positional arguments",
-			"routing": {
-				"send": {
-					"property": "args",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ JSON.parse($value) }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Account"
-					],
-					"operation": [
-						"Call Account Tax Group"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Kwargs",
-			"name": "kwargs",
-			"type": "json",
-			"default": "{}",
-			"description": "Keyword arguments",
-			"routing": {
-				"send": {
-					"property": "kwargs",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ JSON.parse($value) }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Account"
-					],
-					"operation": [
-						"Call Account Tax Group"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
-			"type": "string",
-			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
-			"required": false,
-			"routing": {
-				"request": {
-					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
-					}
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Account"
-					],
-					"operation": [
-						"Call Account Tax Group"
 					]
 				}
 			}

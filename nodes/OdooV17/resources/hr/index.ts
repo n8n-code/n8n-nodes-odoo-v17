@@ -63,18 +63,6 @@ export const hrDescription: INodeProperties[] = [
 					}
 				},
 				{
-					"name": "Call Hr Department",
-					"value": "Call Hr Department",
-					"action": "Call method on Department",
-					"description": "Call any method on a hr.department record. Uses Odoo `execute_kw` with method name.",
-					"routing": {
-						"request": {
-							"method": "POST",
-							"url": "=/api/hr.department/{{$parameter[\"id\"]}}/call"
-						}
-					}
-				},
-				{
 					"name": "Search Hr Employee",
 					"value": "Search Hr Employee",
 					"action": "Search & read Employee",
@@ -123,18 +111,6 @@ export const hrDescription: INodeProperties[] = [
 					}
 				},
 				{
-					"name": "Call Hr Employee",
-					"value": "Call Hr Employee",
-					"action": "Call method on Employee",
-					"description": "Call any method on a hr.employee record. Uses Odoo `execute_kw` with method name.",
-					"routing": {
-						"request": {
-							"method": "POST",
-							"url": "=/api/hr.employee/{{$parameter[\"id\"]}}/call"
-						}
-					}
-				},
-				{
 					"name": "Search Hr Job",
 					"value": "Search Hr Job",
 					"action": "Search & read Job Position",
@@ -179,18 +155,6 @@ export const hrDescription: INodeProperties[] = [
 						"request": {
 							"method": "DELETE",
 							"url": "=/api/hr.job/{{$parameter[\"id\"]}}"
-						}
-					}
-				},
-				{
-					"name": "Call Hr Job",
-					"value": "Call Hr Job",
-					"action": "Call method on Job Position",
-					"description": "Call any method on a hr.job record. Uses Odoo `execute_kw` with method name.",
-					"routing": {
-						"request": {
-							"method": "POST",
-							"url": "=/api/hr.job/{{$parameter[\"id\"]}}/call"
 						}
 					}
 				}
@@ -245,7 +209,7 @@ export const hrDescription: INodeProperties[] = [
 			"displayName": "Fields",
 			"name": "fields",
 			"description": "Comma-separated field names to return",
-			"default": "name,default_code,list_price",
+			"default": "name,manager_id,id",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -269,7 +233,7 @@ export const hrDescription: INodeProperties[] = [
 		{
 			"displayName": "Limit",
 			"name": "limit",
-			"default": 80,
+			"default": 20,
 			"type": "number",
 			"routing": {
 				"send": {
@@ -318,7 +282,7 @@ export const hrDescription: INodeProperties[] = [
 			"displayName": "Order",
 			"name": "order",
 			"description": "Sort order, e.g. 'name asc' or 'create_date desc'",
-			"default": "",
+			"default": "name asc",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -340,16 +304,16 @@ export const hrDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -960,16 +924,16 @@ export const hrDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -1025,7 +989,7 @@ export const hrDescription: INodeProperties[] = [
 			"displayName": "Fields",
 			"name": "fields",
 			"description": "Comma-separated field names to return",
-			"default": "",
+			"default": "name,manager_id,id",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -1047,16 +1011,16 @@ export const hrDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -1109,16 +1073,16 @@ export const hrDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -1129,143 +1093,6 @@ export const hrDescription: INodeProperties[] = [
 					],
 					"operation": [
 						"Delete Hr Department"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "POST /api/hr.department/{id}/call",
-			"name": "operation",
-			"type": "notice",
-			"typeOptions": {
-				"theme": "info"
-			},
-			"default": "",
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Hr"
-					],
-					"operation": [
-						"Call Hr Department"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "ID",
-			"name": "id",
-			"required": true,
-			"default": 0,
-			"type": "number",
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Hr"
-					],
-					"operation": [
-						"Call Hr Department"
-					]
-				}
-			}
-		},
-		{
-			"required": true,
-			"displayName": "Method",
-			"name": "method",
-			"type": "string",
-			"default": "action_confirm",
-			"description": "Method name to call",
-			"routing": {
-				"send": {
-					"property": "method",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ $value }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Hr"
-					],
-					"operation": [
-						"Call Hr Department"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Args",
-			"name": "args",
-			"type": "json",
-			"default": "[\n  null\n]",
-			"description": "Positional arguments",
-			"routing": {
-				"send": {
-					"property": "args",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ JSON.parse($value) }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Hr"
-					],
-					"operation": [
-						"Call Hr Department"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Kwargs",
-			"name": "kwargs",
-			"type": "json",
-			"default": "{}",
-			"description": "Keyword arguments",
-			"routing": {
-				"send": {
-					"property": "kwargs",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ JSON.parse($value) }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Hr"
-					],
-					"operation": [
-						"Call Hr Department"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
-			"type": "string",
-			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
-			"required": false,
-			"routing": {
-				"request": {
-					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
-					}
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Hr"
-					],
-					"operation": [
-						"Call Hr Department"
 					]
 				}
 			}
@@ -1318,7 +1145,7 @@ export const hrDescription: INodeProperties[] = [
 			"displayName": "Fields",
 			"name": "fields",
 			"description": "Comma-separated field names to return",
-			"default": "name,default_code,list_price",
+			"default": "name,work_email,department_id,id",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -1342,7 +1169,7 @@ export const hrDescription: INodeProperties[] = [
 		{
 			"displayName": "Limit",
 			"name": "limit",
-			"default": 80,
+			"default": 20,
 			"type": "number",
 			"routing": {
 				"send": {
@@ -1391,7 +1218,7 @@ export const hrDescription: INodeProperties[] = [
 			"displayName": "Order",
 			"name": "order",
 			"description": "Sort order, e.g. 'name asc' or 'create_date desc'",
-			"default": "",
+			"default": "name asc",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -1413,16 +1240,16 @@ export const hrDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -4458,16 +4285,16 @@ export const hrDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -4523,7 +4350,7 @@ export const hrDescription: INodeProperties[] = [
 			"displayName": "Fields",
 			"name": "fields",
 			"description": "Comma-separated field names to return",
-			"default": "",
+			"default": "name,work_email,department_id,id",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -4545,16 +4372,16 @@ export const hrDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -4607,16 +4434,16 @@ export const hrDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -4627,143 +4454,6 @@ export const hrDescription: INodeProperties[] = [
 					],
 					"operation": [
 						"Delete Hr Employee"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "POST /api/hr.employee/{id}/call",
-			"name": "operation",
-			"type": "notice",
-			"typeOptions": {
-				"theme": "info"
-			},
-			"default": "",
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Hr"
-					],
-					"operation": [
-						"Call Hr Employee"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "ID",
-			"name": "id",
-			"required": true,
-			"default": 0,
-			"type": "number",
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Hr"
-					],
-					"operation": [
-						"Call Hr Employee"
-					]
-				}
-			}
-		},
-		{
-			"required": true,
-			"displayName": "Method",
-			"name": "method",
-			"type": "string",
-			"default": "action_confirm",
-			"description": "Method name to call",
-			"routing": {
-				"send": {
-					"property": "method",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ $value }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Hr"
-					],
-					"operation": [
-						"Call Hr Employee"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Args",
-			"name": "args",
-			"type": "json",
-			"default": "[\n  null\n]",
-			"description": "Positional arguments",
-			"routing": {
-				"send": {
-					"property": "args",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ JSON.parse($value) }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Hr"
-					],
-					"operation": [
-						"Call Hr Employee"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Kwargs",
-			"name": "kwargs",
-			"type": "json",
-			"default": "{}",
-			"description": "Keyword arguments",
-			"routing": {
-				"send": {
-					"property": "kwargs",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ JSON.parse($value) }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Hr"
-					],
-					"operation": [
-						"Call Hr Employee"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
-			"type": "string",
-			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
-			"required": false,
-			"routing": {
-				"request": {
-					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
-					}
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Hr"
-					],
-					"operation": [
-						"Call Hr Employee"
 					]
 				}
 			}
@@ -4816,7 +4506,7 @@ export const hrDescription: INodeProperties[] = [
 			"displayName": "Fields",
 			"name": "fields",
 			"description": "Comma-separated field names to return",
-			"default": "name,default_code,list_price",
+			"default": "name,department_id,id",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -4840,7 +4530,7 @@ export const hrDescription: INodeProperties[] = [
 		{
 			"displayName": "Limit",
 			"name": "limit",
-			"default": 80,
+			"default": 20,
 			"type": "number",
 			"routing": {
 				"send": {
@@ -4889,7 +4579,7 @@ export const hrDescription: INodeProperties[] = [
 			"displayName": "Order",
 			"name": "order",
 			"description": "Sort order, e.g. 'name asc' or 'create_date desc'",
-			"default": "",
+			"default": "name asc",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -4911,16 +4601,16 @@ export const hrDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -5506,16 +5196,16 @@ export const hrDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -5571,7 +5261,7 @@ export const hrDescription: INodeProperties[] = [
 			"displayName": "Fields",
 			"name": "fields",
 			"description": "Comma-separated field names to return",
-			"default": "",
+			"default": "name,department_id,id",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -5593,16 +5283,16 @@ export const hrDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -5655,16 +5345,16 @@ export const hrDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -5675,143 +5365,6 @@ export const hrDescription: INodeProperties[] = [
 					],
 					"operation": [
 						"Delete Hr Job"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "POST /api/hr.job/{id}/call",
-			"name": "operation",
-			"type": "notice",
-			"typeOptions": {
-				"theme": "info"
-			},
-			"default": "",
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Hr"
-					],
-					"operation": [
-						"Call Hr Job"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "ID",
-			"name": "id",
-			"required": true,
-			"default": 0,
-			"type": "number",
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Hr"
-					],
-					"operation": [
-						"Call Hr Job"
-					]
-				}
-			}
-		},
-		{
-			"required": true,
-			"displayName": "Method",
-			"name": "method",
-			"type": "string",
-			"default": "action_confirm",
-			"description": "Method name to call",
-			"routing": {
-				"send": {
-					"property": "method",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ $value }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Hr"
-					],
-					"operation": [
-						"Call Hr Job"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Args",
-			"name": "args",
-			"type": "json",
-			"default": "[\n  null\n]",
-			"description": "Positional arguments",
-			"routing": {
-				"send": {
-					"property": "args",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ JSON.parse($value) }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Hr"
-					],
-					"operation": [
-						"Call Hr Job"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Kwargs",
-			"name": "kwargs",
-			"type": "json",
-			"default": "{}",
-			"description": "Keyword arguments",
-			"routing": {
-				"send": {
-					"property": "kwargs",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ JSON.parse($value) }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Hr"
-					],
-					"operation": [
-						"Call Hr Job"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
-			"type": "string",
-			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
-			"required": false,
-			"routing": {
-				"request": {
-					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
-					}
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Hr"
-					],
-					"operation": [
-						"Call Hr Job"
 					]
 				}
 			}

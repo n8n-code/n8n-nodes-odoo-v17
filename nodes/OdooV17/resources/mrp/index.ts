@@ -63,18 +63,6 @@ export const mrpDescription: INodeProperties[] = [
 					}
 				},
 				{
-					"name": "Call Mrp Bom",
-					"value": "Call Mrp Bom",
-					"action": "Call method on Bill of Material",
-					"description": "Call any method on a mrp.bom record. Uses Odoo `execute_kw` with method name.",
-					"routing": {
-						"request": {
-							"method": "POST",
-							"url": "=/api/mrp.bom/{{$parameter[\"id\"]}}/call"
-						}
-					}
-				},
-				{
 					"name": "Search Mrp Production",
 					"value": "Search Mrp Production",
 					"action": "Search & read Production Order",
@@ -123,18 +111,6 @@ export const mrpDescription: INodeProperties[] = [
 					}
 				},
 				{
-					"name": "Call Mrp Production",
-					"value": "Call Mrp Production",
-					"action": "Call method on Production Order",
-					"description": "Call any method on a mrp.production record. Uses Odoo `execute_kw` with method name.",
-					"routing": {
-						"request": {
-							"method": "POST",
-							"url": "=/api/mrp.production/{{$parameter[\"id\"]}}/call"
-						}
-					}
-				},
-				{
 					"name": "Search Mrp Workorder",
 					"value": "Search Mrp Workorder",
 					"action": "Search & read Work Order",
@@ -179,18 +155,6 @@ export const mrpDescription: INodeProperties[] = [
 						"request": {
 							"method": "DELETE",
 							"url": "=/api/mrp.workorder/{{$parameter[\"id\"]}}"
-						}
-					}
-				},
-				{
-					"name": "Call Mrp Workorder",
-					"value": "Call Mrp Workorder",
-					"action": "Call method on Work Order",
-					"description": "Call any method on a mrp.workorder record. Uses Odoo `execute_kw` with method name.",
-					"routing": {
-						"request": {
-							"method": "POST",
-							"url": "=/api/mrp.workorder/{{$parameter[\"id\"]}}/call"
 						}
 					}
 				}
@@ -245,7 +209,7 @@ export const mrpDescription: INodeProperties[] = [
 			"displayName": "Fields",
 			"name": "fields",
 			"description": "Comma-separated field names to return",
-			"default": "name,default_code,list_price",
+			"default": "code,product_tmpl_id,product_qty,id",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -269,7 +233,7 @@ export const mrpDescription: INodeProperties[] = [
 		{
 			"displayName": "Limit",
 			"name": "limit",
-			"default": 80,
+			"default": 20,
 			"type": "number",
 			"routing": {
 				"send": {
@@ -318,7 +282,7 @@ export const mrpDescription: INodeProperties[] = [
 			"displayName": "Order",
 			"name": "order",
 			"description": "Sort order, e.g. 'name asc' or 'create_date desc'",
-			"default": "",
+			"default": "code asc",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -340,16 +304,16 @@ export const mrpDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -1210,16 +1174,16 @@ export const mrpDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -1275,7 +1239,7 @@ export const mrpDescription: INodeProperties[] = [
 			"displayName": "Fields",
 			"name": "fields",
 			"description": "Comma-separated field names to return",
-			"default": "",
+			"default": "code,product_tmpl_id,product_qty,id",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -1297,16 +1261,16 @@ export const mrpDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -1359,16 +1323,16 @@ export const mrpDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -1379,143 +1343,6 @@ export const mrpDescription: INodeProperties[] = [
 					],
 					"operation": [
 						"Delete Mrp Bom"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "POST /api/mrp.bom/{id}/call",
-			"name": "operation",
-			"type": "notice",
-			"typeOptions": {
-				"theme": "info"
-			},
-			"default": "",
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Mrp"
-					],
-					"operation": [
-						"Call Mrp Bom"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "ID",
-			"name": "id",
-			"required": true,
-			"default": 0,
-			"type": "number",
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Mrp"
-					],
-					"operation": [
-						"Call Mrp Bom"
-					]
-				}
-			}
-		},
-		{
-			"required": true,
-			"displayName": "Method",
-			"name": "method",
-			"type": "string",
-			"default": "action_confirm",
-			"description": "Method name to call",
-			"routing": {
-				"send": {
-					"property": "method",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ $value }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Mrp"
-					],
-					"operation": [
-						"Call Mrp Bom"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Args",
-			"name": "args",
-			"type": "json",
-			"default": "[\n  null\n]",
-			"description": "Positional arguments",
-			"routing": {
-				"send": {
-					"property": "args",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ JSON.parse($value) }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Mrp"
-					],
-					"operation": [
-						"Call Mrp Bom"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Kwargs",
-			"name": "kwargs",
-			"type": "json",
-			"default": "{}",
-			"description": "Keyword arguments",
-			"routing": {
-				"send": {
-					"property": "kwargs",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ JSON.parse($value) }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Mrp"
-					],
-					"operation": [
-						"Call Mrp Bom"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
-			"type": "string",
-			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
-			"required": false,
-			"routing": {
-				"request": {
-					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
-					}
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Mrp"
-					],
-					"operation": [
-						"Call Mrp Bom"
 					]
 				}
 			}
@@ -1568,7 +1395,7 @@ export const mrpDescription: INodeProperties[] = [
 			"displayName": "Fields",
 			"name": "fields",
 			"description": "Comma-separated field names to return",
-			"default": "name,default_code,list_price",
+			"default": "name,state,product_id,product_qty,id",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -1592,7 +1419,7 @@ export const mrpDescription: INodeProperties[] = [
 		{
 			"displayName": "Limit",
 			"name": "limit",
-			"default": 80,
+			"default": 20,
 			"type": "number",
 			"routing": {
 				"send": {
@@ -1641,7 +1468,7 @@ export const mrpDescription: INodeProperties[] = [
 			"displayName": "Order",
 			"name": "order",
 			"description": "Sort order, e.g. 'name asc' or 'create_date desc'",
-			"default": "",
+			"default": "date_start desc",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -1663,16 +1490,16 @@ export const mrpDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -4058,16 +3885,16 @@ export const mrpDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -4123,7 +3950,7 @@ export const mrpDescription: INodeProperties[] = [
 			"displayName": "Fields",
 			"name": "fields",
 			"description": "Comma-separated field names to return",
-			"default": "",
+			"default": "name,state,product_id,product_qty,id",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -4145,16 +3972,16 @@ export const mrpDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -4207,16 +4034,16 @@ export const mrpDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -4227,143 +4054,6 @@ export const mrpDescription: INodeProperties[] = [
 					],
 					"operation": [
 						"Delete Mrp Production"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "POST /api/mrp.production/{id}/call",
-			"name": "operation",
-			"type": "notice",
-			"typeOptions": {
-				"theme": "info"
-			},
-			"default": "",
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Mrp"
-					],
-					"operation": [
-						"Call Mrp Production"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "ID",
-			"name": "id",
-			"required": true,
-			"default": 0,
-			"type": "number",
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Mrp"
-					],
-					"operation": [
-						"Call Mrp Production"
-					]
-				}
-			}
-		},
-		{
-			"required": true,
-			"displayName": "Method",
-			"name": "method",
-			"type": "string",
-			"default": "action_confirm",
-			"description": "Method name to call",
-			"routing": {
-				"send": {
-					"property": "method",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ $value }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Mrp"
-					],
-					"operation": [
-						"Call Mrp Production"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Args",
-			"name": "args",
-			"type": "json",
-			"default": "[\n  null\n]",
-			"description": "Positional arguments",
-			"routing": {
-				"send": {
-					"property": "args",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ JSON.parse($value) }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Mrp"
-					],
-					"operation": [
-						"Call Mrp Production"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Kwargs",
-			"name": "kwargs",
-			"type": "json",
-			"default": "{}",
-			"description": "Keyword arguments",
-			"routing": {
-				"send": {
-					"property": "kwargs",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ JSON.parse($value) }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Mrp"
-					],
-					"operation": [
-						"Call Mrp Production"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
-			"type": "string",
-			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
-			"required": false,
-			"routing": {
-				"request": {
-					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
-					}
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Mrp"
-					],
-					"operation": [
-						"Call Mrp Production"
 					]
 				}
 			}
@@ -4416,7 +4106,7 @@ export const mrpDescription: INodeProperties[] = [
 			"displayName": "Fields",
 			"name": "fields",
 			"description": "Comma-separated field names to return",
-			"default": "name,default_code,list_price",
+			"default": "name,state,production_id,id",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -4440,7 +4130,7 @@ export const mrpDescription: INodeProperties[] = [
 		{
 			"displayName": "Limit",
 			"name": "limit",
-			"default": 80,
+			"default": 20,
 			"type": "number",
 			"routing": {
 				"send": {
@@ -4489,7 +4179,7 @@ export const mrpDescription: INodeProperties[] = [
 			"displayName": "Order",
 			"name": "order",
 			"description": "Sort order, e.g. 'name asc' or 'create_date desc'",
-			"default": "",
+			"default": "id asc",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -4511,16 +4201,16 @@ export const mrpDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -5756,16 +5446,16 @@ export const mrpDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -5821,7 +5511,7 @@ export const mrpDescription: INodeProperties[] = [
 			"displayName": "Fields",
 			"name": "fields",
 			"description": "Comma-separated field names to return",
-			"default": "",
+			"default": "name,state,production_id,id",
 			"type": "string",
 			"routing": {
 				"send": {
@@ -5843,16 +5533,16 @@ export const mrpDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -5905,16 +5595,16 @@ export const mrpDescription: INodeProperties[] = [
 			}
 		},
 		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
+			"displayName": "Bearer Token",
+			"name": "security_bearerauth",
 			"type": "string",
 			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
+			"description": "Generate token from /api/credentials page in Odoo backend.",
 			"required": false,
 			"routing": {
 				"request": {
 					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
+						"Authorization": "={{ 'Bearer ' + $value }}"
 					}
 				}
 			},
@@ -5925,143 +5615,6 @@ export const mrpDescription: INodeProperties[] = [
 					],
 					"operation": [
 						"Delete Mrp Workorder"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "POST /api/mrp.workorder/{id}/call",
-			"name": "operation",
-			"type": "notice",
-			"typeOptions": {
-				"theme": "info"
-			},
-			"default": "",
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Mrp"
-					],
-					"operation": [
-						"Call Mrp Workorder"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "ID",
-			"name": "id",
-			"required": true,
-			"default": 0,
-			"type": "number",
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Mrp"
-					],
-					"operation": [
-						"Call Mrp Workorder"
-					]
-				}
-			}
-		},
-		{
-			"required": true,
-			"displayName": "Method",
-			"name": "method",
-			"type": "string",
-			"default": "action_confirm",
-			"description": "Method name to call",
-			"routing": {
-				"send": {
-					"property": "method",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ $value }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Mrp"
-					],
-					"operation": [
-						"Call Mrp Workorder"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Args",
-			"name": "args",
-			"type": "json",
-			"default": "[\n  null\n]",
-			"description": "Positional arguments",
-			"routing": {
-				"send": {
-					"property": "args",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ JSON.parse($value) }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Mrp"
-					],
-					"operation": [
-						"Call Mrp Workorder"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Kwargs",
-			"name": "kwargs",
-			"type": "json",
-			"default": "{}",
-			"description": "Keyword arguments",
-			"routing": {
-				"send": {
-					"property": "kwargs",
-					"propertyInDotNotation": false,
-					"type": "body",
-					"value": "={{ JSON.parse($value) }}"
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Mrp"
-					],
-					"operation": [
-						"Call Mrp Workorder"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Basic Auth (Base64)",
-			"name": "security_odoo_xmlrpc",
-			"type": "string",
-			"default": "",
-			"description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls.",
-			"required": false,
-			"routing": {
-				"request": {
-					"headers": {
-						"Authorization": "={{ 'Basic ' + $value }}"
-					}
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Mrp"
-					],
-					"operation": [
-						"Call Mrp Workorder"
 					]
 				}
 			}

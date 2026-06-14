@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Odoo — Business API (Compact)",
-    "description": "Compact OpenAPI spec for key business models only.\nOdoo 17.0\n\nModels included: product, partner, sale, purchase, account, stock, CRM, POS, HR, MRP, project, UoM",
+    "description": "Compact OpenAPI spec for key business models only.\nOdoo 17.0\n\nModels included: product, partner, sale, purchase, account, stock, CRM, POS, HR, MRP, project, UoM\n\n## Authentication\n\n**Bearer Token (Recommended):** Generate from Odoo backend → REST API → API Console.\n```\nAuthorization: Bearer <token>\n```\n\n**Basic Auth:** Use Odoo email + password.\n```\nAuthorization: Basic base64(email:password)\n```",
     "version": "17.0-20260609",
     "contact": {
       "name": "Odoo Instance"
@@ -11,7 +11,7 @@
   "servers": [
     {
       "url": "https://your-odoo-instance.com",
-      "description": "Odoo Instance"
+      "description": "Odoo Instance (replace with your instance URL)"
     }
   ],
   "tags": [
@@ -94,14 +94,14 @@
             "schema": {
               "type": "string"
             },
-            "example": "name,default_code,list_price"
+            "example": "name,code,id"
           },
           {
             "name": "limit",
             "in": "query",
             "schema": {
               "type": "integer",
-              "default": 80
+              "default": 20
             }
           },
           {
@@ -118,7 +118,8 @@
             "description": "Sort order, e.g. 'name asc' or 'create_date desc'",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "code asc"
           }
         ],
         "responses": {
@@ -152,6 +153,13 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/account_account_upsert"
+              },
+              "example": {
+                "_key": {
+                  "code": "100000"
+                },
+                "name": "Bank Account",
+                "code": "100000"
               }
             }
           }
@@ -210,7 +218,8 @@
             "description": "Comma-separated field names to return",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name,code,id"
           }
         ],
         "responses": {
@@ -273,72 +282,6 @@
         "x-odoo-model": "account.account"
       }
     },
-    "/api/account.account/{id}/call": {
-      "post": {
-        "summary": "Call method on Account",
-        "description": "Call any method on a account.account record. Uses Odoo `execute_kw` with method name.",
-        "operationId": "call_account_account",
-        "tags": [
-          "account"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "method": {
-                    "type": "string",
-                    "description": "Method name to call",
-                    "example": "action_confirm"
-                  },
-                  "args": {
-                    "type": "array",
-                    "items": {},
-                    "description": "Positional arguments"
-                  },
-                  "kwargs": {
-                    "type": "object",
-                    "description": "Keyword arguments"
-                  }
-                },
-                "required": [
-                  "method"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Method call result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "result": {}
-                  }
-                }
-              }
-            }
-          }
-        },
-        "x-odoo-method": "execute_kw",
-        "x-odoo-model": "account.account"
-      }
-    },
     "/api/account.journal": {
       "get": {
         "summary": "Search & read Journal",
@@ -364,14 +307,14 @@
             "schema": {
               "type": "string"
             },
-            "example": "name,default_code,list_price"
+            "example": "name,code,type,id"
           },
           {
             "name": "limit",
             "in": "query",
             "schema": {
               "type": "integer",
-              "default": 80
+              "default": 20
             }
           },
           {
@@ -388,7 +331,8 @@
             "description": "Sort order, e.g. 'name asc' or 'create_date desc'",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name asc"
           }
         ],
         "responses": {
@@ -422,6 +366,13 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/account_journal_upsert"
+              },
+              "example": {
+                "_key": {
+                  "code": "BNK1"
+                },
+                "name": "Bank Journal",
+                "type": "bank"
               }
             }
           }
@@ -480,7 +431,8 @@
             "description": "Comma-separated field names to return",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name,code,type,id"
           }
         ],
         "responses": {
@@ -543,72 +495,6 @@
         "x-odoo-model": "account.journal"
       }
     },
-    "/api/account.journal/{id}/call": {
-      "post": {
-        "summary": "Call method on Journal",
-        "description": "Call any method on a account.journal record. Uses Odoo `execute_kw` with method name.",
-        "operationId": "call_account_journal",
-        "tags": [
-          "account"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "method": {
-                    "type": "string",
-                    "description": "Method name to call",
-                    "example": "action_confirm"
-                  },
-                  "args": {
-                    "type": "array",
-                    "items": {},
-                    "description": "Positional arguments"
-                  },
-                  "kwargs": {
-                    "type": "object",
-                    "description": "Keyword arguments"
-                  }
-                },
-                "required": [
-                  "method"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Method call result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "result": {}
-                  }
-                }
-              }
-            }
-          }
-        },
-        "x-odoo-method": "execute_kw",
-        "x-odoo-model": "account.journal"
-      }
-    },
     "/api/account.move": {
       "get": {
         "summary": "Search & read Journal Entry",
@@ -634,14 +520,14 @@
             "schema": {
               "type": "string"
             },
-            "example": "name,default_code,list_price"
+            "example": "name,partner_id,state,amount_total,id"
           },
           {
             "name": "limit",
             "in": "query",
             "schema": {
               "type": "integer",
-              "default": 80
+              "default": 20
             }
           },
           {
@@ -658,7 +544,8 @@
             "description": "Sort order, e.g. 'name asc' or 'create_date desc'",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "date desc"
           }
         ],
         "responses": {
@@ -692,6 +579,13 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/account_move_upsert"
+              },
+              "example": {
+                "_key": {
+                  "name": "INV/2024/001"
+                },
+                "partner_id": 1,
+                "move_type": "out_invoice"
               }
             }
           }
@@ -750,7 +644,8 @@
             "description": "Comma-separated field names to return",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name,partner_id,state,amount_total,id"
           }
         ],
         "responses": {
@@ -813,72 +708,6 @@
         "x-odoo-model": "account.move"
       }
     },
-    "/api/account.move/{id}/call": {
-      "post": {
-        "summary": "Call method on Journal Entry",
-        "description": "Call any method on a account.move record. Uses Odoo `execute_kw` with method name.",
-        "operationId": "call_account_move",
-        "tags": [
-          "account"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "method": {
-                    "type": "string",
-                    "description": "Method name to call",
-                    "example": "action_confirm"
-                  },
-                  "args": {
-                    "type": "array",
-                    "items": {},
-                    "description": "Positional arguments"
-                  },
-                  "kwargs": {
-                    "type": "object",
-                    "description": "Keyword arguments"
-                  }
-                },
-                "required": [
-                  "method"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Method call result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "result": {}
-                  }
-                }
-              }
-            }
-          }
-        },
-        "x-odoo-method": "execute_kw",
-        "x-odoo-model": "account.move"
-      }
-    },
     "/api/account.move.line": {
       "get": {
         "summary": "Search & read Journal Item",
@@ -904,14 +733,14 @@
             "schema": {
               "type": "string"
             },
-            "example": "name,default_code,list_price"
+            "example": "name,account_id,debit,credit,id"
           },
           {
             "name": "limit",
             "in": "query",
             "schema": {
               "type": "integer",
-              "default": 80
+              "default": 20
             }
           },
           {
@@ -928,7 +757,8 @@
             "description": "Sort order, e.g. 'name asc' or 'create_date desc'",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "id asc"
           }
         ],
         "responses": {
@@ -962,6 +792,11 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/account_move_line_upsert"
+              },
+              "example": {
+                "name": "Payment line",
+                "account_id": 1,
+                "debit": 100
               }
             }
           }
@@ -1020,7 +855,8 @@
             "description": "Comma-separated field names to return",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name,account_id,debit,credit,id"
           }
         ],
         "responses": {
@@ -1083,72 +919,6 @@
         "x-odoo-model": "account.move.line"
       }
     },
-    "/api/account.move.line/{id}/call": {
-      "post": {
-        "summary": "Call method on Journal Item",
-        "description": "Call any method on a account.move.line record. Uses Odoo `execute_kw` with method name.",
-        "operationId": "call_account_move_line",
-        "tags": [
-          "account"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "method": {
-                    "type": "string",
-                    "description": "Method name to call",
-                    "example": "action_confirm"
-                  },
-                  "args": {
-                    "type": "array",
-                    "items": {},
-                    "description": "Positional arguments"
-                  },
-                  "kwargs": {
-                    "type": "object",
-                    "description": "Keyword arguments"
-                  }
-                },
-                "required": [
-                  "method"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Method call result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "result": {}
-                  }
-                }
-              }
-            }
-          }
-        },
-        "x-odoo-method": "execute_kw",
-        "x-odoo-model": "account.move.line"
-      }
-    },
     "/api/account.payment": {
       "get": {
         "summary": "Search & read Payments",
@@ -1174,14 +944,14 @@
             "schema": {
               "type": "string"
             },
-            "example": "name,default_code,list_price"
+            "example": "name,state,amount,id"
           },
           {
             "name": "limit",
             "in": "query",
             "schema": {
               "type": "integer",
-              "default": 80
+              "default": 20
             }
           },
           {
@@ -1198,7 +968,8 @@
             "description": "Sort order, e.g. 'name asc' or 'create_date desc'",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "date desc"
           }
         ],
         "responses": {
@@ -1232,6 +1003,12 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/account_payment_upsert"
+              },
+              "example": {
+                "name": "PAY/001",
+                "payment_type": "outbound",
+                "partner_id": 1,
+                "amount": 500
               }
             }
           }
@@ -1290,7 +1067,8 @@
             "description": "Comma-separated field names to return",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name,state,amount,id"
           }
         ],
         "responses": {
@@ -1353,72 +1131,6 @@
         "x-odoo-model": "account.payment"
       }
     },
-    "/api/account.payment/{id}/call": {
-      "post": {
-        "summary": "Call method on Payments",
-        "description": "Call any method on a account.payment record. Uses Odoo `execute_kw` with method name.",
-        "operationId": "call_account_payment",
-        "tags": [
-          "account"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "method": {
-                    "type": "string",
-                    "description": "Method name to call",
-                    "example": "action_confirm"
-                  },
-                  "args": {
-                    "type": "array",
-                    "items": {},
-                    "description": "Positional arguments"
-                  },
-                  "kwargs": {
-                    "type": "object",
-                    "description": "Keyword arguments"
-                  }
-                },
-                "required": [
-                  "method"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Method call result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "result": {}
-                  }
-                }
-              }
-            }
-          }
-        },
-        "x-odoo-method": "execute_kw",
-        "x-odoo-model": "account.payment"
-      }
-    },
     "/api/account.tax": {
       "get": {
         "summary": "Search & read Tax",
@@ -1444,14 +1156,14 @@
             "schema": {
               "type": "string"
             },
-            "example": "name,default_code,list_price"
+            "example": "name,amount,type,id"
           },
           {
             "name": "limit",
             "in": "query",
             "schema": {
               "type": "integer",
-              "default": 80
+              "default": 20
             }
           },
           {
@@ -1468,7 +1180,8 @@
             "description": "Sort order, e.g. 'name asc' or 'create_date desc'",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name asc"
           }
         ],
         "responses": {
@@ -1502,6 +1215,13 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/account_tax_upsert"
+              },
+              "example": {
+                "_key": {
+                  "name": "PPN 11%"
+                },
+                "amount": 11,
+                "type_tax_use": "sale"
               }
             }
           }
@@ -1560,7 +1280,8 @@
             "description": "Comma-separated field names to return",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name,amount,type,id"
           }
         ],
         "responses": {
@@ -1623,72 +1344,6 @@
         "x-odoo-model": "account.tax"
       }
     },
-    "/api/account.tax/{id}/call": {
-      "post": {
-        "summary": "Call method on Tax",
-        "description": "Call any method on a account.tax record. Uses Odoo `execute_kw` with method name.",
-        "operationId": "call_account_tax",
-        "tags": [
-          "account"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "method": {
-                    "type": "string",
-                    "description": "Method name to call",
-                    "example": "action_confirm"
-                  },
-                  "args": {
-                    "type": "array",
-                    "items": {},
-                    "description": "Positional arguments"
-                  },
-                  "kwargs": {
-                    "type": "object",
-                    "description": "Keyword arguments"
-                  }
-                },
-                "required": [
-                  "method"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Method call result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "result": {}
-                  }
-                }
-              }
-            }
-          }
-        },
-        "x-odoo-method": "execute_kw",
-        "x-odoo-model": "account.tax"
-      }
-    },
     "/api/account.tax.group": {
       "get": {
         "summary": "Search & read Tax Group",
@@ -1714,14 +1369,14 @@
             "schema": {
               "type": "string"
             },
-            "example": "name,default_code,list_price"
+            "example": "name,id"
           },
           {
             "name": "limit",
             "in": "query",
             "schema": {
               "type": "integer",
-              "default": 80
+              "default": 20
             }
           },
           {
@@ -1738,7 +1393,8 @@
             "description": "Sort order, e.g. 'name asc' or 'create_date desc'",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name asc"
           }
         ],
         "responses": {
@@ -1772,6 +1428,11 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/account_tax_group_upsert"
+              },
+              "example": {
+                "_key": {
+                  "name": "Tax Group"
+                }
               }
             }
           }
@@ -1830,7 +1491,8 @@
             "description": "Comma-separated field names to return",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name,id"
           }
         ],
         "responses": {
@@ -1893,72 +1555,6 @@
         "x-odoo-model": "account.tax.group"
       }
     },
-    "/api/account.tax.group/{id}/call": {
-      "post": {
-        "summary": "Call method on Tax Group",
-        "description": "Call any method on a account.tax.group record. Uses Odoo `execute_kw` with method name.",
-        "operationId": "call_account_tax_group",
-        "tags": [
-          "account"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "method": {
-                    "type": "string",
-                    "description": "Method name to call",
-                    "example": "action_confirm"
-                  },
-                  "args": {
-                    "type": "array",
-                    "items": {},
-                    "description": "Positional arguments"
-                  },
-                  "kwargs": {
-                    "type": "object",
-                    "description": "Keyword arguments"
-                  }
-                },
-                "required": [
-                  "method"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Method call result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "result": {}
-                  }
-                }
-              }
-            }
-          }
-        },
-        "x-odoo-method": "execute_kw",
-        "x-odoo-model": "account.tax.group"
-      }
-    },
     "/api/crm.lead": {
       "get": {
         "summary": "Search & read Lead/Opportunity",
@@ -1984,14 +1580,14 @@
             "schema": {
               "type": "string"
             },
-            "example": "name,default_code,list_price"
+            "example": "name,partner_id,stage_id,id"
           },
           {
             "name": "limit",
             "in": "query",
             "schema": {
               "type": "integer",
-              "default": 80
+              "default": 20
             }
           },
           {
@@ -2008,7 +1604,8 @@
             "description": "Sort order, e.g. 'name asc' or 'create_date desc'",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "create_date desc"
           }
         ],
         "responses": {
@@ -2042,6 +1639,12 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/crm_lead_upsert"
+              },
+              "example": {
+                "_key": {
+                  "name": "Test Lead"
+                },
+                "partner_id": 1
               }
             }
           }
@@ -2100,7 +1703,8 @@
             "description": "Comma-separated field names to return",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name,partner_id,stage_id,id"
           }
         ],
         "responses": {
@@ -2163,72 +1767,6 @@
         "x-odoo-model": "crm.lead"
       }
     },
-    "/api/crm.lead/{id}/call": {
-      "post": {
-        "summary": "Call method on Lead/Opportunity",
-        "description": "Call any method on a crm.lead record. Uses Odoo `execute_kw` with method name.",
-        "operationId": "call_crm_lead",
-        "tags": [
-          "crm"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "method": {
-                    "type": "string",
-                    "description": "Method name to call",
-                    "example": "action_confirm"
-                  },
-                  "args": {
-                    "type": "array",
-                    "items": {},
-                    "description": "Positional arguments"
-                  },
-                  "kwargs": {
-                    "type": "object",
-                    "description": "Keyword arguments"
-                  }
-                },
-                "required": [
-                  "method"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Method call result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "result": {}
-                  }
-                }
-              }
-            }
-          }
-        },
-        "x-odoo-method": "execute_kw",
-        "x-odoo-model": "crm.lead"
-      }
-    },
     "/api/crm.stage": {
       "get": {
         "summary": "Search & read CRM Stages",
@@ -2254,14 +1792,14 @@
             "schema": {
               "type": "string"
             },
-            "example": "name,default_code,list_price"
+            "example": "name,sequence,id"
           },
           {
             "name": "limit",
             "in": "query",
             "schema": {
               "type": "integer",
-              "default": 80
+              "default": 20
             }
           },
           {
@@ -2278,7 +1816,8 @@
             "description": "Sort order, e.g. 'name asc' or 'create_date desc'",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "sequence asc"
           }
         ],
         "responses": {
@@ -2312,6 +1851,12 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/crm_stage_upsert"
+              },
+              "example": {
+                "_key": {
+                  "name": "New"
+                },
+                "sequence": 1
               }
             }
           }
@@ -2370,7 +1915,8 @@
             "description": "Comma-separated field names to return",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name,sequence,id"
           }
         ],
         "responses": {
@@ -2433,72 +1979,6 @@
         "x-odoo-model": "crm.stage"
       }
     },
-    "/api/crm.stage/{id}/call": {
-      "post": {
-        "summary": "Call method on CRM Stages",
-        "description": "Call any method on a crm.stage record. Uses Odoo `execute_kw` with method name.",
-        "operationId": "call_crm_stage",
-        "tags": [
-          "crm"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "method": {
-                    "type": "string",
-                    "description": "Method name to call",
-                    "example": "action_confirm"
-                  },
-                  "args": {
-                    "type": "array",
-                    "items": {},
-                    "description": "Positional arguments"
-                  },
-                  "kwargs": {
-                    "type": "object",
-                    "description": "Keyword arguments"
-                  }
-                },
-                "required": [
-                  "method"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Method call result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "result": {}
-                  }
-                }
-              }
-            }
-          }
-        },
-        "x-odoo-method": "execute_kw",
-        "x-odoo-model": "crm.stage"
-      }
-    },
     "/api/crm.tag": {
       "get": {
         "summary": "Search & read CRM Tag",
@@ -2524,14 +2004,14 @@
             "schema": {
               "type": "string"
             },
-            "example": "name,default_code,list_price"
+            "example": "name,id"
           },
           {
             "name": "limit",
             "in": "query",
             "schema": {
               "type": "integer",
-              "default": 80
+              "default": 20
             }
           },
           {
@@ -2548,7 +2028,8 @@
             "description": "Sort order, e.g. 'name asc' or 'create_date desc'",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name asc"
           }
         ],
         "responses": {
@@ -2582,6 +2063,11 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/crm_tag_upsert"
+              },
+              "example": {
+                "_key": {
+                  "name": "VIP"
+                }
               }
             }
           }
@@ -2640,7 +2126,8 @@
             "description": "Comma-separated field names to return",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name,id"
           }
         ],
         "responses": {
@@ -2703,72 +2190,6 @@
         "x-odoo-model": "crm.tag"
       }
     },
-    "/api/crm.tag/{id}/call": {
-      "post": {
-        "summary": "Call method on CRM Tag",
-        "description": "Call any method on a crm.tag record. Uses Odoo `execute_kw` with method name.",
-        "operationId": "call_crm_tag",
-        "tags": [
-          "crm"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "method": {
-                    "type": "string",
-                    "description": "Method name to call",
-                    "example": "action_confirm"
-                  },
-                  "args": {
-                    "type": "array",
-                    "items": {},
-                    "description": "Positional arguments"
-                  },
-                  "kwargs": {
-                    "type": "object",
-                    "description": "Keyword arguments"
-                  }
-                },
-                "required": [
-                  "method"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Method call result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "result": {}
-                  }
-                }
-              }
-            }
-          }
-        },
-        "x-odoo-method": "execute_kw",
-        "x-odoo-model": "crm.tag"
-      }
-    },
     "/api/hr.department": {
       "get": {
         "summary": "Search & read Department",
@@ -2794,14 +2215,14 @@
             "schema": {
               "type": "string"
             },
-            "example": "name,default_code,list_price"
+            "example": "name,manager_id,id"
           },
           {
             "name": "limit",
             "in": "query",
             "schema": {
               "type": "integer",
-              "default": 80
+              "default": 20
             }
           },
           {
@@ -2818,7 +2239,8 @@
             "description": "Sort order, e.g. 'name asc' or 'create_date desc'",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name asc"
           }
         ],
         "responses": {
@@ -2852,6 +2274,11 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/hr_department_upsert"
+              },
+              "example": {
+                "_key": {
+                  "name": "Engineering"
+                }
               }
             }
           }
@@ -2910,7 +2337,8 @@
             "description": "Comma-separated field names to return",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name,manager_id,id"
           }
         ],
         "responses": {
@@ -2973,72 +2401,6 @@
         "x-odoo-model": "hr.department"
       }
     },
-    "/api/hr.department/{id}/call": {
-      "post": {
-        "summary": "Call method on Department",
-        "description": "Call any method on a hr.department record. Uses Odoo `execute_kw` with method name.",
-        "operationId": "call_hr_department",
-        "tags": [
-          "hr"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "method": {
-                    "type": "string",
-                    "description": "Method name to call",
-                    "example": "action_confirm"
-                  },
-                  "args": {
-                    "type": "array",
-                    "items": {},
-                    "description": "Positional arguments"
-                  },
-                  "kwargs": {
-                    "type": "object",
-                    "description": "Keyword arguments"
-                  }
-                },
-                "required": [
-                  "method"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Method call result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "result": {}
-                  }
-                }
-              }
-            }
-          }
-        },
-        "x-odoo-method": "execute_kw",
-        "x-odoo-model": "hr.department"
-      }
-    },
     "/api/hr.employee": {
       "get": {
         "summary": "Search & read Employee",
@@ -3064,14 +2426,14 @@
             "schema": {
               "type": "string"
             },
-            "example": "name,default_code,list_price"
+            "example": "name,work_email,department_id,id"
           },
           {
             "name": "limit",
             "in": "query",
             "schema": {
               "type": "integer",
-              "default": 80
+              "default": 20
             }
           },
           {
@@ -3088,7 +2450,8 @@
             "description": "Sort order, e.g. 'name asc' or 'create_date desc'",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name asc"
           }
         ],
         "responses": {
@@ -3122,6 +2485,12 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/hr_employee_upsert"
+              },
+              "example": {
+                "_key": {
+                  "work_email": "john@demo.com"
+                },
+                "name": "John Doe"
               }
             }
           }
@@ -3180,7 +2549,8 @@
             "description": "Comma-separated field names to return",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name,work_email,department_id,id"
           }
         ],
         "responses": {
@@ -3243,72 +2613,6 @@
         "x-odoo-model": "hr.employee"
       }
     },
-    "/api/hr.employee/{id}/call": {
-      "post": {
-        "summary": "Call method on Employee",
-        "description": "Call any method on a hr.employee record. Uses Odoo `execute_kw` with method name.",
-        "operationId": "call_hr_employee",
-        "tags": [
-          "hr"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "method": {
-                    "type": "string",
-                    "description": "Method name to call",
-                    "example": "action_confirm"
-                  },
-                  "args": {
-                    "type": "array",
-                    "items": {},
-                    "description": "Positional arguments"
-                  },
-                  "kwargs": {
-                    "type": "object",
-                    "description": "Keyword arguments"
-                  }
-                },
-                "required": [
-                  "method"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Method call result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "result": {}
-                  }
-                }
-              }
-            }
-          }
-        },
-        "x-odoo-method": "execute_kw",
-        "x-odoo-model": "hr.employee"
-      }
-    },
     "/api/hr.job": {
       "get": {
         "summary": "Search & read Job Position",
@@ -3334,14 +2638,14 @@
             "schema": {
               "type": "string"
             },
-            "example": "name,default_code,list_price"
+            "example": "name,department_id,id"
           },
           {
             "name": "limit",
             "in": "query",
             "schema": {
               "type": "integer",
-              "default": 80
+              "default": 20
             }
           },
           {
@@ -3358,7 +2662,8 @@
             "description": "Sort order, e.g. 'name asc' or 'create_date desc'",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name asc"
           }
         ],
         "responses": {
@@ -3392,6 +2697,11 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/hr_job_upsert"
+              },
+              "example": {
+                "_key": {
+                  "name": "Developer"
+                }
               }
             }
           }
@@ -3450,7 +2760,8 @@
             "description": "Comma-separated field names to return",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name,department_id,id"
           }
         ],
         "responses": {
@@ -3513,72 +2824,6 @@
         "x-odoo-model": "hr.job"
       }
     },
-    "/api/hr.job/{id}/call": {
-      "post": {
-        "summary": "Call method on Job Position",
-        "description": "Call any method on a hr.job record. Uses Odoo `execute_kw` with method name.",
-        "operationId": "call_hr_job",
-        "tags": [
-          "hr"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "method": {
-                    "type": "string",
-                    "description": "Method name to call",
-                    "example": "action_confirm"
-                  },
-                  "args": {
-                    "type": "array",
-                    "items": {},
-                    "description": "Positional arguments"
-                  },
-                  "kwargs": {
-                    "type": "object",
-                    "description": "Keyword arguments"
-                  }
-                },
-                "required": [
-                  "method"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Method call result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "result": {}
-                  }
-                }
-              }
-            }
-          }
-        },
-        "x-odoo-method": "execute_kw",
-        "x-odoo-model": "hr.job"
-      }
-    },
     "/api/mail.message": {
       "get": {
         "summary": "Search & read Message",
@@ -3604,14 +2849,14 @@
             "schema": {
               "type": "string"
             },
-            "example": "name,default_code,list_price"
+            "example": "subject,model,body,id"
           },
           {
             "name": "limit",
             "in": "query",
             "schema": {
               "type": "integer",
-              "default": 80
+              "default": 20
             }
           },
           {
@@ -3628,7 +2873,8 @@
             "description": "Sort order, e.g. 'name asc' or 'create_date desc'",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "date desc"
           }
         ],
         "responses": {
@@ -3662,6 +2908,12 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/mail_message_upsert"
+              },
+              "example": {
+                "subject": "Hello",
+                "body": "<p>Test</p>",
+                "model": "res.partner",
+                "res_id": 1
               }
             }
           }
@@ -3720,7 +2972,8 @@
             "description": "Comma-separated field names to return",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "subject,model,body,id"
           }
         ],
         "responses": {
@@ -3783,72 +3036,6 @@
         "x-odoo-model": "mail.message"
       }
     },
-    "/api/mail.message/{id}/call": {
-      "post": {
-        "summary": "Call method on Message",
-        "description": "Call any method on a mail.message record. Uses Odoo `execute_kw` with method name.",
-        "operationId": "call_mail_message",
-        "tags": [
-          "mail"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "method": {
-                    "type": "string",
-                    "description": "Method name to call",
-                    "example": "action_confirm"
-                  },
-                  "args": {
-                    "type": "array",
-                    "items": {},
-                    "description": "Positional arguments"
-                  },
-                  "kwargs": {
-                    "type": "object",
-                    "description": "Keyword arguments"
-                  }
-                },
-                "required": [
-                  "method"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Method call result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "result": {}
-                  }
-                }
-              }
-            }
-          }
-        },
-        "x-odoo-method": "execute_kw",
-        "x-odoo-model": "mail.message"
-      }
-    },
     "/api/mail.thread": {
       "get": {
         "summary": "Search & read Email Thread",
@@ -3874,14 +3061,14 @@
             "schema": {
               "type": "string"
             },
-            "example": "name,default_code,list_price"
+            "example": "id"
           },
           {
             "name": "limit",
             "in": "query",
             "schema": {
               "type": "integer",
-              "default": 80
+              "default": 20
             }
           },
           {
@@ -3898,7 +3085,8 @@
             "description": "Sort order, e.g. 'name asc' or 'create_date desc'",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "id asc"
           }
         ],
         "responses": {
@@ -3932,6 +3120,9 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/mail_thread_upsert"
+              },
+              "example": {
+                "id": 1
               }
             }
           }
@@ -3990,7 +3181,8 @@
             "description": "Comma-separated field names to return",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "id"
           }
         ],
         "responses": {
@@ -4053,72 +3245,6 @@
         "x-odoo-model": "mail.thread"
       }
     },
-    "/api/mail.thread/{id}/call": {
-      "post": {
-        "summary": "Call method on Email Thread",
-        "description": "Call any method on a mail.thread record. Uses Odoo `execute_kw` with method name.",
-        "operationId": "call_mail_thread",
-        "tags": [
-          "mail"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "method": {
-                    "type": "string",
-                    "description": "Method name to call",
-                    "example": "action_confirm"
-                  },
-                  "args": {
-                    "type": "array",
-                    "items": {},
-                    "description": "Positional arguments"
-                  },
-                  "kwargs": {
-                    "type": "object",
-                    "description": "Keyword arguments"
-                  }
-                },
-                "required": [
-                  "method"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Method call result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "result": {}
-                  }
-                }
-              }
-            }
-          }
-        },
-        "x-odoo-method": "execute_kw",
-        "x-odoo-model": "mail.thread"
-      }
-    },
     "/api/mrp.bom": {
       "get": {
         "summary": "Search & read Bill of Material",
@@ -4144,14 +3270,14 @@
             "schema": {
               "type": "string"
             },
-            "example": "name,default_code,list_price"
+            "example": "code,product_tmpl_id,product_qty,id"
           },
           {
             "name": "limit",
             "in": "query",
             "schema": {
               "type": "integer",
-              "default": 80
+              "default": 20
             }
           },
           {
@@ -4168,7 +3294,8 @@
             "description": "Sort order, e.g. 'name asc' or 'create_date desc'",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "code asc"
           }
         ],
         "responses": {
@@ -4202,6 +3329,13 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/mrp_bom_upsert"
+              },
+              "example": {
+                "_key": {
+                  "code": "BOM001"
+                },
+                "product_tmpl_id": 1,
+                "product_qty": 1
               }
             }
           }
@@ -4260,7 +3394,8 @@
             "description": "Comma-separated field names to return",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "code,product_tmpl_id,product_qty,id"
           }
         ],
         "responses": {
@@ -4323,72 +3458,6 @@
         "x-odoo-model": "mrp.bom"
       }
     },
-    "/api/mrp.bom/{id}/call": {
-      "post": {
-        "summary": "Call method on Bill of Material",
-        "description": "Call any method on a mrp.bom record. Uses Odoo `execute_kw` with method name.",
-        "operationId": "call_mrp_bom",
-        "tags": [
-          "mrp"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "method": {
-                    "type": "string",
-                    "description": "Method name to call",
-                    "example": "action_confirm"
-                  },
-                  "args": {
-                    "type": "array",
-                    "items": {},
-                    "description": "Positional arguments"
-                  },
-                  "kwargs": {
-                    "type": "object",
-                    "description": "Keyword arguments"
-                  }
-                },
-                "required": [
-                  "method"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Method call result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "result": {}
-                  }
-                }
-              }
-            }
-          }
-        },
-        "x-odoo-method": "execute_kw",
-        "x-odoo-model": "mrp.bom"
-      }
-    },
     "/api/mrp.production": {
       "get": {
         "summary": "Search & read Production Order",
@@ -4414,14 +3483,14 @@
             "schema": {
               "type": "string"
             },
-            "example": "name,default_code,list_price"
+            "example": "name,state,product_id,product_qty,id"
           },
           {
             "name": "limit",
             "in": "query",
             "schema": {
               "type": "integer",
-              "default": 80
+              "default": 20
             }
           },
           {
@@ -4438,7 +3507,8 @@
             "description": "Sort order, e.g. 'name asc' or 'create_date desc'",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "date_start desc"
           }
         ],
         "responses": {
@@ -4472,6 +3542,11 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/mrp_production_upsert"
+              },
+              "example": {
+                "name": "MO/001",
+                "product_id": 1,
+                "product_qty": 10
               }
             }
           }
@@ -4530,7 +3605,8 @@
             "description": "Comma-separated field names to return",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name,state,product_id,product_qty,id"
           }
         ],
         "responses": {
@@ -4593,72 +3669,6 @@
         "x-odoo-model": "mrp.production"
       }
     },
-    "/api/mrp.production/{id}/call": {
-      "post": {
-        "summary": "Call method on Production Order",
-        "description": "Call any method on a mrp.production record. Uses Odoo `execute_kw` with method name.",
-        "operationId": "call_mrp_production",
-        "tags": [
-          "mrp"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "method": {
-                    "type": "string",
-                    "description": "Method name to call",
-                    "example": "action_confirm"
-                  },
-                  "args": {
-                    "type": "array",
-                    "items": {},
-                    "description": "Positional arguments"
-                  },
-                  "kwargs": {
-                    "type": "object",
-                    "description": "Keyword arguments"
-                  }
-                },
-                "required": [
-                  "method"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Method call result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "result": {}
-                  }
-                }
-              }
-            }
-          }
-        },
-        "x-odoo-method": "execute_kw",
-        "x-odoo-model": "mrp.production"
-      }
-    },
     "/api/mrp.workorder": {
       "get": {
         "summary": "Search & read Work Order",
@@ -4684,14 +3694,14 @@
             "schema": {
               "type": "string"
             },
-            "example": "name,default_code,list_price"
+            "example": "name,state,production_id,id"
           },
           {
             "name": "limit",
             "in": "query",
             "schema": {
               "type": "integer",
-              "default": 80
+              "default": 20
             }
           },
           {
@@ -4708,7 +3718,8 @@
             "description": "Sort order, e.g. 'name asc' or 'create_date desc'",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "id asc"
           }
         ],
         "responses": {
@@ -4742,6 +3753,10 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/mrp_workorder_upsert"
+              },
+              "example": {
+                "name": "WO/001",
+                "production_id": 1
               }
             }
           }
@@ -4800,7 +3815,8 @@
             "description": "Comma-separated field names to return",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name,state,production_id,id"
           }
         ],
         "responses": {
@@ -4863,72 +3879,6 @@
         "x-odoo-model": "mrp.workorder"
       }
     },
-    "/api/mrp.workorder/{id}/call": {
-      "post": {
-        "summary": "Call method on Work Order",
-        "description": "Call any method on a mrp.workorder record. Uses Odoo `execute_kw` with method name.",
-        "operationId": "call_mrp_workorder",
-        "tags": [
-          "mrp"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "method": {
-                    "type": "string",
-                    "description": "Method name to call",
-                    "example": "action_confirm"
-                  },
-                  "args": {
-                    "type": "array",
-                    "items": {},
-                    "description": "Positional arguments"
-                  },
-                  "kwargs": {
-                    "type": "object",
-                    "description": "Keyword arguments"
-                  }
-                },
-                "required": [
-                  "method"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Method call result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "result": {}
-                  }
-                }
-              }
-            }
-          }
-        },
-        "x-odoo-method": "execute_kw",
-        "x-odoo-model": "mrp.workorder"
-      }
-    },
     "/api/pos.config": {
       "get": {
         "summary": "Search & read Point of Sale Configuration",
@@ -4954,14 +3904,14 @@
             "schema": {
               "type": "string"
             },
-            "example": "name,default_code,list_price"
+            "example": "name,module_pos_restaurant,id"
           },
           {
             "name": "limit",
             "in": "query",
             "schema": {
               "type": "integer",
-              "default": 80
+              "default": 20
             }
           },
           {
@@ -4978,7 +3928,8 @@
             "description": "Sort order, e.g. 'name asc' or 'create_date desc'",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name asc"
           }
         ],
         "responses": {
@@ -5012,6 +3963,11 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/pos_config_upsert"
+              },
+              "example": {
+                "_key": {
+                  "name": "Shop 1"
+                }
               }
             }
           }
@@ -5070,7 +4026,8 @@
             "description": "Comma-separated field names to return",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name,module_pos_restaurant,id"
           }
         ],
         "responses": {
@@ -5133,72 +4090,6 @@
         "x-odoo-model": "pos.config"
       }
     },
-    "/api/pos.config/{id}/call": {
-      "post": {
-        "summary": "Call method on Point of Sale Configuration",
-        "description": "Call any method on a pos.config record. Uses Odoo `execute_kw` with method name.",
-        "operationId": "call_pos_config",
-        "tags": [
-          "pos"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "method": {
-                    "type": "string",
-                    "description": "Method name to call",
-                    "example": "action_confirm"
-                  },
-                  "args": {
-                    "type": "array",
-                    "items": {},
-                    "description": "Positional arguments"
-                  },
-                  "kwargs": {
-                    "type": "object",
-                    "description": "Keyword arguments"
-                  }
-                },
-                "required": [
-                  "method"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Method call result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "result": {}
-                  }
-                }
-              }
-            }
-          }
-        },
-        "x-odoo-method": "execute_kw",
-        "x-odoo-model": "pos.config"
-      }
-    },
     "/api/pos.order": {
       "get": {
         "summary": "Search & read Point of Sale Orders",
@@ -5224,14 +4115,14 @@
             "schema": {
               "type": "string"
             },
-            "example": "name,default_code,list_price"
+            "example": "name,state,partner_id,amount_total,id"
           },
           {
             "name": "limit",
             "in": "query",
             "schema": {
               "type": "integer",
-              "default": 80
+              "default": 20
             }
           },
           {
@@ -5248,7 +4139,8 @@
             "description": "Sort order, e.g. 'name asc' or 'create_date desc'",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "date_order desc"
           }
         ],
         "responses": {
@@ -5282,6 +4174,10 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/pos_order_upsert"
+              },
+              "example": {
+                "name": "Order/001",
+                "partner_id": 1
               }
             }
           }
@@ -5340,7 +4236,8 @@
             "description": "Comma-separated field names to return",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name,state,partner_id,amount_total,id"
           }
         ],
         "responses": {
@@ -5403,72 +4300,6 @@
         "x-odoo-model": "pos.order"
       }
     },
-    "/api/pos.order/{id}/call": {
-      "post": {
-        "summary": "Call method on Point of Sale Orders",
-        "description": "Call any method on a pos.order record. Uses Odoo `execute_kw` with method name.",
-        "operationId": "call_pos_order",
-        "tags": [
-          "pos"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "method": {
-                    "type": "string",
-                    "description": "Method name to call",
-                    "example": "action_confirm"
-                  },
-                  "args": {
-                    "type": "array",
-                    "items": {},
-                    "description": "Positional arguments"
-                  },
-                  "kwargs": {
-                    "type": "object",
-                    "description": "Keyword arguments"
-                  }
-                },
-                "required": [
-                  "method"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Method call result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "result": {}
-                  }
-                }
-              }
-            }
-          }
-        },
-        "x-odoo-method": "execute_kw",
-        "x-odoo-model": "pos.order"
-      }
-    },
     "/api/pos.order.line": {
       "get": {
         "summary": "Search & read Point of Sale Order Lines",
@@ -5494,14 +4325,14 @@
             "schema": {
               "type": "string"
             },
-            "example": "name,default_code,list_price"
+            "example": "name,order_id,product_id,qty,price_unit,id"
           },
           {
             "name": "limit",
             "in": "query",
             "schema": {
               "type": "integer",
-              "default": 80
+              "default": 20
             }
           },
           {
@@ -5518,7 +4349,8 @@
             "description": "Sort order, e.g. 'name asc' or 'create_date desc'",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "id asc"
           }
         ],
         "responses": {
@@ -5552,6 +4384,12 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/pos_order_line_upsert"
+              },
+              "example": {
+                "name": "Line 1",
+                "order_id": 1,
+                "product_id": 1,
+                "qty": 1
               }
             }
           }
@@ -5610,7 +4448,8 @@
             "description": "Comma-separated field names to return",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name,order_id,product_id,qty,price_unit,id"
           }
         ],
         "responses": {
@@ -5673,72 +4512,6 @@
         "x-odoo-model": "pos.order.line"
       }
     },
-    "/api/pos.order.line/{id}/call": {
-      "post": {
-        "summary": "Call method on Point of Sale Order Lines",
-        "description": "Call any method on a pos.order.line record. Uses Odoo `execute_kw` with method name.",
-        "operationId": "call_pos_order_line",
-        "tags": [
-          "pos"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "method": {
-                    "type": "string",
-                    "description": "Method name to call",
-                    "example": "action_confirm"
-                  },
-                  "args": {
-                    "type": "array",
-                    "items": {},
-                    "description": "Positional arguments"
-                  },
-                  "kwargs": {
-                    "type": "object",
-                    "description": "Keyword arguments"
-                  }
-                },
-                "required": [
-                  "method"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Method call result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "result": {}
-                  }
-                }
-              }
-            }
-          }
-        },
-        "x-odoo-method": "execute_kw",
-        "x-odoo-model": "pos.order.line"
-      }
-    },
     "/api/pos.session": {
       "get": {
         "summary": "Search & read Point of Sale Session",
@@ -5764,14 +4537,14 @@
             "schema": {
               "type": "string"
             },
-            "example": "name,default_code,list_price"
+            "example": "name,state,config_id,id"
           },
           {
             "name": "limit",
             "in": "query",
             "schema": {
               "type": "integer",
-              "default": 80
+              "default": 20
             }
           },
           {
@@ -5788,7 +4561,8 @@
             "description": "Sort order, e.g. 'name asc' or 'create_date desc'",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "start_at desc"
           }
         ],
         "responses": {
@@ -5822,6 +4596,10 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/pos_session_upsert"
+              },
+              "example": {
+                "name": "Session/001",
+                "config_id": 1
               }
             }
           }
@@ -5880,7 +4658,8 @@
             "description": "Comma-separated field names to return",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name,state,config_id,id"
           }
         ],
         "responses": {
@@ -5943,72 +4722,6 @@
         "x-odoo-model": "pos.session"
       }
     },
-    "/api/pos.session/{id}/call": {
-      "post": {
-        "summary": "Call method on Point of Sale Session",
-        "description": "Call any method on a pos.session record. Uses Odoo `execute_kw` with method name.",
-        "operationId": "call_pos_session",
-        "tags": [
-          "pos"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "method": {
-                    "type": "string",
-                    "description": "Method name to call",
-                    "example": "action_confirm"
-                  },
-                  "args": {
-                    "type": "array",
-                    "items": {},
-                    "description": "Positional arguments"
-                  },
-                  "kwargs": {
-                    "type": "object",
-                    "description": "Keyword arguments"
-                  }
-                },
-                "required": [
-                  "method"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Method call result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "result": {}
-                  }
-                }
-              }
-            }
-          }
-        },
-        "x-odoo-method": "execute_kw",
-        "x-odoo-model": "pos.session"
-      }
-    },
     "/api/product.attribute": {
       "get": {
         "summary": "Search & read Product Attribute",
@@ -6034,14 +4747,14 @@
             "schema": {
               "type": "string"
             },
-            "example": "name,default_code,list_price"
+            "example": "name,create_variant,id"
           },
           {
             "name": "limit",
             "in": "query",
             "schema": {
               "type": "integer",
-              "default": 80
+              "default": 20
             }
           },
           {
@@ -6058,7 +4771,8 @@
             "description": "Sort order, e.g. 'name asc' or 'create_date desc'",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name asc"
           }
         ],
         "responses": {
@@ -6092,6 +4806,11 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/product_attribute_upsert"
+              },
+              "example": {
+                "_key": {
+                  "name": "Color"
+                }
               }
             }
           }
@@ -6150,7 +4869,8 @@
             "description": "Comma-separated field names to return",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name,create_variant,id"
           }
         ],
         "responses": {
@@ -6213,72 +4933,6 @@
         "x-odoo-model": "product.attribute"
       }
     },
-    "/api/product.attribute/{id}/call": {
-      "post": {
-        "summary": "Call method on Product Attribute",
-        "description": "Call any method on a product.attribute record. Uses Odoo `execute_kw` with method name.",
-        "operationId": "call_product_attribute",
-        "tags": [
-          "product"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "method": {
-                    "type": "string",
-                    "description": "Method name to call",
-                    "example": "action_confirm"
-                  },
-                  "args": {
-                    "type": "array",
-                    "items": {},
-                    "description": "Positional arguments"
-                  },
-                  "kwargs": {
-                    "type": "object",
-                    "description": "Keyword arguments"
-                  }
-                },
-                "required": [
-                  "method"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Method call result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "result": {}
-                  }
-                }
-              }
-            }
-          }
-        },
-        "x-odoo-method": "execute_kw",
-        "x-odoo-model": "product.attribute"
-      }
-    },
     "/api/product.attribute.value": {
       "get": {
         "summary": "Search & read Attribute Value",
@@ -6304,14 +4958,14 @@
             "schema": {
               "type": "string"
             },
-            "example": "name,default_code,list_price"
+            "example": "name,attribute_id,color,id"
           },
           {
             "name": "limit",
             "in": "query",
             "schema": {
               "type": "integer",
-              "default": 80
+              "default": 20
             }
           },
           {
@@ -6328,7 +4982,8 @@
             "description": "Sort order, e.g. 'name asc' or 'create_date desc'",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "sequence asc"
           }
         ],
         "responses": {
@@ -6362,6 +5017,12 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/product_attribute_value_upsert"
+              },
+              "example": {
+                "_key": {
+                  "name": "Red"
+                },
+                "attribute_id": 1
               }
             }
           }
@@ -6420,7 +5081,8 @@
             "description": "Comma-separated field names to return",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name,attribute_id,color,id"
           }
         ],
         "responses": {
@@ -6483,72 +5145,6 @@
         "x-odoo-model": "product.attribute.value"
       }
     },
-    "/api/product.attribute.value/{id}/call": {
-      "post": {
-        "summary": "Call method on Attribute Value",
-        "description": "Call any method on a product.attribute.value record. Uses Odoo `execute_kw` with method name.",
-        "operationId": "call_product_attribute_value",
-        "tags": [
-          "product"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "method": {
-                    "type": "string",
-                    "description": "Method name to call",
-                    "example": "action_confirm"
-                  },
-                  "args": {
-                    "type": "array",
-                    "items": {},
-                    "description": "Positional arguments"
-                  },
-                  "kwargs": {
-                    "type": "object",
-                    "description": "Keyword arguments"
-                  }
-                },
-                "required": [
-                  "method"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Method call result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "result": {}
-                  }
-                }
-              }
-            }
-          }
-        },
-        "x-odoo-method": "execute_kw",
-        "x-odoo-model": "product.attribute.value"
-      }
-    },
     "/api/product.category": {
       "get": {
         "summary": "Search & read Product Category",
@@ -6574,14 +5170,14 @@
             "schema": {
               "type": "string"
             },
-            "example": "name,default_code,list_price"
+            "example": "name,parent_id,id"
           },
           {
             "name": "limit",
             "in": "query",
             "schema": {
               "type": "integer",
-              "default": 80
+              "default": 20
             }
           },
           {
@@ -6598,7 +5194,8 @@
             "description": "Sort order, e.g. 'name asc' or 'create_date desc'",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name asc"
           }
         ],
         "responses": {
@@ -6632,6 +5229,11 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/product_category_upsert"
+              },
+              "example": {
+                "_key": {
+                  "name": "Electronics"
+                }
               }
             }
           }
@@ -6690,7 +5292,8 @@
             "description": "Comma-separated field names to return",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name,parent_id,id"
           }
         ],
         "responses": {
@@ -6753,72 +5356,6 @@
         "x-odoo-model": "product.category"
       }
     },
-    "/api/product.category/{id}/call": {
-      "post": {
-        "summary": "Call method on Product Category",
-        "description": "Call any method on a product.category record. Uses Odoo `execute_kw` with method name.",
-        "operationId": "call_product_category",
-        "tags": [
-          "product"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "method": {
-                    "type": "string",
-                    "description": "Method name to call",
-                    "example": "action_confirm"
-                  },
-                  "args": {
-                    "type": "array",
-                    "items": {},
-                    "description": "Positional arguments"
-                  },
-                  "kwargs": {
-                    "type": "object",
-                    "description": "Keyword arguments"
-                  }
-                },
-                "required": [
-                  "method"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Method call result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "result": {}
-                  }
-                }
-              }
-            }
-          }
-        },
-        "x-odoo-method": "execute_kw",
-        "x-odoo-model": "product.category"
-      }
-    },
     "/api/product.product": {
       "get": {
         "summary": "Search & read Product Variant",
@@ -6844,14 +5381,14 @@
             "schema": {
               "type": "string"
             },
-            "example": "name,default_code,list_price"
+            "example": "name,default_code,barcode,list_price,id"
           },
           {
             "name": "limit",
             "in": "query",
             "schema": {
               "type": "integer",
-              "default": 80
+              "default": 20
             }
           },
           {
@@ -6868,7 +5405,8 @@
             "description": "Sort order, e.g. 'name asc' or 'create_date desc'",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name asc"
           }
         ],
         "responses": {
@@ -6902,6 +5440,13 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/product_product_upsert"
+              },
+              "example": {
+                "_key": {
+                  "barcode": "1234567890"
+                },
+                "name": "Test Product",
+                "list_price": 100000
               }
             }
           }
@@ -6960,7 +5505,8 @@
             "description": "Comma-separated field names to return",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name,default_code,barcode,list_price,id"
           }
         ],
         "responses": {
@@ -7023,72 +5569,6 @@
         "x-odoo-model": "product.product"
       }
     },
-    "/api/product.product/{id}/call": {
-      "post": {
-        "summary": "Call method on Product Variant",
-        "description": "Call any method on a product.product record. Uses Odoo `execute_kw` with method name.",
-        "operationId": "call_product_product",
-        "tags": [
-          "product"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "method": {
-                    "type": "string",
-                    "description": "Method name to call",
-                    "example": "action_confirm"
-                  },
-                  "args": {
-                    "type": "array",
-                    "items": {},
-                    "description": "Positional arguments"
-                  },
-                  "kwargs": {
-                    "type": "object",
-                    "description": "Keyword arguments"
-                  }
-                },
-                "required": [
-                  "method"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Method call result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "result": {}
-                  }
-                }
-              }
-            }
-          }
-        },
-        "x-odoo-method": "execute_kw",
-        "x-odoo-model": "product.product"
-      }
-    },
     "/api/product.template": {
       "get": {
         "summary": "Search & read Product",
@@ -7114,14 +5594,14 @@
             "schema": {
               "type": "string"
             },
-            "example": "name,default_code,list_price"
+            "example": "name,default_code,barcode,list_price,id"
           },
           {
             "name": "limit",
             "in": "query",
             "schema": {
               "type": "integer",
-              "default": 80
+              "default": 20
             }
           },
           {
@@ -7138,7 +5618,8 @@
             "description": "Sort order, e.g. 'name asc' or 'create_date desc'",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name asc"
           }
         ],
         "responses": {
@@ -7172,6 +5653,12 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/product_template_upsert"
+              },
+              "example": {
+                "_key": {
+                  "name": "Test Product"
+                },
+                "list_price": 100000
               }
             }
           }
@@ -7230,7 +5717,8 @@
             "description": "Comma-separated field names to return",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name,default_code,barcode,list_price,id"
           }
         ],
         "responses": {
@@ -7293,72 +5781,6 @@
         "x-odoo-model": "product.template"
       }
     },
-    "/api/product.template/{id}/call": {
-      "post": {
-        "summary": "Call method on Product",
-        "description": "Call any method on a product.template record. Uses Odoo `execute_kw` with method name.",
-        "operationId": "call_product_template",
-        "tags": [
-          "product"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "method": {
-                    "type": "string",
-                    "description": "Method name to call",
-                    "example": "action_confirm"
-                  },
-                  "args": {
-                    "type": "array",
-                    "items": {},
-                    "description": "Positional arguments"
-                  },
-                  "kwargs": {
-                    "type": "object",
-                    "description": "Keyword arguments"
-                  }
-                },
-                "required": [
-                  "method"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Method call result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "result": {}
-                  }
-                }
-              }
-            }
-          }
-        },
-        "x-odoo-method": "execute_kw",
-        "x-odoo-model": "product.template"
-      }
-    },
     "/api/project.project": {
       "get": {
         "summary": "Search & read Project",
@@ -7384,14 +5806,14 @@
             "schema": {
               "type": "string"
             },
-            "example": "name,default_code,list_price"
+            "example": "name,stage_id,user_id,id"
           },
           {
             "name": "limit",
             "in": "query",
             "schema": {
               "type": "integer",
-              "default": 80
+              "default": 20
             }
           },
           {
@@ -7408,7 +5830,8 @@
             "description": "Sort order, e.g. 'name asc' or 'create_date desc'",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name asc"
           }
         ],
         "responses": {
@@ -7442,6 +5865,11 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/project_project_upsert"
+              },
+              "example": {
+                "_key": {
+                  "name": "Website Redesign"
+                }
               }
             }
           }
@@ -7500,7 +5928,8 @@
             "description": "Comma-separated field names to return",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name,stage_id,user_id,id"
           }
         ],
         "responses": {
@@ -7563,72 +5992,6 @@
         "x-odoo-model": "project.project"
       }
     },
-    "/api/project.project/{id}/call": {
-      "post": {
-        "summary": "Call method on Project",
-        "description": "Call any method on a project.project record. Uses Odoo `execute_kw` with method name.",
-        "operationId": "call_project_project",
-        "tags": [
-          "project"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "method": {
-                    "type": "string",
-                    "description": "Method name to call",
-                    "example": "action_confirm"
-                  },
-                  "args": {
-                    "type": "array",
-                    "items": {},
-                    "description": "Positional arguments"
-                  },
-                  "kwargs": {
-                    "type": "object",
-                    "description": "Keyword arguments"
-                  }
-                },
-                "required": [
-                  "method"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Method call result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "result": {}
-                  }
-                }
-              }
-            }
-          }
-        },
-        "x-odoo-method": "execute_kw",
-        "x-odoo-model": "project.project"
-      }
-    },
     "/api/project.task": {
       "get": {
         "summary": "Search & read Task",
@@ -7654,14 +6017,14 @@
             "schema": {
               "type": "string"
             },
-            "example": "name,default_code,list_price"
+            "example": "name,project_id,stage_id,user_id,id"
           },
           {
             "name": "limit",
             "in": "query",
             "schema": {
               "type": "integer",
-              "default": 80
+              "default": 20
             }
           },
           {
@@ -7678,7 +6041,8 @@
             "description": "Sort order, e.g. 'name asc' or 'create_date desc'",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "sequence asc"
           }
         ],
         "responses": {
@@ -7712,6 +6076,12 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/project_task_upsert"
+              },
+              "example": {
+                "_key": {
+                  "name": "Design Homepage"
+                },
+                "project_id": 1
               }
             }
           }
@@ -7770,7 +6140,8 @@
             "description": "Comma-separated field names to return",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name,project_id,stage_id,user_id,id"
           }
         ],
         "responses": {
@@ -7833,72 +6204,6 @@
         "x-odoo-model": "project.task"
       }
     },
-    "/api/project.task/{id}/call": {
-      "post": {
-        "summary": "Call method on Task",
-        "description": "Call any method on a project.task record. Uses Odoo `execute_kw` with method name.",
-        "operationId": "call_project_task",
-        "tags": [
-          "project"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "method": {
-                    "type": "string",
-                    "description": "Method name to call",
-                    "example": "action_confirm"
-                  },
-                  "args": {
-                    "type": "array",
-                    "items": {},
-                    "description": "Positional arguments"
-                  },
-                  "kwargs": {
-                    "type": "object",
-                    "description": "Keyword arguments"
-                  }
-                },
-                "required": [
-                  "method"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Method call result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "result": {}
-                  }
-                }
-              }
-            }
-          }
-        },
-        "x-odoo-method": "execute_kw",
-        "x-odoo-model": "project.task"
-      }
-    },
     "/api/purchase.order": {
       "get": {
         "summary": "Search & read Purchase Order",
@@ -7924,14 +6229,14 @@
             "schema": {
               "type": "string"
             },
-            "example": "name,default_code,list_price"
+            "example": "name,partner_id,state,amount_total,id"
           },
           {
             "name": "limit",
             "in": "query",
             "schema": {
               "type": "integer",
-              "default": 80
+              "default": 20
             }
           },
           {
@@ -7948,7 +6253,8 @@
             "description": "Sort order, e.g. 'name asc' or 'create_date desc'",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "date_order desc"
           }
         ],
         "responses": {
@@ -7982,6 +6288,10 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/purchase_order_upsert"
+              },
+              "example": {
+                "name": "PO/001",
+                "partner_id": 1
               }
             }
           }
@@ -8040,7 +6350,8 @@
             "description": "Comma-separated field names to return",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name,partner_id,state,amount_total,id"
           }
         ],
         "responses": {
@@ -8103,72 +6414,6 @@
         "x-odoo-model": "purchase.order"
       }
     },
-    "/api/purchase.order/{id}/call": {
-      "post": {
-        "summary": "Call method on Purchase Order",
-        "description": "Call any method on a purchase.order record. Uses Odoo `execute_kw` with method name.",
-        "operationId": "call_purchase_order",
-        "tags": [
-          "purchase"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "method": {
-                    "type": "string",
-                    "description": "Method name to call",
-                    "example": "action_confirm"
-                  },
-                  "args": {
-                    "type": "array",
-                    "items": {},
-                    "description": "Positional arguments"
-                  },
-                  "kwargs": {
-                    "type": "object",
-                    "description": "Keyword arguments"
-                  }
-                },
-                "required": [
-                  "method"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Method call result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "result": {}
-                  }
-                }
-              }
-            }
-          }
-        },
-        "x-odoo-method": "execute_kw",
-        "x-odoo-model": "purchase.order"
-      }
-    },
     "/api/purchase.order.line": {
       "get": {
         "summary": "Search & read Purchase Order Line",
@@ -8194,14 +6439,14 @@
             "schema": {
               "type": "string"
             },
-            "example": "name,default_code,list_price"
+            "example": "name,order_id,product_id,price_unit,product_qty,id"
           },
           {
             "name": "limit",
             "in": "query",
             "schema": {
               "type": "integer",
-              "default": 80
+              "default": 20
             }
           },
           {
@@ -8218,7 +6463,8 @@
             "description": "Sort order, e.g. 'name asc' or 'create_date desc'",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "id asc"
           }
         ],
         "responses": {
@@ -8252,6 +6498,13 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/purchase_order_line_upsert"
+              },
+              "example": {
+                "name": "Line 1",
+                "order_id": 1,
+                "product_id": 1,
+                "price_unit": 50000,
+                "product_qty": 10
               }
             }
           }
@@ -8310,7 +6563,8 @@
             "description": "Comma-separated field names to return",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name,order_id,product_id,price_unit,product_qty,id"
           }
         ],
         "responses": {
@@ -8373,72 +6627,6 @@
         "x-odoo-model": "purchase.order.line"
       }
     },
-    "/api/purchase.order.line/{id}/call": {
-      "post": {
-        "summary": "Call method on Purchase Order Line",
-        "description": "Call any method on a purchase.order.line record. Uses Odoo `execute_kw` with method name.",
-        "operationId": "call_purchase_order_line",
-        "tags": [
-          "purchase"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "method": {
-                    "type": "string",
-                    "description": "Method name to call",
-                    "example": "action_confirm"
-                  },
-                  "args": {
-                    "type": "array",
-                    "items": {},
-                    "description": "Positional arguments"
-                  },
-                  "kwargs": {
-                    "type": "object",
-                    "description": "Keyword arguments"
-                  }
-                },
-                "required": [
-                  "method"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Method call result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "result": {}
-                  }
-                }
-              }
-            }
-          }
-        },
-        "x-odoo-method": "execute_kw",
-        "x-odoo-model": "purchase.order.line"
-      }
-    },
     "/api/res.partner": {
       "get": {
         "summary": "Search & read Contact",
@@ -8464,14 +6652,14 @@
             "schema": {
               "type": "string"
             },
-            "example": "name,default_code,list_price"
+            "example": "name,email,phone,category_id,id"
           },
           {
             "name": "limit",
             "in": "query",
             "schema": {
               "type": "integer",
-              "default": 80
+              "default": 20
             }
           },
           {
@@ -8488,7 +6676,8 @@
             "description": "Sort order, e.g. 'name asc' or 'create_date desc'",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name asc"
           }
         ],
         "responses": {
@@ -8522,6 +6711,13 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/res_partner_upsert"
+              },
+              "example": {
+                "_key": {
+                  "email": "john@example.com"
+                },
+                "name": "John Doe",
+                "phone": "+6281234567890"
               }
             }
           }
@@ -8580,7 +6776,8 @@
             "description": "Comma-separated field names to return",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name,email,phone,category_id,id"
           }
         ],
         "responses": {
@@ -8643,72 +6840,6 @@
         "x-odoo-model": "res.partner"
       }
     },
-    "/api/res.partner/{id}/call": {
-      "post": {
-        "summary": "Call method on Contact",
-        "description": "Call any method on a res.partner record. Uses Odoo `execute_kw` with method name.",
-        "operationId": "call_res_partner",
-        "tags": [
-          "res"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "method": {
-                    "type": "string",
-                    "description": "Method name to call",
-                    "example": "action_confirm"
-                  },
-                  "args": {
-                    "type": "array",
-                    "items": {},
-                    "description": "Positional arguments"
-                  },
-                  "kwargs": {
-                    "type": "object",
-                    "description": "Keyword arguments"
-                  }
-                },
-                "required": [
-                  "method"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Method call result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "result": {}
-                  }
-                }
-              }
-            }
-          }
-        },
-        "x-odoo-method": "execute_kw",
-        "x-odoo-model": "res.partner"
-      }
-    },
     "/api/res.partner.bank": {
       "get": {
         "summary": "Search & read Bank Accounts",
@@ -8734,14 +6865,14 @@
             "schema": {
               "type": "string"
             },
-            "example": "name,default_code,list_price"
+            "example": "acc_number,partner_id,bank_name,id"
           },
           {
             "name": "limit",
             "in": "query",
             "schema": {
               "type": "integer",
-              "default": 80
+              "default": 20
             }
           },
           {
@@ -8758,7 +6889,8 @@
             "description": "Sort order, e.g. 'name asc' or 'create_date desc'",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "id asc"
           }
         ],
         "responses": {
@@ -8792,6 +6924,12 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/res_partner_bank_upsert"
+              },
+              "example": {
+                "_key": {
+                  "acc_number": "1234567890"
+                },
+                "partner_id": 1
               }
             }
           }
@@ -8850,7 +6988,8 @@
             "description": "Comma-separated field names to return",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "acc_number,partner_id,bank_name,id"
           }
         ],
         "responses": {
@@ -8913,72 +7052,6 @@
         "x-odoo-model": "res.partner.bank"
       }
     },
-    "/api/res.partner.bank/{id}/call": {
-      "post": {
-        "summary": "Call method on Bank Accounts",
-        "description": "Call any method on a res.partner.bank record. Uses Odoo `execute_kw` with method name.",
-        "operationId": "call_res_partner_bank",
-        "tags": [
-          "res"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "method": {
-                    "type": "string",
-                    "description": "Method name to call",
-                    "example": "action_confirm"
-                  },
-                  "args": {
-                    "type": "array",
-                    "items": {},
-                    "description": "Positional arguments"
-                  },
-                  "kwargs": {
-                    "type": "object",
-                    "description": "Keyword arguments"
-                  }
-                },
-                "required": [
-                  "method"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Method call result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "result": {}
-                  }
-                }
-              }
-            }
-          }
-        },
-        "x-odoo-method": "execute_kw",
-        "x-odoo-model": "res.partner.bank"
-      }
-    },
     "/api/res.partner.category": {
       "get": {
         "summary": "Search & read Partner Tags",
@@ -9004,14 +7077,14 @@
             "schema": {
               "type": "string"
             },
-            "example": "name,default_code,list_price"
+            "example": "name,color,id"
           },
           {
             "name": "limit",
             "in": "query",
             "schema": {
               "type": "integer",
-              "default": 80
+              "default": 20
             }
           },
           {
@@ -9028,7 +7101,8 @@
             "description": "Sort order, e.g. 'name asc' or 'create_date desc'",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name asc"
           }
         ],
         "responses": {
@@ -9062,6 +7136,11 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/res_partner_category_upsert"
+              },
+              "example": {
+                "_key": {
+                  "name": "VIP"
+                }
               }
             }
           }
@@ -9120,7 +7199,8 @@
             "description": "Comma-separated field names to return",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name,color,id"
           }
         ],
         "responses": {
@@ -9183,72 +7263,6 @@
         "x-odoo-model": "res.partner.category"
       }
     },
-    "/api/res.partner.category/{id}/call": {
-      "post": {
-        "summary": "Call method on Partner Tags",
-        "description": "Call any method on a res.partner.category record. Uses Odoo `execute_kw` with method name.",
-        "operationId": "call_res_partner_category",
-        "tags": [
-          "res"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "method": {
-                    "type": "string",
-                    "description": "Method name to call",
-                    "example": "action_confirm"
-                  },
-                  "args": {
-                    "type": "array",
-                    "items": {},
-                    "description": "Positional arguments"
-                  },
-                  "kwargs": {
-                    "type": "object",
-                    "description": "Keyword arguments"
-                  }
-                },
-                "required": [
-                  "method"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Method call result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "result": {}
-                  }
-                }
-              }
-            }
-          }
-        },
-        "x-odoo-method": "execute_kw",
-        "x-odoo-model": "res.partner.category"
-      }
-    },
     "/api/sale.order": {
       "get": {
         "summary": "Search & read Sales Order",
@@ -9274,14 +7288,14 @@
             "schema": {
               "type": "string"
             },
-            "example": "name,default_code,list_price"
+            "example": "name,partner_id,state,amount_total,id"
           },
           {
             "name": "limit",
             "in": "query",
             "schema": {
               "type": "integer",
-              "default": 80
+              "default": 20
             }
           },
           {
@@ -9298,7 +7312,8 @@
             "description": "Sort order, e.g. 'name asc' or 'create_date desc'",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "date_order desc"
           }
         ],
         "responses": {
@@ -9332,6 +7347,10 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/sale_order_upsert"
+              },
+              "example": {
+                "name": "S00001",
+                "partner_id": 1
               }
             }
           }
@@ -9390,7 +7409,8 @@
             "description": "Comma-separated field names to return",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name,partner_id,state,amount_total,id"
           }
         ],
         "responses": {
@@ -9453,72 +7473,6 @@
         "x-odoo-model": "sale.order"
       }
     },
-    "/api/sale.order/{id}/call": {
-      "post": {
-        "summary": "Call method on Sales Order",
-        "description": "Call any method on a sale.order record. Uses Odoo `execute_kw` with method name.",
-        "operationId": "call_sale_order",
-        "tags": [
-          "sale"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "method": {
-                    "type": "string",
-                    "description": "Method name to call",
-                    "example": "action_confirm"
-                  },
-                  "args": {
-                    "type": "array",
-                    "items": {},
-                    "description": "Positional arguments"
-                  },
-                  "kwargs": {
-                    "type": "object",
-                    "description": "Keyword arguments"
-                  }
-                },
-                "required": [
-                  "method"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Method call result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "result": {}
-                  }
-                }
-              }
-            }
-          }
-        },
-        "x-odoo-method": "execute_kw",
-        "x-odoo-model": "sale.order"
-      }
-    },
     "/api/sale.order.line": {
       "get": {
         "summary": "Search & read Sales Order Line",
@@ -9544,14 +7498,14 @@
             "schema": {
               "type": "string"
             },
-            "example": "name,default_code,list_price"
+            "example": "name,order_id,product_id,price_unit,product_uom_qty,id"
           },
           {
             "name": "limit",
             "in": "query",
             "schema": {
               "type": "integer",
-              "default": 80
+              "default": 20
             }
           },
           {
@@ -9568,7 +7522,8 @@
             "description": "Sort order, e.g. 'name asc' or 'create_date desc'",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "id asc"
           }
         ],
         "responses": {
@@ -9602,6 +7557,13 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/sale_order_line_upsert"
+              },
+              "example": {
+                "name": "Line 1",
+                "order_id": 1,
+                "product_id": 1,
+                "price_unit": 100000,
+                "product_uom_qty": 2
               }
             }
           }
@@ -9660,7 +7622,8 @@
             "description": "Comma-separated field names to return",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name,order_id,product_id,price_unit,product_uom_qty,id"
           }
         ],
         "responses": {
@@ -9723,72 +7686,6 @@
         "x-odoo-model": "sale.order.line"
       }
     },
-    "/api/sale.order.line/{id}/call": {
-      "post": {
-        "summary": "Call method on Sales Order Line",
-        "description": "Call any method on a sale.order.line record. Uses Odoo `execute_kw` with method name.",
-        "operationId": "call_sale_order_line",
-        "tags": [
-          "sale"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "method": {
-                    "type": "string",
-                    "description": "Method name to call",
-                    "example": "action_confirm"
-                  },
-                  "args": {
-                    "type": "array",
-                    "items": {},
-                    "description": "Positional arguments"
-                  },
-                  "kwargs": {
-                    "type": "object",
-                    "description": "Keyword arguments"
-                  }
-                },
-                "required": [
-                  "method"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Method call result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "result": {}
-                  }
-                }
-              }
-            }
-          }
-        },
-        "x-odoo-method": "execute_kw",
-        "x-odoo-model": "sale.order.line"
-      }
-    },
     "/api/stock.location": {
       "get": {
         "summary": "Search & read Inventory Locations",
@@ -9814,14 +7711,14 @@
             "schema": {
               "type": "string"
             },
-            "example": "name,default_code,list_price"
+            "example": "name,complete_usage,usage,id"
           },
           {
             "name": "limit",
             "in": "query",
             "schema": {
               "type": "integer",
-              "default": 80
+              "default": 20
             }
           },
           {
@@ -9838,7 +7735,8 @@
             "description": "Sort order, e.g. 'name asc' or 'create_date desc'",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name asc"
           }
         ],
         "responses": {
@@ -9872,6 +7770,13 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/stock_location_upsert"
+              },
+              "example": {
+                "_key": {
+                  "complete_name": "WH/Stock"
+                },
+                "name": "Stock",
+                "usage": "internal"
               }
             }
           }
@@ -9930,7 +7835,8 @@
             "description": "Comma-separated field names to return",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name,complete_usage,usage,id"
           }
         ],
         "responses": {
@@ -9993,72 +7899,6 @@
         "x-odoo-model": "stock.location"
       }
     },
-    "/api/stock.location/{id}/call": {
-      "post": {
-        "summary": "Call method on Inventory Locations",
-        "description": "Call any method on a stock.location record. Uses Odoo `execute_kw` with method name.",
-        "operationId": "call_stock_location",
-        "tags": [
-          "stock"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "method": {
-                    "type": "string",
-                    "description": "Method name to call",
-                    "example": "action_confirm"
-                  },
-                  "args": {
-                    "type": "array",
-                    "items": {},
-                    "description": "Positional arguments"
-                  },
-                  "kwargs": {
-                    "type": "object",
-                    "description": "Keyword arguments"
-                  }
-                },
-                "required": [
-                  "method"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Method call result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "result": {}
-                  }
-                }
-              }
-            }
-          }
-        },
-        "x-odoo-method": "execute_kw",
-        "x-odoo-model": "stock.location"
-      }
-    },
     "/api/stock.move": {
       "get": {
         "summary": "Search & read Stock Move",
@@ -10084,14 +7924,14 @@
             "schema": {
               "type": "string"
             },
-            "example": "name,default_code,list_price"
+            "example": "name,state,product_id,product_uom_qty,id"
           },
           {
             "name": "limit",
             "in": "query",
             "schema": {
               "type": "integer",
-              "default": 80
+              "default": 20
             }
           },
           {
@@ -10108,7 +7948,8 @@
             "description": "Sort order, e.g. 'name asc' or 'create_date desc'",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "create_date desc"
           }
         ],
         "responses": {
@@ -10142,6 +7983,11 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/stock_move_upsert"
+              },
+              "example": {
+                "name": "Move/001",
+                "product_id": 1,
+                "product_uom_qty": 10
               }
             }
           }
@@ -10200,7 +8046,8 @@
             "description": "Comma-separated field names to return",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name,state,product_id,product_uom_qty,id"
           }
         ],
         "responses": {
@@ -10263,72 +8110,6 @@
         "x-odoo-model": "stock.move"
       }
     },
-    "/api/stock.move/{id}/call": {
-      "post": {
-        "summary": "Call method on Stock Move",
-        "description": "Call any method on a stock.move record. Uses Odoo `execute_kw` with method name.",
-        "operationId": "call_stock_move",
-        "tags": [
-          "stock"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "method": {
-                    "type": "string",
-                    "description": "Method name to call",
-                    "example": "action_confirm"
-                  },
-                  "args": {
-                    "type": "array",
-                    "items": {},
-                    "description": "Positional arguments"
-                  },
-                  "kwargs": {
-                    "type": "object",
-                    "description": "Keyword arguments"
-                  }
-                },
-                "required": [
-                  "method"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Method call result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "result": {}
-                  }
-                }
-              }
-            }
-          }
-        },
-        "x-odoo-method": "execute_kw",
-        "x-odoo-model": "stock.move"
-      }
-    },
     "/api/stock.move.line": {
       "get": {
         "summary": "Search & read Product Moves (Stock Move Line)",
@@ -10354,14 +8135,14 @@
             "schema": {
               "type": "string"
             },
-            "example": "name,default_code,list_price"
+            "example": "name,product_id,state,qty_done,id"
           },
           {
             "name": "limit",
             "in": "query",
             "schema": {
               "type": "integer",
-              "default": 80
+              "default": 20
             }
           },
           {
@@ -10378,7 +8159,8 @@
             "description": "Sort order, e.g. 'name asc' or 'create_date desc'",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "id asc"
           }
         ],
         "responses": {
@@ -10412,6 +8194,11 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/stock_move_line_upsert"
+              },
+              "example": {
+                "name": "Move Line 1",
+                "product_id": 1,
+                "qty_done": 5
               }
             }
           }
@@ -10470,7 +8257,8 @@
             "description": "Comma-separated field names to return",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name,product_id,state,qty_done,id"
           }
         ],
         "responses": {
@@ -10533,72 +8321,6 @@
         "x-odoo-model": "stock.move.line"
       }
     },
-    "/api/stock.move.line/{id}/call": {
-      "post": {
-        "summary": "Call method on Product Moves (Stock Move Line)",
-        "description": "Call any method on a stock.move.line record. Uses Odoo `execute_kw` with method name.",
-        "operationId": "call_stock_move_line",
-        "tags": [
-          "stock"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "method": {
-                    "type": "string",
-                    "description": "Method name to call",
-                    "example": "action_confirm"
-                  },
-                  "args": {
-                    "type": "array",
-                    "items": {},
-                    "description": "Positional arguments"
-                  },
-                  "kwargs": {
-                    "type": "object",
-                    "description": "Keyword arguments"
-                  }
-                },
-                "required": [
-                  "method"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Method call result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "result": {}
-                  }
-                }
-              }
-            }
-          }
-        },
-        "x-odoo-method": "execute_kw",
-        "x-odoo-model": "stock.move.line"
-      }
-    },
     "/api/stock.picking": {
       "get": {
         "summary": "Search & read Transfer",
@@ -10624,14 +8346,14 @@
             "schema": {
               "type": "string"
             },
-            "example": "name,default_code,list_price"
+            "example": "name,state,partner_id,picking_type_id,id"
           },
           {
             "name": "limit",
             "in": "query",
             "schema": {
               "type": "integer",
-              "default": 80
+              "default": 20
             }
           },
           {
@@ -10648,7 +8370,8 @@
             "description": "Sort order, e.g. 'name asc' or 'create_date desc'",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "scheduled_date desc"
           }
         ],
         "responses": {
@@ -10682,6 +8405,10 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/stock_picking_upsert"
+              },
+              "example": {
+                "name": "WH/OUT/001",
+                "picking_type_id": 1
               }
             }
           }
@@ -10740,7 +8467,8 @@
             "description": "Comma-separated field names to return",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name,state,partner_id,picking_type_id,id"
           }
         ],
         "responses": {
@@ -10803,72 +8531,6 @@
         "x-odoo-model": "stock.picking"
       }
     },
-    "/api/stock.picking/{id}/call": {
-      "post": {
-        "summary": "Call method on Transfer",
-        "description": "Call any method on a stock.picking record. Uses Odoo `execute_kw` with method name.",
-        "operationId": "call_stock_picking",
-        "tags": [
-          "stock"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "method": {
-                    "type": "string",
-                    "description": "Method name to call",
-                    "example": "action_confirm"
-                  },
-                  "args": {
-                    "type": "array",
-                    "items": {},
-                    "description": "Positional arguments"
-                  },
-                  "kwargs": {
-                    "type": "object",
-                    "description": "Keyword arguments"
-                  }
-                },
-                "required": [
-                  "method"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Method call result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "result": {}
-                  }
-                }
-              }
-            }
-          }
-        },
-        "x-odoo-method": "execute_kw",
-        "x-odoo-model": "stock.picking"
-      }
-    },
     "/api/stock.picking.type": {
       "get": {
         "summary": "Search & read Picking Type",
@@ -10894,14 +8556,14 @@
             "schema": {
               "type": "string"
             },
-            "example": "name,default_code,list_price"
+            "example": "name,code,warehouse_id,id"
           },
           {
             "name": "limit",
             "in": "query",
             "schema": {
               "type": "integer",
-              "default": 80
+              "default": 20
             }
           },
           {
@@ -10918,7 +8580,8 @@
             "description": "Sort order, e.g. 'name asc' or 'create_date desc'",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name asc"
           }
         ],
         "responses": {
@@ -10952,6 +8615,11 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/stock_picking_type_upsert"
+              },
+              "example": {
+                "_key": {
+                  "name": "Delivery Orders"
+                }
               }
             }
           }
@@ -11010,7 +8678,8 @@
             "description": "Comma-separated field names to return",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name,code,warehouse_id,id"
           }
         ],
         "responses": {
@@ -11073,72 +8742,6 @@
         "x-odoo-model": "stock.picking.type"
       }
     },
-    "/api/stock.picking.type/{id}/call": {
-      "post": {
-        "summary": "Call method on Picking Type",
-        "description": "Call any method on a stock.picking.type record. Uses Odoo `execute_kw` with method name.",
-        "operationId": "call_stock_picking_type",
-        "tags": [
-          "stock"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "method": {
-                    "type": "string",
-                    "description": "Method name to call",
-                    "example": "action_confirm"
-                  },
-                  "args": {
-                    "type": "array",
-                    "items": {},
-                    "description": "Positional arguments"
-                  },
-                  "kwargs": {
-                    "type": "object",
-                    "description": "Keyword arguments"
-                  }
-                },
-                "required": [
-                  "method"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Method call result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "result": {}
-                  }
-                }
-              }
-            }
-          }
-        },
-        "x-odoo-method": "execute_kw",
-        "x-odoo-model": "stock.picking.type"
-      }
-    },
     "/api/stock.quant": {
       "get": {
         "summary": "Search & read Quants",
@@ -11164,14 +8767,14 @@
             "schema": {
               "type": "string"
             },
-            "example": "name,default_code,list_price"
+            "example": "product_id,location_id,quantity,reserved_quantity,id"
           },
           {
             "name": "limit",
             "in": "query",
             "schema": {
               "type": "integer",
-              "default": 80
+              "default": 20
             }
           },
           {
@@ -11188,7 +8791,8 @@
             "description": "Sort order, e.g. 'name asc' or 'create_date desc'",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "id asc"
           }
         ],
         "responses": {
@@ -11222,6 +8826,11 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/stock_quant_upsert"
+              },
+              "example": {
+                "product_id": 1,
+                "location_id": 1,
+                "quantity": 100
               }
             }
           }
@@ -11280,7 +8889,8 @@
             "description": "Comma-separated field names to return",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "product_id,location_id,quantity,reserved_quantity,id"
           }
         ],
         "responses": {
@@ -11343,72 +8953,6 @@
         "x-odoo-model": "stock.quant"
       }
     },
-    "/api/stock.quant/{id}/call": {
-      "post": {
-        "summary": "Call method on Quants",
-        "description": "Call any method on a stock.quant record. Uses Odoo `execute_kw` with method name.",
-        "operationId": "call_stock_quant",
-        "tags": [
-          "stock"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "method": {
-                    "type": "string",
-                    "description": "Method name to call",
-                    "example": "action_confirm"
-                  },
-                  "args": {
-                    "type": "array",
-                    "items": {},
-                    "description": "Positional arguments"
-                  },
-                  "kwargs": {
-                    "type": "object",
-                    "description": "Keyword arguments"
-                  }
-                },
-                "required": [
-                  "method"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Method call result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "result": {}
-                  }
-                }
-              }
-            }
-          }
-        },
-        "x-odoo-method": "execute_kw",
-        "x-odoo-model": "stock.quant"
-      }
-    },
     "/api/stock.warehouse": {
       "get": {
         "summary": "Search & read Warehouse",
@@ -11434,14 +8978,14 @@
             "schema": {
               "type": "string"
             },
-            "example": "name,default_code,list_price"
+            "example": "name,code,company_id,id"
           },
           {
             "name": "limit",
             "in": "query",
             "schema": {
               "type": "integer",
-              "default": 80
+              "default": 20
             }
           },
           {
@@ -11458,7 +9002,8 @@
             "description": "Sort order, e.g. 'name asc' or 'create_date desc'",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name asc"
           }
         ],
         "responses": {
@@ -11492,6 +9037,11 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/stock_warehouse_upsert"
+              },
+              "example": {
+                "_key": {
+                  "name": "Warehouse 1"
+                }
               }
             }
           }
@@ -11550,7 +9100,8 @@
             "description": "Comma-separated field names to return",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name,code,company_id,id"
           }
         ],
         "responses": {
@@ -11613,72 +9164,6 @@
         "x-odoo-model": "stock.warehouse"
       }
     },
-    "/api/stock.warehouse/{id}/call": {
-      "post": {
-        "summary": "Call method on Warehouse",
-        "description": "Call any method on a stock.warehouse record. Uses Odoo `execute_kw` with method name.",
-        "operationId": "call_stock_warehouse",
-        "tags": [
-          "stock"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "method": {
-                    "type": "string",
-                    "description": "Method name to call",
-                    "example": "action_confirm"
-                  },
-                  "args": {
-                    "type": "array",
-                    "items": {},
-                    "description": "Positional arguments"
-                  },
-                  "kwargs": {
-                    "type": "object",
-                    "description": "Keyword arguments"
-                  }
-                },
-                "required": [
-                  "method"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Method call result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "result": {}
-                  }
-                }
-              }
-            }
-          }
-        },
-        "x-odoo-method": "execute_kw",
-        "x-odoo-model": "stock.warehouse"
-      }
-    },
     "/api/uom.category": {
       "get": {
         "summary": "Search & read Product UoM Categories",
@@ -11704,14 +9189,14 @@
             "schema": {
               "type": "string"
             },
-            "example": "name,default_code,list_price"
+            "example": "name,is_current_group_of_ids,id"
           },
           {
             "name": "limit",
             "in": "query",
             "schema": {
               "type": "integer",
-              "default": 80
+              "default": 20
             }
           },
           {
@@ -11728,7 +9213,8 @@
             "description": "Sort order, e.g. 'name asc' or 'create_date desc'",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name asc"
           }
         ],
         "responses": {
@@ -11762,6 +9248,11 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/uom_category_upsert"
+              },
+              "example": {
+                "_key": {
+                  "name": "Unit"
+                }
               }
             }
           }
@@ -11820,7 +9311,8 @@
             "description": "Comma-separated field names to return",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name,is_current_group_of_ids,id"
           }
         ],
         "responses": {
@@ -11883,72 +9375,6 @@
         "x-odoo-model": "uom.category"
       }
     },
-    "/api/uom.category/{id}/call": {
-      "post": {
-        "summary": "Call method on Product UoM Categories",
-        "description": "Call any method on a uom.category record. Uses Odoo `execute_kw` with method name.",
-        "operationId": "call_uom_category",
-        "tags": [
-          "uom"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "method": {
-                    "type": "string",
-                    "description": "Method name to call",
-                    "example": "action_confirm"
-                  },
-                  "args": {
-                    "type": "array",
-                    "items": {},
-                    "description": "Positional arguments"
-                  },
-                  "kwargs": {
-                    "type": "object",
-                    "description": "Keyword arguments"
-                  }
-                },
-                "required": [
-                  "method"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Method call result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "result": {}
-                  }
-                }
-              }
-            }
-          }
-        },
-        "x-odoo-method": "execute_kw",
-        "x-odoo-model": "uom.category"
-      }
-    },
     "/api/uom.uom": {
       "get": {
         "summary": "Search & read Product Unit of Measure",
@@ -11974,14 +9400,14 @@
             "schema": {
               "type": "string"
             },
-            "example": "name,default_code,list_price"
+            "example": "name,category_id,factor,id"
           },
           {
             "name": "limit",
             "in": "query",
             "schema": {
               "type": "integer",
-              "default": 80
+              "default": 20
             }
           },
           {
@@ -11998,7 +9424,8 @@
             "description": "Sort order, e.g. 'name asc' or 'create_date desc'",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name asc"
           }
         ],
         "responses": {
@@ -12032,6 +9459,13 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/uom_uom_upsert"
+              },
+              "example": {
+                "_key": {
+                  "name": "Units"
+                },
+                "category_id": 1,
+                "factor": 1
               }
             }
           }
@@ -12090,7 +9524,8 @@
             "description": "Comma-separated field names to return",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "name,category_id,factor,id"
           }
         ],
         "responses": {
@@ -12150,72 +9585,6 @@
           }
         },
         "x-odoo-method": "unlink",
-        "x-odoo-model": "uom.uom"
-      }
-    },
-    "/api/uom.uom/{id}/call": {
-      "post": {
-        "summary": "Call method on Product Unit of Measure",
-        "description": "Call any method on a uom.uom record. Uses Odoo `execute_kw` with method name.",
-        "operationId": "call_uom_uom",
-        "tags": [
-          "uom"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "method": {
-                    "type": "string",
-                    "description": "Method name to call",
-                    "example": "action_confirm"
-                  },
-                  "args": {
-                    "type": "array",
-                    "items": {},
-                    "description": "Positional arguments"
-                  },
-                  "kwargs": {
-                    "type": "object",
-                    "description": "Keyword arguments"
-                  }
-                },
-                "required": [
-                  "method"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Method call result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "result": {}
-                  }
-                }
-              }
-            }
-          }
-        },
-        "x-odoo-method": "execute_kw",
         "x-odoo-model": "uom.uom"
       }
     }
@@ -58314,22 +55683,22 @@
       }
     },
     "securitySchemes": {
-      "odoo_auth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "Authorization",
-        "description": "Odoo UID:password or API key. First authenticate via XML-RPC to get UID."
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "API Token",
+        "description": "Generate token from /api/credentials page in Odoo backend."
       },
-      "odoo_xmlrpc": {
+      "basicAuth": {
         "type": "http",
         "scheme": "basic",
-        "description": "Use Odoo XML-RPC authenticate() to get UID, then use UID:password for calls."
+        "description": "HTTP Basic Auth using Odoo email and password."
       }
     }
   },
   "security": [
     {
-      "odoo_xmlrpc": []
+      "bearerAuth": []
     }
   ]
 }
