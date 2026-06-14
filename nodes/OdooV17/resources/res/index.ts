@@ -2802,6 +2802,7 @@ export const resDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"required": true,
 			"displayName": "Name",
 			"name": "name",
 			"type": "string",
@@ -5039,6 +5040,7 @@ export const resDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"required": true,
 			"displayName": "Acc Number",
 			"name": "acc_number",
 			"type": "string",
@@ -6351,6 +6353,7 @@ export const resDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"required": true,
 			"displayName": "Name",
 			"name": "name",
 			"type": "string",

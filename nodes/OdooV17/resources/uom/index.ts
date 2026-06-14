@@ -328,6 +328,7 @@ export const uomDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"required": true,
 			"displayName": "Name",
 			"name": "name",
 			"type": "string",
@@ -690,6 +691,7 @@ export const uomDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"required": true,
 			"displayName": "Category ID",
 			"name": "category_id",
 			"type": "number",
@@ -740,6 +742,7 @@ export const uomDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"required": true,
 			"displayName": "Factor",
 			"name": "factor",
 			"type": "number",
@@ -865,6 +868,7 @@ export const uomDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"required": true,
 			"displayName": "Name",
 			"name": "name",
 			"type": "string",

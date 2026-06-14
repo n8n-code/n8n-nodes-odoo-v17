@@ -473,6 +473,7 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"required": true,
 			"displayName": "Code",
 			"name": "code",
 			"type": "string",
@@ -923,6 +924,7 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"required": true,
 			"displayName": "Name",
 			"name": "name",
 			"type": "string",
@@ -2160,6 +2162,7 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"required": true,
 			"displayName": "Code",
 			"name": "code",
 			"type": "string",
@@ -2935,6 +2938,7 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"required": true,
 			"displayName": "Name",
 			"name": "name",
 			"type": "string",
@@ -3285,6 +3289,7 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"required": true,
 			"displayName": "Type",
 			"name": "type",
 			"type": "string",
@@ -5922,6 +5927,7 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"required": true,
 			"displayName": "Move Type",
 			"name": "move_type",
 			"type": "string",
@@ -5972,6 +5978,7 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"required": true,
 			"displayName": "Name",
 			"name": "name",
 			"type": "string",
@@ -9009,6 +9016,7 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"required": true,
 			"displayName": "Name",
 			"name": "name",
 			"type": "string",
@@ -12871,6 +12879,7 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"required": true,
 			"displayName": "Name",
 			"name": "name",
 			"type": "string",
@@ -13421,6 +13430,7 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"required": true,
 			"displayName": "Payment Type",
 			"name": "payment_type",
 			"type": "string",
@@ -15358,6 +15368,7 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"required": true,
 			"displayName": "Amount Type",
 			"name": "amount_type",
 			"type": "string",
@@ -15908,6 +15919,7 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"required": true,
 			"displayName": "Name",
 			"name": "name",
 			"type": "string",
@@ -16108,6 +16120,7 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"required": true,
 			"displayName": "Type Tax Use",
 			"name": "type_tax_use",
 			"type": "string",
@@ -16520,6 +16533,7 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"required": true,
 			"displayName": "Name",
 			"name": "name",
 			"type": "string",

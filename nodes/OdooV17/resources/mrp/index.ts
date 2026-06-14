@@ -977,6 +977,7 @@ export const mrpDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"required": true,
 			"displayName": "Product Tmpl ID",
 			"name": "product_tmpl_id",
 			"type": "number",
@@ -2889,6 +2890,7 @@ export const mrpDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"required": true,
 			"displayName": "Product ID",
 			"name": "product_id",
 			"type": "number",
@@ -2914,6 +2916,7 @@ export const mrpDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"required": true,
 			"displayName": "Product Qty",
 			"name": "product_qty",
 			"type": "number",
@@ -4526,6 +4529,7 @@ export const mrpDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"required": true,
 			"displayName": "Name",
 			"name": "name",
 			"type": "string",

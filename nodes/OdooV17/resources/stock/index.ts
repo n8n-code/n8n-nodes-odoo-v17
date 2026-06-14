@@ -673,6 +673,7 @@ export const stockDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"required": true,
 			"displayName": "Name",
 			"name": "name",
 			"type": "string",
@@ -2235,6 +2236,7 @@ export const stockDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"required": true,
 			"displayName": "Name",
 			"name": "name",
 			"type": "string",
@@ -6634,6 +6636,7 @@ export const stockDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"required": true,
 			"displayName": "Name",
 			"name": "name",
 			"type": "string",
@@ -6859,6 +6862,7 @@ export const stockDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"required": true,
 			"displayName": "Picking Type ID",
 			"name": "picking_type_id",
 			"type": "number",
@@ -8846,6 +8850,7 @@ export const stockDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"required": true,
 			"displayName": "Name",
 			"name": "name",
 			"type": "string",
@@ -11195,6 +11200,7 @@ export const stockDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"required": true,
 			"displayName": "Name",
 			"name": "name",
 			"type": "string",

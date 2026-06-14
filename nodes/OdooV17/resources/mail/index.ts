@@ -1228,6 +1228,7 @@ export const mailDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"required": true,
 			"displayName": "Subject",
 			"name": "subject",
 			"type": "string",
