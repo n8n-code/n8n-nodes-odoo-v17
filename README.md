@@ -13,7 +13,7 @@ Every time you connect n8n to odoo-v17, you waste hours mapping endpoints, defin
 
 **What if connecting n8n to odoo-v17 took 5 minutes, not half a day?**
 
-This node gives you **14+ resources** out of the box: **Account**, **Crm**, **Hr**, **Mail**, **Mrp**, and 9 more: with full CRUD operations, typed parameters, and zero manual configuration.
+This node gives you **59+ resources** out of the box: **Account**, **Crm**, **Hr**, **Mail**, **Mrp**, and 54 more: with full CRUD operations, typed parameters, and zero manual configuration.
 
 ---
 
@@ -269,6 +269,411 @@ That's it. No configuration files. No code. It just works.
 - Get stock warehouse field metadata
 - Get uom category field metadata
 - Get uom uom field metadata
+
+</details>
+
+<details>
+<summary><b>Account Account</b> (3 operations)</summary>
+
+- Get Read account account by ID
+- Put Update account account by ID
+- Delete account account by ID
+
+</details>
+
+<details>
+<summary><b>Account Journal</b> (3 operations)</summary>
+
+- Get Read account journal by ID
+- Put Update account journal by ID
+- Delete account journal by ID
+
+</details>
+
+<details>
+<summary><b>Account Move</b> (3 operations)</summary>
+
+- Get Read account move by ID
+- Put Update account move by ID
+- Delete account move by ID
+
+</details>
+
+<details>
+<summary><b>Account Move Line</b> (3 operations)</summary>
+
+- Get Read account move line by ID
+- Put Update account move line by ID
+- Delete account move line by ID
+
+</details>
+
+<details>
+<summary><b>Account Payment</b> (3 operations)</summary>
+
+- Get Read account payment by ID
+- Put Update account payment by ID
+- Delete account payment by ID
+
+</details>
+
+<details>
+<summary><b>Account Tax</b> (3 operations)</summary>
+
+- Get Read account tax by ID
+- Put Update account tax by ID
+- Delete account tax by ID
+
+</details>
+
+<details>
+<summary><b>Account Tax Group</b> (3 operations)</summary>
+
+- Get Read account tax group by ID
+- Put Update account tax group by ID
+- Delete account tax group by ID
+
+</details>
+
+<details>
+<summary><b>Crm Lead</b> (3 operations)</summary>
+
+- Get Read crm lead by ID
+- Put Update crm lead by ID
+- Delete crm lead by ID
+
+</details>
+
+<details>
+<summary><b>Crm Stage</b> (3 operations)</summary>
+
+- Get Read crm stage by ID
+- Put Update crm stage by ID
+- Delete crm stage by ID
+
+</details>
+
+<details>
+<summary><b>Crm Tag</b> (3 operations)</summary>
+
+- Get Read crm tag by ID
+- Put Update crm tag by ID
+- Delete crm tag by ID
+
+</details>
+
+<details>
+<summary><b>Hr Department</b> (3 operations)</summary>
+
+- Get Read hr department by ID
+- Put Update hr department by ID
+- Delete hr department by ID
+
+</details>
+
+<details>
+<summary><b>Hr Employee</b> (3 operations)</summary>
+
+- Get Read hr employee by ID
+- Put Update hr employee by ID
+- Delete hr employee by ID
+
+</details>
+
+<details>
+<summary><b>Hr Job</b> (3 operations)</summary>
+
+- Get Read hr job by ID
+- Put Update hr job by ID
+- Delete hr job by ID
+
+</details>
+
+<details>
+<summary><b>Mail Message</b> (3 operations)</summary>
+
+- Get Read mail message by ID
+- Put Update mail message by ID
+- Delete mail message by ID
+
+</details>
+
+<details>
+<summary><b>Mail Thread</b> (3 operations)</summary>
+
+- Get Read mail thread by ID
+- Put Update mail thread by ID
+- Delete mail thread by ID
+
+</details>
+
+<details>
+<summary><b>Mrp Bom</b> (3 operations)</summary>
+
+- Get Read mrp bom by ID
+- Put Update mrp bom by ID
+- Delete mrp bom by ID
+
+</details>
+
+<details>
+<summary><b>Mrp Production</b> (3 operations)</summary>
+
+- Get Read mrp production by ID
+- Put Update mrp production by ID
+- Delete mrp production by ID
+
+</details>
+
+<details>
+<summary><b>Mrp Workorder</b> (3 operations)</summary>
+
+- Get Read mrp workorder by ID
+- Put Update mrp workorder by ID
+- Delete mrp workorder by ID
+
+</details>
+
+<details>
+<summary><b>Pos Config</b> (3 operations)</summary>
+
+- Get Read pos config by ID
+- Put Update pos config by ID
+- Delete pos config by ID
+
+</details>
+
+<details>
+<summary><b>Pos Order</b> (3 operations)</summary>
+
+- Get Read pos order by ID
+- Put Update pos order by ID
+- Delete pos order by ID
+
+</details>
+
+<details>
+<summary><b>Pos Order Line</b> (3 operations)</summary>
+
+- Get Read pos order line by ID
+- Put Update pos order line by ID
+- Delete pos order line by ID
+
+</details>
+
+<details>
+<summary><b>Pos Session</b> (3 operations)</summary>
+
+- Get Read pos session by ID
+- Put Update pos session by ID
+- Delete pos session by ID
+
+</details>
+
+<details>
+<summary><b>Product Attribute</b> (3 operations)</summary>
+
+- Get Read product attribute by ID
+- Put Update product attribute by ID
+- Delete product attribute by ID
+
+</details>
+
+<details>
+<summary><b>Product Attribute Value</b> (3 operations)</summary>
+
+- Get Read product attribute value by ID
+- Put Update product attribute value by ID
+- Delete product attribute value by ID
+
+</details>
+
+<details>
+<summary><b>Product Category</b> (3 operations)</summary>
+
+- Get Read product category by ID
+- Put Update product category by ID
+- Delete product category by ID
+
+</details>
+
+<details>
+<summary><b>Product Product</b> (3 operations)</summary>
+
+- Get Read product product by ID
+- Put Update product product by ID
+- Delete product product by ID
+
+</details>
+
+<details>
+<summary><b>Product Template</b> (3 operations)</summary>
+
+- Get Read product template by ID
+- Put Update product template by ID
+- Delete product template by ID
+
+</details>
+
+<details>
+<summary><b>Project Project</b> (3 operations)</summary>
+
+- Get Read project project by ID
+- Put Update project project by ID
+- Delete project project by ID
+
+</details>
+
+<details>
+<summary><b>Project Task</b> (3 operations)</summary>
+
+- Get Read project task by ID
+- Put Update project task by ID
+- Delete project task by ID
+
+</details>
+
+<details>
+<summary><b>Purchase Order</b> (3 operations)</summary>
+
+- Get Read purchase order by ID
+- Put Update purchase order by ID
+- Delete purchase order by ID
+
+</details>
+
+<details>
+<summary><b>Purchase Order Line</b> (3 operations)</summary>
+
+- Get Read purchase order line by ID
+- Put Update purchase order line by ID
+- Delete purchase order line by ID
+
+</details>
+
+<details>
+<summary><b>Res Partner</b> (3 operations)</summary>
+
+- Get Read res partner by ID
+- Put Update res partner by ID
+- Delete res partner by ID
+
+</details>
+
+<details>
+<summary><b>Res Partner Bank</b> (3 operations)</summary>
+
+- Get Read res partner bank by ID
+- Put Update res partner bank by ID
+- Delete res partner bank by ID
+
+</details>
+
+<details>
+<summary><b>Res Partner Category</b> (3 operations)</summary>
+
+- Get Read res partner category by ID
+- Put Update res partner category by ID
+- Delete res partner category by ID
+
+</details>
+
+<details>
+<summary><b>Sale Order</b> (3 operations)</summary>
+
+- Get Read sale order by ID
+- Put Update sale order by ID
+- Delete sale order by ID
+
+</details>
+
+<details>
+<summary><b>Sale Order Line</b> (3 operations)</summary>
+
+- Get Read sale order line by ID
+- Put Update sale order line by ID
+- Delete sale order line by ID
+
+</details>
+
+<details>
+<summary><b>Stock Location</b> (3 operations)</summary>
+
+- Get Read stock location by ID
+- Put Update stock location by ID
+- Delete stock location by ID
+
+</details>
+
+<details>
+<summary><b>Stock Move</b> (3 operations)</summary>
+
+- Get Read stock move by ID
+- Put Update stock move by ID
+- Delete stock move by ID
+
+</details>
+
+<details>
+<summary><b>Stock Move Line</b> (3 operations)</summary>
+
+- Get Read stock move line by ID
+- Put Update stock move line by ID
+- Delete stock move line by ID
+
+</details>
+
+<details>
+<summary><b>Stock Picking</b> (3 operations)</summary>
+
+- Get Read stock picking by ID
+- Put Update stock picking by ID
+- Delete stock picking by ID
+
+</details>
+
+<details>
+<summary><b>Stock Picking Type</b> (3 operations)</summary>
+
+- Get Read stock picking type by ID
+- Put Update stock picking type by ID
+- Delete stock picking type by ID
+
+</details>
+
+<details>
+<summary><b>Stock Quant</b> (3 operations)</summary>
+
+- Get Read stock quant by ID
+- Put Update stock quant by ID
+- Delete stock quant by ID
+
+</details>
+
+<details>
+<summary><b>Stock Warehouse</b> (3 operations)</summary>
+
+- Get Read stock warehouse by ID
+- Put Update stock warehouse by ID
+- Delete stock warehouse by ID
+
+</details>
+
+<details>
+<summary><b>Uom Category</b> (3 operations)</summary>
+
+- Get Read uom category by ID
+- Put Update uom category by ID
+- Delete uom category by ID
+
+</details>
+
+<details>
+<summary><b>Uom Uom</b> (3 operations)</summary>
+
+- Get Read uom uom by ID
+- Put Update uom uom by ID
+- Delete uom uom by ID
 
 </details>
 

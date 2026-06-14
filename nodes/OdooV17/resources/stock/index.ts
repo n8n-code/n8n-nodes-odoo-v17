@@ -207,7 +207,7 @@ export const stockDescription: INodeProperties[] = [
 		{
 			"displayName": "Domain",
 			"name": "domain",
-			"description": "JSON-encoded Odoo domain filter",
+			"description": "Odoo domain filter (JSON array). Each condition is [field, operator, value].\n\n**Operators:**\n- `=` : equals\n- `!=` : not equals\n- `ilike` : contains (case-insensitive)\n- `like` : contains (case-sensitive)\n- `>` `<` `>=` `<=` : comparison\n- `in` : value is in list\n- `not in` : value is not in list\n\n**Examples:**\n\nExact match:\n```\n[[\"name\", \"=\", \"John\"]]\n```\n\nSearch (contains):\n```\n[[\"name\", \"ilike\", \"john\"]]\n```\n\nMultiple conditions (AND):\n```\n[[\"name\", \"ilike\", \"john\"], [\"email\", \"ilike\", \"gmail\"]]\n```\n\nMultiple values (OR):\n```\n[\"|\", [\"name\", \"=\", \"John\"], [\"name\", \"=\", \"Jane\"]]\n```\n\nFilter by state:\n```\n[[\"state\", \"in\", [\"draft\", \"sent\"]]]\n```\n\nComparison:\n```\n[[\"amount_total\", \">=\", 100000]]\n```\n\nCombined:\n```\n[[\"partner_id.name\", \"ilike\", \"admin\"], [\"state\", \"=\", \"sale\"], [\"amount_total\", \">\", 50000]]\n```\n\n**Tip:** Use `GET /api/{model}/fields` to see available field names and types.",
 			"default": "[[\"name\",\"ilike\",\"test\"]]",
 			"type": "string",
 			"routing": {
@@ -312,56 +312,6 @@ export const stockDescription: INodeProperties[] = [
 				"send": {
 					"type": "query",
 					"property": "order",
-					"value": "={{ $value }}",
-					"propertyInDotNotation": false
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Stock"
-					],
-					"operation": [
-						"Search Stock Location"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Name",
-			"name": "name",
-			"description": "Exact match on name field",
-			"default": "John Doe",
-			"type": "string",
-			"routing": {
-				"send": {
-					"type": "query",
-					"property": "name",
-					"value": "={{ $value }}",
-					"propertyInDotNotation": false
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Stock"
-					],
-					"operation": [
-						"Search Stock Location"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Name Like",
-			"name": "name_like",
-			"description": "Search name (case-insensitive partial match)",
-			"default": "john",
-			"type": "string",
-			"routing": {
-				"send": {
-					"type": "query",
-					"property": "name_like",
 					"value": "={{ $value }}",
 					"propertyInDotNotation": false
 				}
@@ -1194,7 +1144,7 @@ export const stockDescription: INodeProperties[] = [
 		{
 			"displayName": "Domain",
 			"name": "domain",
-			"description": "JSON-encoded Odoo domain filter",
+			"description": "Odoo domain filter (JSON array). Each condition is [field, operator, value].\n\n**Operators:**\n- `=` : equals\n- `!=` : not equals\n- `ilike` : contains (case-insensitive)\n- `like` : contains (case-sensitive)\n- `>` `<` `>=` `<=` : comparison\n- `in` : value is in list\n- `not in` : value is not in list\n\n**Examples:**\n\nExact match:\n```\n[[\"name\", \"=\", \"John\"]]\n```\n\nSearch (contains):\n```\n[[\"name\", \"ilike\", \"john\"]]\n```\n\nMultiple conditions (AND):\n```\n[[\"name\", \"ilike\", \"john\"], [\"email\", \"ilike\", \"gmail\"]]\n```\n\nMultiple values (OR):\n```\n[\"|\", [\"name\", \"=\", \"John\"], [\"name\", \"=\", \"Jane\"]]\n```\n\nFilter by state:\n```\n[[\"state\", \"in\", [\"draft\", \"sent\"]]]\n```\n\nComparison:\n```\n[[\"amount_total\", \">=\", 100000]]\n```\n\nCombined:\n```\n[[\"partner_id.name\", \"ilike\", \"admin\"], [\"state\", \"=\", \"sale\"], [\"amount_total\", \">\", 50000]]\n```\n\n**Tip:** Use `GET /api/{model}/fields` to see available field names and types.",
 			"default": "[[\"name\",\"ilike\",\"test\"]]",
 			"type": "string",
 			"routing": {
@@ -1299,56 +1249,6 @@ export const stockDescription: INodeProperties[] = [
 				"send": {
 					"type": "query",
 					"property": "order",
-					"value": "={{ $value }}",
-					"propertyInDotNotation": false
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Stock"
-					],
-					"operation": [
-						"Search Stock Move"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Name",
-			"name": "name",
-			"description": "Exact match on name field",
-			"default": "John Doe",
-			"type": "string",
-			"routing": {
-				"send": {
-					"type": "query",
-					"property": "name",
-					"value": "={{ $value }}",
-					"propertyInDotNotation": false
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Stock"
-					],
-					"operation": [
-						"Search Stock Move"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Name Like",
-			"name": "name_like",
-			"description": "Search name (case-insensitive partial match)",
-			"default": "john",
-			"type": "string",
-			"routing": {
-				"send": {
-					"type": "query",
-					"property": "name_like",
 					"value": "={{ $value }}",
 					"propertyInDotNotation": false
 				}
@@ -3856,7 +3756,7 @@ export const stockDescription: INodeProperties[] = [
 		{
 			"displayName": "Domain",
 			"name": "domain",
-			"description": "JSON-encoded Odoo domain filter",
+			"description": "Odoo domain filter (JSON array). Each condition is [field, operator, value].\n\n**Operators:**\n- `=` : equals\n- `!=` : not equals\n- `ilike` : contains (case-insensitive)\n- `like` : contains (case-sensitive)\n- `>` `<` `>=` `<=` : comparison\n- `in` : value is in list\n- `not in` : value is not in list\n\n**Examples:**\n\nExact match:\n```\n[[\"name\", \"=\", \"John\"]]\n```\n\nSearch (contains):\n```\n[[\"name\", \"ilike\", \"john\"]]\n```\n\nMultiple conditions (AND):\n```\n[[\"name\", \"ilike\", \"john\"], [\"email\", \"ilike\", \"gmail\"]]\n```\n\nMultiple values (OR):\n```\n[\"|\", [\"name\", \"=\", \"John\"], [\"name\", \"=\", \"Jane\"]]\n```\n\nFilter by state:\n```\n[[\"state\", \"in\", [\"draft\", \"sent\"]]]\n```\n\nComparison:\n```\n[[\"amount_total\", \">=\", 100000]]\n```\n\nCombined:\n```\n[[\"partner_id.name\", \"ilike\", \"admin\"], [\"state\", \"=\", \"sale\"], [\"amount_total\", \">\", 50000]]\n```\n\n**Tip:** Use `GET /api/{model}/fields` to see available field names and types.",
 			"default": "[[\"name\",\"ilike\",\"test\"]]",
 			"type": "string",
 			"routing": {
@@ -3961,56 +3861,6 @@ export const stockDescription: INodeProperties[] = [
 				"send": {
 					"type": "query",
 					"property": "order",
-					"value": "={{ $value }}",
-					"propertyInDotNotation": false
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Stock"
-					],
-					"operation": [
-						"Search Stock Move Line"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Name",
-			"name": "name",
-			"description": "Exact match on name field",
-			"default": "John Doe",
-			"type": "string",
-			"routing": {
-				"send": {
-					"type": "query",
-					"property": "name",
-					"value": "={{ $value }}",
-					"propertyInDotNotation": false
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Stock"
-					],
-					"operation": [
-						"Search Stock Move Line"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Name Like",
-			"name": "name_like",
-			"description": "Search name (case-insensitive partial match)",
-			"default": "john",
-			"type": "string",
-			"routing": {
-				"send": {
-					"type": "query",
-					"property": "name_like",
 					"value": "={{ $value }}",
 					"propertyInDotNotation": false
 				}
@@ -5368,7 +5218,7 @@ export const stockDescription: INodeProperties[] = [
 		{
 			"displayName": "Domain",
 			"name": "domain",
-			"description": "JSON-encoded Odoo domain filter",
+			"description": "Odoo domain filter (JSON array). Each condition is [field, operator, value].\n\n**Operators:**\n- `=` : equals\n- `!=` : not equals\n- `ilike` : contains (case-insensitive)\n- `like` : contains (case-sensitive)\n- `>` `<` `>=` `<=` : comparison\n- `in` : value is in list\n- `not in` : value is not in list\n\n**Examples:**\n\nExact match:\n```\n[[\"name\", \"=\", \"John\"]]\n```\n\nSearch (contains):\n```\n[[\"name\", \"ilike\", \"john\"]]\n```\n\nMultiple conditions (AND):\n```\n[[\"name\", \"ilike\", \"john\"], [\"email\", \"ilike\", \"gmail\"]]\n```\n\nMultiple values (OR):\n```\n[\"|\", [\"name\", \"=\", \"John\"], [\"name\", \"=\", \"Jane\"]]\n```\n\nFilter by state:\n```\n[[\"state\", \"in\", [\"draft\", \"sent\"]]]\n```\n\nComparison:\n```\n[[\"amount_total\", \">=\", 100000]]\n```\n\nCombined:\n```\n[[\"partner_id.name\", \"ilike\", \"admin\"], [\"state\", \"=\", \"sale\"], [\"amount_total\", \">\", 50000]]\n```\n\n**Tip:** Use `GET /api/{model}/fields` to see available field names and types.",
 			"default": "[[\"name\",\"ilike\",\"test\"]]",
 			"type": "string",
 			"routing": {
@@ -5473,56 +5323,6 @@ export const stockDescription: INodeProperties[] = [
 				"send": {
 					"type": "query",
 					"property": "order",
-					"value": "={{ $value }}",
-					"propertyInDotNotation": false
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Stock"
-					],
-					"operation": [
-						"Search Stock Picking"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Name",
-			"name": "name",
-			"description": "Exact match on name field",
-			"default": "John Doe",
-			"type": "string",
-			"routing": {
-				"send": {
-					"type": "query",
-					"property": "name",
-					"value": "={{ $value }}",
-					"propertyInDotNotation": false
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Stock"
-					],
-					"operation": [
-						"Search Stock Picking"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Name Like",
-			"name": "name_like",
-			"description": "Search name (case-insensitive partial match)",
-			"default": "john",
-			"type": "string",
-			"routing": {
-				"send": {
-					"type": "query",
-					"property": "name_like",
 					"value": "={{ $value }}",
 					"propertyInDotNotation": false
 				}
@@ -7880,7 +7680,7 @@ export const stockDescription: INodeProperties[] = [
 		{
 			"displayName": "Domain",
 			"name": "domain",
-			"description": "JSON-encoded Odoo domain filter",
+			"description": "Odoo domain filter (JSON array). Each condition is [field, operator, value].\n\n**Operators:**\n- `=` : equals\n- `!=` : not equals\n- `ilike` : contains (case-insensitive)\n- `like` : contains (case-sensitive)\n- `>` `<` `>=` `<=` : comparison\n- `in` : value is in list\n- `not in` : value is not in list\n\n**Examples:**\n\nExact match:\n```\n[[\"name\", \"=\", \"John\"]]\n```\n\nSearch (contains):\n```\n[[\"name\", \"ilike\", \"john\"]]\n```\n\nMultiple conditions (AND):\n```\n[[\"name\", \"ilike\", \"john\"], [\"email\", \"ilike\", \"gmail\"]]\n```\n\nMultiple values (OR):\n```\n[\"|\", [\"name\", \"=\", \"John\"], [\"name\", \"=\", \"Jane\"]]\n```\n\nFilter by state:\n```\n[[\"state\", \"in\", [\"draft\", \"sent\"]]]\n```\n\nComparison:\n```\n[[\"amount_total\", \">=\", 100000]]\n```\n\nCombined:\n```\n[[\"partner_id.name\", \"ilike\", \"admin\"], [\"state\", \"=\", \"sale\"], [\"amount_total\", \">\", 50000]]\n```\n\n**Tip:** Use `GET /api/{model}/fields` to see available field names and types.",
 			"default": "[[\"name\",\"ilike\",\"test\"]]",
 			"type": "string",
 			"routing": {
@@ -7985,56 +7785,6 @@ export const stockDescription: INodeProperties[] = [
 				"send": {
 					"type": "query",
 					"property": "order",
-					"value": "={{ $value }}",
-					"propertyInDotNotation": false
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Stock"
-					],
-					"operation": [
-						"Search Stock Picking Type"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Name",
-			"name": "name",
-			"description": "Exact match on name field",
-			"default": "John Doe",
-			"type": "string",
-			"routing": {
-				"send": {
-					"type": "query",
-					"property": "name",
-					"value": "={{ $value }}",
-					"propertyInDotNotation": false
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Stock"
-					],
-					"operation": [
-						"Search Stock Picking Type"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Name Like",
-			"name": "name_like",
-			"description": "Search name (case-insensitive partial match)",
-			"default": "john",
-			"type": "string",
-			"routing": {
-				"send": {
-					"type": "query",
-					"property": "name_like",
 					"value": "={{ $value }}",
 					"propertyInDotNotation": false
 				}
@@ -9692,7 +9442,7 @@ export const stockDescription: INodeProperties[] = [
 		{
 			"displayName": "Domain",
 			"name": "domain",
-			"description": "JSON-encoded Odoo domain filter",
+			"description": "Odoo domain filter (JSON array). Each condition is [field, operator, value].\n\n**Operators:**\n- `=` : equals\n- `!=` : not equals\n- `ilike` : contains (case-insensitive)\n- `like` : contains (case-sensitive)\n- `>` `<` `>=` `<=` : comparison\n- `in` : value is in list\n- `not in` : value is not in list\n\n**Examples:**\n\nExact match:\n```\n[[\"name\", \"=\", \"John\"]]\n```\n\nSearch (contains):\n```\n[[\"name\", \"ilike\", \"john\"]]\n```\n\nMultiple conditions (AND):\n```\n[[\"name\", \"ilike\", \"john\"], [\"email\", \"ilike\", \"gmail\"]]\n```\n\nMultiple values (OR):\n```\n[\"|\", [\"name\", \"=\", \"John\"], [\"name\", \"=\", \"Jane\"]]\n```\n\nFilter by state:\n```\n[[\"state\", \"in\", [\"draft\", \"sent\"]]]\n```\n\nComparison:\n```\n[[\"amount_total\", \">=\", 100000]]\n```\n\nCombined:\n```\n[[\"partner_id.name\", \"ilike\", \"admin\"], [\"state\", \"=\", \"sale\"], [\"amount_total\", \">\", 50000]]\n```\n\n**Tip:** Use `GET /api/{model}/fields` to see available field names and types.",
 			"default": "[[\"name\",\"ilike\",\"test\"]]",
 			"type": "string",
 			"routing": {
@@ -9797,56 +9547,6 @@ export const stockDescription: INodeProperties[] = [
 				"send": {
 					"type": "query",
 					"property": "order",
-					"value": "={{ $value }}",
-					"propertyInDotNotation": false
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Stock"
-					],
-					"operation": [
-						"Search Stock Quant"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Name",
-			"name": "name",
-			"description": "Exact match on name field",
-			"default": "John Doe",
-			"type": "string",
-			"routing": {
-				"send": {
-					"type": "query",
-					"property": "name",
-					"value": "={{ $value }}",
-					"propertyInDotNotation": false
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Stock"
-					],
-					"operation": [
-						"Search Stock Quant"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Name Like",
-			"name": "name_like",
-			"description": "Search name (case-insensitive partial match)",
-			"default": "john",
-			"type": "string",
-			"routing": {
-				"send": {
-					"type": "query",
-					"property": "name_like",
 					"value": "={{ $value }}",
 					"propertyInDotNotation": false
 				}
@@ -10854,7 +10554,7 @@ export const stockDescription: INodeProperties[] = [
 		{
 			"displayName": "Domain",
 			"name": "domain",
-			"description": "JSON-encoded Odoo domain filter",
+			"description": "Odoo domain filter (JSON array). Each condition is [field, operator, value].\n\n**Operators:**\n- `=` : equals\n- `!=` : not equals\n- `ilike` : contains (case-insensitive)\n- `like` : contains (case-sensitive)\n- `>` `<` `>=` `<=` : comparison\n- `in` : value is in list\n- `not in` : value is not in list\n\n**Examples:**\n\nExact match:\n```\n[[\"name\", \"=\", \"John\"]]\n```\n\nSearch (contains):\n```\n[[\"name\", \"ilike\", \"john\"]]\n```\n\nMultiple conditions (AND):\n```\n[[\"name\", \"ilike\", \"john\"], [\"email\", \"ilike\", \"gmail\"]]\n```\n\nMultiple values (OR):\n```\n[\"|\", [\"name\", \"=\", \"John\"], [\"name\", \"=\", \"Jane\"]]\n```\n\nFilter by state:\n```\n[[\"state\", \"in\", [\"draft\", \"sent\"]]]\n```\n\nComparison:\n```\n[[\"amount_total\", \">=\", 100000]]\n```\n\nCombined:\n```\n[[\"partner_id.name\", \"ilike\", \"admin\"], [\"state\", \"=\", \"sale\"], [\"amount_total\", \">\", 50000]]\n```\n\n**Tip:** Use `GET /api/{model}/fields` to see available field names and types.",
 			"default": "[[\"name\",\"ilike\",\"test\"]]",
 			"type": "string",
 			"routing": {
@@ -10959,56 +10659,6 @@ export const stockDescription: INodeProperties[] = [
 				"send": {
 					"type": "query",
 					"property": "order",
-					"value": "={{ $value }}",
-					"propertyInDotNotation": false
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Stock"
-					],
-					"operation": [
-						"Search Stock Warehouse"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Name",
-			"name": "name",
-			"description": "Exact match on name field",
-			"default": "John Doe",
-			"type": "string",
-			"routing": {
-				"send": {
-					"type": "query",
-					"property": "name",
-					"value": "={{ $value }}",
-					"propertyInDotNotation": false
-				}
-			},
-			"displayOptions": {
-				"show": {
-					"resource": [
-						"Stock"
-					],
-					"operation": [
-						"Search Stock Warehouse"
-					]
-				}
-			}
-		},
-		{
-			"displayName": "Name Like",
-			"name": "name_like",
-			"description": "Search name (case-insensitive partial match)",
-			"default": "john",
-			"type": "string",
-			"routing": {
-				"send": {
-					"type": "query",
-					"property": "name_like",
 					"value": "={{ $value }}",
 					"propertyInDotNotation": false
 				}
