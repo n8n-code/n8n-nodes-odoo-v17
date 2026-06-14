@@ -1,6 +1,6 @@
 {
   "name": "@n8n-dev/n8n-nodes-odoo-v17",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Odoo v17 is an all-in-one open-source ERP for managing all aspects of business in a single platform",
   "license": "MIT",
   "homepage": "https://n8n-code.github.io/n8n-dev/#/n8n-nodes-odoo-v17",
