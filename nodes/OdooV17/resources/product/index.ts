@@ -280,6 +280,56 @@ export const productDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"displayName": "Name",
+			"name": "name",
+			"description": "Exact match on name field",
+			"default": "John Doe",
+			"type": "string",
+			"routing": {
+				"send": {
+					"type": "query",
+					"property": "name",
+					"value": "={{ $value }}",
+					"propertyInDotNotation": false
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Product"
+					],
+					"operation": [
+						"Search Product Attribute"
+					]
+				}
+			}
+		},
+		{
+			"displayName": "Name Like",
+			"name": "name_like",
+			"description": "Search name (case-insensitive partial match)",
+			"default": "john",
+			"type": "string",
+			"routing": {
+				"send": {
+					"type": "query",
+					"property": "name_like",
+					"value": "={{ $value }}",
+					"propertyInDotNotation": false
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Product"
+					],
+					"operation": [
+						"Search Product Attribute"
+					]
+				}
+			}
+		},
+		{
 			"displayName": "Bearer Token",
 			"name": "security_bearerauth",
 			"type": "string",
@@ -290,6 +340,31 @@ export const productDescription: INodeProperties[] = [
 				"request": {
 					"headers": {
 						"Authorization": "={{ 'Bearer ' + $value }}"
+					}
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Product"
+					],
+					"operation": [
+						"Search Product Attribute"
+					]
+				}
+			}
+		},
+		{
+			"displayName": "Basic Auth (Base64)",
+			"name": "security_basicauth",
+			"type": "string",
+			"default": "",
+			"description": "HTTP Basic Auth using Odoo email and password.",
+			"required": false,
+			"routing": {
+				"request": {
+					"headers": {
+						"Authorization": "={{ 'Basic ' + $value }}"
 					}
 				}
 			},
@@ -550,6 +625,31 @@ export const productDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"displayName": "Basic Auth (Base64)",
+			"name": "security_basicauth",
+			"type": "string",
+			"default": "",
+			"description": "HTTP Basic Auth using Odoo email and password.",
+			"required": false,
+			"routing": {
+				"request": {
+					"headers": {
+						"Authorization": "={{ 'Basic ' + $value }}"
+					}
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Product"
+					],
+					"operation": [
+						"Upsert Product Attribute"
+					]
+				}
+			}
+		},
+		{
 			"displayName": "GET /api/product.attribute.value",
 			"name": "operation",
 			"type": "notice",
@@ -692,6 +792,56 @@ export const productDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"displayName": "Name",
+			"name": "name",
+			"description": "Exact match on name field",
+			"default": "John Doe",
+			"type": "string",
+			"routing": {
+				"send": {
+					"type": "query",
+					"property": "name",
+					"value": "={{ $value }}",
+					"propertyInDotNotation": false
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Product"
+					],
+					"operation": [
+						"Search Product Attribute Value"
+					]
+				}
+			}
+		},
+		{
+			"displayName": "Name Like",
+			"name": "name_like",
+			"description": "Search name (case-insensitive partial match)",
+			"default": "john",
+			"type": "string",
+			"routing": {
+				"send": {
+					"type": "query",
+					"property": "name_like",
+					"value": "={{ $value }}",
+					"propertyInDotNotation": false
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Product"
+					],
+					"operation": [
+						"Search Product Attribute Value"
+					]
+				}
+			}
+		},
+		{
 			"displayName": "Bearer Token",
 			"name": "security_bearerauth",
 			"type": "string",
@@ -702,6 +852,31 @@ export const productDescription: INodeProperties[] = [
 				"request": {
 					"headers": {
 						"Authorization": "={{ 'Bearer ' + $value }}"
+					}
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Product"
+					],
+					"operation": [
+						"Search Product Attribute Value"
+					]
+				}
+			}
+		},
+		{
+			"displayName": "Basic Auth (Base64)",
+			"name": "security_basicauth",
+			"type": "string",
+			"default": "",
+			"description": "HTTP Basic Auth using Odoo email and password.",
+			"required": false,
+			"routing": {
+				"request": {
+					"headers": {
+						"Authorization": "={{ 'Basic ' + $value }}"
 					}
 				}
 			},
@@ -1062,6 +1237,31 @@ export const productDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"displayName": "Basic Auth (Base64)",
+			"name": "security_basicauth",
+			"type": "string",
+			"default": "",
+			"description": "HTTP Basic Auth using Odoo email and password.",
+			"required": false,
+			"routing": {
+				"request": {
+					"headers": {
+						"Authorization": "={{ 'Basic ' + $value }}"
+					}
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Product"
+					],
+					"operation": [
+						"Upsert Product Attribute Value"
+					]
+				}
+			}
+		},
+		{
 			"displayName": "GET /api/product.category",
 			"name": "operation",
 			"type": "notice",
@@ -1204,6 +1404,56 @@ export const productDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"displayName": "Name",
+			"name": "name",
+			"description": "Exact match on name field",
+			"default": "John Doe",
+			"type": "string",
+			"routing": {
+				"send": {
+					"type": "query",
+					"property": "name",
+					"value": "={{ $value }}",
+					"propertyInDotNotation": false
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Product"
+					],
+					"operation": [
+						"Search Product Category"
+					]
+				}
+			}
+		},
+		{
+			"displayName": "Name Like",
+			"name": "name_like",
+			"description": "Search name (case-insensitive partial match)",
+			"default": "john",
+			"type": "string",
+			"routing": {
+				"send": {
+					"type": "query",
+					"property": "name_like",
+					"value": "={{ $value }}",
+					"propertyInDotNotation": false
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Product"
+					],
+					"operation": [
+						"Search Product Category"
+					]
+				}
+			}
+		},
+		{
 			"displayName": "Bearer Token",
 			"name": "security_bearerauth",
 			"type": "string",
@@ -1214,6 +1464,31 @@ export const productDescription: INodeProperties[] = [
 				"request": {
 					"headers": {
 						"Authorization": "={{ 'Bearer ' + $value }}"
+					}
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Product"
+					],
+					"operation": [
+						"Search Product Category"
+					]
+				}
+			}
+		},
+		{
+			"displayName": "Basic Auth (Base64)",
+			"name": "security_basicauth",
+			"type": "string",
+			"default": "",
+			"description": "HTTP Basic Auth using Odoo email and password.",
+			"required": false,
+			"routing": {
+				"request": {
+					"headers": {
+						"Authorization": "={{ 'Basic ' + $value }}"
 					}
 				}
 			},
@@ -1824,6 +2099,31 @@ export const productDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"displayName": "Basic Auth (Base64)",
+			"name": "security_basicauth",
+			"type": "string",
+			"default": "",
+			"description": "HTTP Basic Auth using Odoo email and password.",
+			"required": false,
+			"routing": {
+				"request": {
+					"headers": {
+						"Authorization": "={{ 'Basic ' + $value }}"
+					}
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Product"
+					],
+					"operation": [
+						"Upsert Product Category"
+					]
+				}
+			}
+		},
+		{
 			"displayName": "GET /api/product.product",
 			"name": "operation",
 			"type": "notice",
@@ -1966,6 +2266,56 @@ export const productDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"displayName": "Name",
+			"name": "name",
+			"description": "Exact match on name field",
+			"default": "John Doe",
+			"type": "string",
+			"routing": {
+				"send": {
+					"type": "query",
+					"property": "name",
+					"value": "={{ $value }}",
+					"propertyInDotNotation": false
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Product"
+					],
+					"operation": [
+						"Search Product Product"
+					]
+				}
+			}
+		},
+		{
+			"displayName": "Name Like",
+			"name": "name_like",
+			"description": "Search name (case-insensitive partial match)",
+			"default": "john",
+			"type": "string",
+			"routing": {
+				"send": {
+					"type": "query",
+					"property": "name_like",
+					"value": "={{ $value }}",
+					"propertyInDotNotation": false
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Product"
+					],
+					"operation": [
+						"Search Product Product"
+					]
+				}
+			}
+		},
+		{
 			"displayName": "Bearer Token",
 			"name": "security_bearerauth",
 			"type": "string",
@@ -1976,6 +2326,31 @@ export const productDescription: INodeProperties[] = [
 				"request": {
 					"headers": {
 						"Authorization": "={{ 'Bearer ' + $value }}"
+					}
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Product"
+					],
+					"operation": [
+						"Search Product Product"
+					]
+				}
+			}
+		},
+		{
+			"displayName": "Basic Auth (Base64)",
+			"name": "security_basicauth",
+			"type": "string",
+			"default": "",
+			"description": "HTTP Basic Auth using Odoo email and password.",
+			"required": false,
+			"routing": {
+				"request": {
+					"headers": {
+						"Authorization": "={{ 'Basic ' + $value }}"
 					}
 				}
 			},
@@ -6886,6 +7261,31 @@ export const productDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"displayName": "Basic Auth (Base64)",
+			"name": "security_basicauth",
+			"type": "string",
+			"default": "",
+			"description": "HTTP Basic Auth using Odoo email and password.",
+			"required": false,
+			"routing": {
+				"request": {
+					"headers": {
+						"Authorization": "={{ 'Basic ' + $value }}"
+					}
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Product"
+					],
+					"operation": [
+						"Upsert Product Product"
+					]
+				}
+			}
+		},
+		{
 			"displayName": "GET /api/product.template",
 			"name": "operation",
 			"type": "notice",
@@ -7028,6 +7428,56 @@ export const productDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"displayName": "Name",
+			"name": "name",
+			"description": "Exact match on name field",
+			"default": "John Doe",
+			"type": "string",
+			"routing": {
+				"send": {
+					"type": "query",
+					"property": "name",
+					"value": "={{ $value }}",
+					"propertyInDotNotation": false
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Product"
+					],
+					"operation": [
+						"Search Product Template"
+					]
+				}
+			}
+		},
+		{
+			"displayName": "Name Like",
+			"name": "name_like",
+			"description": "Search name (case-insensitive partial match)",
+			"default": "john",
+			"type": "string",
+			"routing": {
+				"send": {
+					"type": "query",
+					"property": "name_like",
+					"value": "={{ $value }}",
+					"propertyInDotNotation": false
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Product"
+					],
+					"operation": [
+						"Search Product Template"
+					]
+				}
+			}
+		},
+		{
 			"displayName": "Bearer Token",
 			"name": "security_bearerauth",
 			"type": "string",
@@ -7038,6 +7488,31 @@ export const productDescription: INodeProperties[] = [
 				"request": {
 					"headers": {
 						"Authorization": "={{ 'Bearer ' + $value }}"
+					}
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Product"
+					],
+					"operation": [
+						"Search Product Template"
+					]
+				}
+			}
+		},
+		{
+			"displayName": "Basic Auth (Base64)",
+			"name": "security_basicauth",
+			"type": "string",
+			"default": "",
+			"description": "HTTP Basic Auth using Odoo email and password.",
+			"required": false,
+			"routing": {
+				"request": {
+					"headers": {
+						"Authorization": "={{ 'Basic ' + $value }}"
 					}
 				}
 			},
@@ -11233,6 +11708,31 @@ export const productDescription: INodeProperties[] = [
 				"request": {
 					"headers": {
 						"Authorization": "={{ 'Bearer ' + $value }}"
+					}
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Product"
+					],
+					"operation": [
+						"Upsert Product Template"
+					]
+				}
+			}
+		},
+		{
+			"displayName": "Basic Auth (Base64)",
+			"name": "security_basicauth",
+			"type": "string",
+			"default": "",
+			"description": "HTTP Basic Auth using Odoo email and password.",
+			"required": false,
+			"routing": {
+				"request": {
+					"headers": {
+						"Authorization": "={{ 'Basic ' + $value }}"
 					}
 				}
 			},

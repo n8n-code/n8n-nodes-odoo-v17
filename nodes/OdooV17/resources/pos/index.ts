@@ -256,6 +256,56 @@ export const posDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"displayName": "Name",
+			"name": "name",
+			"description": "Exact match on name field",
+			"default": "John Doe",
+			"type": "string",
+			"routing": {
+				"send": {
+					"type": "query",
+					"property": "name",
+					"value": "={{ $value }}",
+					"propertyInDotNotation": false
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Pos"
+					],
+					"operation": [
+						"Search Pos Config"
+					]
+				}
+			}
+		},
+		{
+			"displayName": "Name Like",
+			"name": "name_like",
+			"description": "Search name (case-insensitive partial match)",
+			"default": "john",
+			"type": "string",
+			"routing": {
+				"send": {
+					"type": "query",
+					"property": "name_like",
+					"value": "={{ $value }}",
+					"propertyInDotNotation": false
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Pos"
+					],
+					"operation": [
+						"Search Pos Config"
+					]
+				}
+			}
+		},
+		{
 			"displayName": "Bearer Token",
 			"name": "security_bearerauth",
 			"type": "string",
@@ -266,6 +316,31 @@ export const posDescription: INodeProperties[] = [
 				"request": {
 					"headers": {
 						"Authorization": "={{ 'Bearer ' + $value }}"
+					}
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Pos"
+					],
+					"operation": [
+						"Search Pos Config"
+					]
+				}
+			}
+		},
+		{
+			"displayName": "Basic Auth (Base64)",
+			"name": "security_basicauth",
+			"type": "string",
+			"default": "",
+			"description": "HTTP Basic Auth using Odoo email and password.",
+			"required": false,
+			"routing": {
+				"request": {
+					"headers": {
+						"Authorization": "={{ 'Basic ' + $value }}"
 					}
 				}
 			},
@@ -2926,6 +3001,31 @@ export const posDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"displayName": "Basic Auth (Base64)",
+			"name": "security_basicauth",
+			"type": "string",
+			"default": "",
+			"description": "HTTP Basic Auth using Odoo email and password.",
+			"required": false,
+			"routing": {
+				"request": {
+					"headers": {
+						"Authorization": "={{ 'Basic ' + $value }}"
+					}
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Pos"
+					],
+					"operation": [
+						"Upsert Pos Config"
+					]
+				}
+			}
+		},
+		{
 			"displayName": "GET /api/pos.order",
 			"name": "operation",
 			"type": "notice",
@@ -3068,6 +3168,56 @@ export const posDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"displayName": "Name",
+			"name": "name",
+			"description": "Exact match on name field",
+			"default": "John Doe",
+			"type": "string",
+			"routing": {
+				"send": {
+					"type": "query",
+					"property": "name",
+					"value": "={{ $value }}",
+					"propertyInDotNotation": false
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Pos"
+					],
+					"operation": [
+						"Search Pos Order"
+					]
+				}
+			}
+		},
+		{
+			"displayName": "Name Like",
+			"name": "name_like",
+			"description": "Search name (case-insensitive partial match)",
+			"default": "john",
+			"type": "string",
+			"routing": {
+				"send": {
+					"type": "query",
+					"property": "name_like",
+					"value": "={{ $value }}",
+					"propertyInDotNotation": false
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Pos"
+					],
+					"operation": [
+						"Search Pos Order"
+					]
+				}
+			}
+		},
+		{
 			"displayName": "Bearer Token",
 			"name": "security_bearerauth",
 			"type": "string",
@@ -3078,6 +3228,31 @@ export const posDescription: INodeProperties[] = [
 				"request": {
 					"headers": {
 						"Authorization": "={{ 'Bearer ' + $value }}"
+					}
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Pos"
+					],
+					"operation": [
+						"Search Pos Order"
+					]
+				}
+			}
+		},
+		{
+			"displayName": "Basic Auth (Base64)",
+			"name": "security_basicauth",
+			"type": "string",
+			"default": "",
+			"description": "HTTP Basic Auth using Odoo email and password.",
+			"required": false,
+			"routing": {
+				"request": {
+					"headers": {
+						"Authorization": "={{ 'Basic ' + $value }}"
 					}
 				}
 			},
@@ -4613,6 +4788,31 @@ export const posDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"displayName": "Basic Auth (Base64)",
+			"name": "security_basicauth",
+			"type": "string",
+			"default": "",
+			"description": "HTTP Basic Auth using Odoo email and password.",
+			"required": false,
+			"routing": {
+				"request": {
+					"headers": {
+						"Authorization": "={{ 'Basic ' + $value }}"
+					}
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Pos"
+					],
+					"operation": [
+						"Upsert Pos Order"
+					]
+				}
+			}
+		},
+		{
 			"displayName": "GET /api/pos.order.line",
 			"name": "operation",
 			"type": "notice",
@@ -4755,6 +4955,56 @@ export const posDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"displayName": "Name",
+			"name": "name",
+			"description": "Exact match on name field",
+			"default": "John Doe",
+			"type": "string",
+			"routing": {
+				"send": {
+					"type": "query",
+					"property": "name",
+					"value": "={{ $value }}",
+					"propertyInDotNotation": false
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Pos"
+					],
+					"operation": [
+						"Search Pos Order Line"
+					]
+				}
+			}
+		},
+		{
+			"displayName": "Name Like",
+			"name": "name_like",
+			"description": "Search name (case-insensitive partial match)",
+			"default": "john",
+			"type": "string",
+			"routing": {
+				"send": {
+					"type": "query",
+					"property": "name_like",
+					"value": "={{ $value }}",
+					"propertyInDotNotation": false
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Pos"
+					],
+					"operation": [
+						"Search Pos Order Line"
+					]
+				}
+			}
+		},
+		{
 			"displayName": "Bearer Token",
 			"name": "security_bearerauth",
 			"type": "string",
@@ -4765,6 +5015,31 @@ export const posDescription: INodeProperties[] = [
 				"request": {
 					"headers": {
 						"Authorization": "={{ 'Bearer ' + $value }}"
+					}
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Pos"
+					],
+					"operation": [
+						"Search Pos Order Line"
+					]
+				}
+			}
+		},
+		{
+			"displayName": "Basic Auth (Base64)",
+			"name": "security_basicauth",
+			"type": "string",
+			"default": "",
+			"description": "HTTP Basic Auth using Odoo email and password.",
+			"required": false,
+			"routing": {
+				"request": {
+					"headers": {
+						"Authorization": "={{ 'Basic ' + $value }}"
 					}
 				}
 			},
@@ -5650,6 +5925,31 @@ export const posDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"displayName": "Basic Auth (Base64)",
+			"name": "security_basicauth",
+			"type": "string",
+			"default": "",
+			"description": "HTTP Basic Auth using Odoo email and password.",
+			"required": false,
+			"routing": {
+				"request": {
+					"headers": {
+						"Authorization": "={{ 'Basic ' + $value }}"
+					}
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Pos"
+					],
+					"operation": [
+						"Upsert Pos Order Line"
+					]
+				}
+			}
+		},
+		{
 			"displayName": "GET /api/pos.session",
 			"name": "operation",
 			"type": "notice",
@@ -5792,6 +6092,56 @@ export const posDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"displayName": "Name",
+			"name": "name",
+			"description": "Exact match on name field",
+			"default": "John Doe",
+			"type": "string",
+			"routing": {
+				"send": {
+					"type": "query",
+					"property": "name",
+					"value": "={{ $value }}",
+					"propertyInDotNotation": false
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Pos"
+					],
+					"operation": [
+						"Search Pos Session"
+					]
+				}
+			}
+		},
+		{
+			"displayName": "Name Like",
+			"name": "name_like",
+			"description": "Search name (case-insensitive partial match)",
+			"default": "john",
+			"type": "string",
+			"routing": {
+				"send": {
+					"type": "query",
+					"property": "name_like",
+					"value": "={{ $value }}",
+					"propertyInDotNotation": false
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Pos"
+					],
+					"operation": [
+						"Search Pos Session"
+					]
+				}
+			}
+		},
+		{
 			"displayName": "Bearer Token",
 			"name": "security_bearerauth",
 			"type": "string",
@@ -5802,6 +6152,31 @@ export const posDescription: INodeProperties[] = [
 				"request": {
 					"headers": {
 						"Authorization": "={{ 'Bearer ' + $value }}"
+					}
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Pos"
+					],
+					"operation": [
+						"Search Pos Session"
+					]
+				}
+			}
+		},
+		{
+			"displayName": "Basic Auth (Base64)",
+			"name": "security_basicauth",
+			"type": "string",
+			"default": "",
+			"description": "HTTP Basic Auth using Odoo email and password.",
+			"required": false,
+			"routing": {
+				"request": {
+					"headers": {
+						"Authorization": "={{ 'Basic ' + $value }}"
 					}
 				}
 			},
@@ -7122,6 +7497,31 @@ export const posDescription: INodeProperties[] = [
 				"request": {
 					"headers": {
 						"Authorization": "={{ 'Bearer ' + $value }}"
+					}
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Pos"
+					],
+					"operation": [
+						"Upsert Pos Session"
+					]
+				}
+			}
+		},
+		{
+			"displayName": "Basic Auth (Base64)",
+			"name": "security_basicauth",
+			"type": "string",
+			"default": "",
+			"description": "HTTP Basic Auth using Odoo email and password.",
+			"required": false,
+			"routing": {
+				"request": {
+					"headers": {
+						"Authorization": "={{ 'Basic ' + $value }}"
 					}
 				}
 			},

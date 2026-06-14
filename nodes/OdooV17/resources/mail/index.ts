@@ -208,6 +208,56 @@ export const mailDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"displayName": "Name",
+			"name": "name",
+			"description": "Exact match on name field",
+			"default": "John Doe",
+			"type": "string",
+			"routing": {
+				"send": {
+					"type": "query",
+					"property": "name",
+					"value": "={{ $value }}",
+					"propertyInDotNotation": false
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Mail"
+					],
+					"operation": [
+						"Search Mail Message"
+					]
+				}
+			}
+		},
+		{
+			"displayName": "Name Like",
+			"name": "name_like",
+			"description": "Search name (case-insensitive partial match)",
+			"default": "john",
+			"type": "string",
+			"routing": {
+				"send": {
+					"type": "query",
+					"property": "name_like",
+					"value": "={{ $value }}",
+					"propertyInDotNotation": false
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Mail"
+					],
+					"operation": [
+						"Search Mail Message"
+					]
+				}
+			}
+		},
+		{
 			"displayName": "Bearer Token",
 			"name": "security_bearerauth",
 			"type": "string",
@@ -218,6 +268,31 @@ export const mailDescription: INodeProperties[] = [
 				"request": {
 					"headers": {
 						"Authorization": "={{ 'Bearer ' + $value }}"
+					}
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Mail"
+					],
+					"operation": [
+						"Search Mail Message"
+					]
+				}
+			}
+		},
+		{
+			"displayName": "Basic Auth (Base64)",
+			"name": "security_basicauth",
+			"type": "string",
+			"default": "",
+			"description": "HTTP Basic Auth using Odoo email and password.",
+			"required": false,
+			"routing": {
+				"request": {
+					"headers": {
+						"Authorization": "={{ 'Basic ' + $value }}"
 					}
 				}
 			},
@@ -1278,6 +1353,31 @@ export const mailDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"displayName": "Basic Auth (Base64)",
+			"name": "security_basicauth",
+			"type": "string",
+			"default": "",
+			"description": "HTTP Basic Auth using Odoo email and password.",
+			"required": false,
+			"routing": {
+				"request": {
+					"headers": {
+						"Authorization": "={{ 'Basic ' + $value }}"
+					}
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Mail"
+					],
+					"operation": [
+						"Upsert Mail Message"
+					]
+				}
+			}
+		},
+		{
 			"displayName": "GET /api/mail.thread",
 			"name": "operation",
 			"type": "notice",
@@ -1420,6 +1520,56 @@ export const mailDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"displayName": "Name",
+			"name": "name",
+			"description": "Exact match on name field",
+			"default": "John Doe",
+			"type": "string",
+			"routing": {
+				"send": {
+					"type": "query",
+					"property": "name",
+					"value": "={{ $value }}",
+					"propertyInDotNotation": false
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Mail"
+					],
+					"operation": [
+						"Search Mail Thread"
+					]
+				}
+			}
+		},
+		{
+			"displayName": "Name Like",
+			"name": "name_like",
+			"description": "Search name (case-insensitive partial match)",
+			"default": "john",
+			"type": "string",
+			"routing": {
+				"send": {
+					"type": "query",
+					"property": "name_like",
+					"value": "={{ $value }}",
+					"propertyInDotNotation": false
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Mail"
+					],
+					"operation": [
+						"Search Mail Thread"
+					]
+				}
+			}
+		},
+		{
 			"displayName": "Bearer Token",
 			"name": "security_bearerauth",
 			"type": "string",
@@ -1430,6 +1580,31 @@ export const mailDescription: INodeProperties[] = [
 				"request": {
 					"headers": {
 						"Authorization": "={{ 'Bearer ' + $value }}"
+					}
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Mail"
+					],
+					"operation": [
+						"Search Mail Thread"
+					]
+				}
+			}
+		},
+		{
+			"displayName": "Basic Auth (Base64)",
+			"name": "security_basicauth",
+			"type": "string",
+			"default": "",
+			"description": "HTTP Basic Auth using Odoo email and password.",
+			"required": false,
+			"routing": {
+				"request": {
+					"headers": {
+						"Authorization": "={{ 'Basic ' + $value }}"
 					}
 				}
 			},
@@ -1725,6 +1900,31 @@ export const mailDescription: INodeProperties[] = [
 				"request": {
 					"headers": {
 						"Authorization": "={{ 'Bearer ' + $value }}"
+					}
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Mail"
+					],
+					"operation": [
+						"Upsert Mail Thread"
+					]
+				}
+			}
+		},
+		{
+			"displayName": "Basic Auth (Base64)",
+			"name": "security_basicauth",
+			"type": "string",
+			"default": "",
+			"description": "HTTP Basic Auth using Odoo email and password.",
+			"required": false,
+			"routing": {
+				"request": {
+					"headers": {
+						"Authorization": "={{ 'Basic ' + $value }}"
 					}
 				}
 			},

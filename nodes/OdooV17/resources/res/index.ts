@@ -232,6 +232,56 @@ export const resDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"displayName": "Name",
+			"name": "name",
+			"description": "Exact match on name field",
+			"default": "John Doe",
+			"type": "string",
+			"routing": {
+				"send": {
+					"type": "query",
+					"property": "name",
+					"value": "={{ $value }}",
+					"propertyInDotNotation": false
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Res"
+					],
+					"operation": [
+						"Search Res Partner"
+					]
+				}
+			}
+		},
+		{
+			"displayName": "Name Like",
+			"name": "name_like",
+			"description": "Search name (case-insensitive partial match)",
+			"default": "john",
+			"type": "string",
+			"routing": {
+				"send": {
+					"type": "query",
+					"property": "name_like",
+					"value": "={{ $value }}",
+					"propertyInDotNotation": false
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Res"
+					],
+					"operation": [
+						"Search Res Partner"
+					]
+				}
+			}
+		},
+		{
 			"displayName": "Bearer Token",
 			"name": "security_bearerauth",
 			"type": "string",
@@ -242,6 +292,31 @@ export const resDescription: INodeProperties[] = [
 				"request": {
 					"headers": {
 						"Authorization": "={{ 'Bearer ' + $value }}"
+					}
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Res"
+					],
+					"operation": [
+						"Search Res Partner"
+					]
+				}
+			}
+		},
+		{
+			"displayName": "Basic Auth (Base64)",
+			"name": "security_basicauth",
+			"type": "string",
+			"default": "",
+			"description": "HTTP Basic Auth using Odoo email and password.",
+			"required": false,
+			"routing": {
+				"request": {
+					"headers": {
+						"Authorization": "={{ 'Basic ' + $value }}"
 					}
 				}
 			},
@@ -4727,6 +4802,31 @@ export const resDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"displayName": "Basic Auth (Base64)",
+			"name": "security_basicauth",
+			"type": "string",
+			"default": "",
+			"description": "HTTP Basic Auth using Odoo email and password.",
+			"required": false,
+			"routing": {
+				"request": {
+					"headers": {
+						"Authorization": "={{ 'Basic ' + $value }}"
+					}
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Res"
+					],
+					"operation": [
+						"Upsert Res Partner"
+					]
+				}
+			}
+		},
+		{
 			"displayName": "GET /api/res.partner.bank",
 			"name": "operation",
 			"type": "notice",
@@ -4869,6 +4969,56 @@ export const resDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"displayName": "Name",
+			"name": "name",
+			"description": "Exact match on name field",
+			"default": "John Doe",
+			"type": "string",
+			"routing": {
+				"send": {
+					"type": "query",
+					"property": "name",
+					"value": "={{ $value }}",
+					"propertyInDotNotation": false
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Res"
+					],
+					"operation": [
+						"Search Res Partner Bank"
+					]
+				}
+			}
+		},
+		{
+			"displayName": "Name Like",
+			"name": "name_like",
+			"description": "Search name (case-insensitive partial match)",
+			"default": "john",
+			"type": "string",
+			"routing": {
+				"send": {
+					"type": "query",
+					"property": "name_like",
+					"value": "={{ $value }}",
+					"propertyInDotNotation": false
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Res"
+					],
+					"operation": [
+						"Search Res Partner Bank"
+					]
+				}
+			}
+		},
+		{
 			"displayName": "Bearer Token",
 			"name": "security_bearerauth",
 			"type": "string",
@@ -4879,6 +5029,31 @@ export const resDescription: INodeProperties[] = [
 				"request": {
 					"headers": {
 						"Authorization": "={{ 'Bearer ' + $value }}"
+					}
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Res"
+					],
+					"operation": [
+						"Search Res Partner Bank"
+					]
+				}
+			}
+		},
+		{
+			"displayName": "Basic Auth (Base64)",
+			"name": "security_basicauth",
+			"type": "string",
+			"default": "",
+			"description": "HTTP Basic Auth using Odoo email and password.",
+			"required": false,
+			"routing": {
+				"request": {
+					"headers": {
+						"Authorization": "={{ 'Basic ' + $value }}"
 					}
 				}
 			},
@@ -5964,6 +6139,31 @@ export const resDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"displayName": "Basic Auth (Base64)",
+			"name": "security_basicauth",
+			"type": "string",
+			"default": "",
+			"description": "HTTP Basic Auth using Odoo email and password.",
+			"required": false,
+			"routing": {
+				"request": {
+					"headers": {
+						"Authorization": "={{ 'Basic ' + $value }}"
+					}
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Res"
+					],
+					"operation": [
+						"Upsert Res Partner Bank"
+					]
+				}
+			}
+		},
+		{
 			"displayName": "GET /api/res.partner.category",
 			"name": "operation",
 			"type": "notice",
@@ -6106,6 +6306,56 @@ export const resDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"displayName": "Name",
+			"name": "name",
+			"description": "Exact match on name field",
+			"default": "John Doe",
+			"type": "string",
+			"routing": {
+				"send": {
+					"type": "query",
+					"property": "name",
+					"value": "={{ $value }}",
+					"propertyInDotNotation": false
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Res"
+					],
+					"operation": [
+						"Search Res Partner Category"
+					]
+				}
+			}
+		},
+		{
+			"displayName": "Name Like",
+			"name": "name_like",
+			"description": "Search name (case-insensitive partial match)",
+			"default": "john",
+			"type": "string",
+			"routing": {
+				"send": {
+					"type": "query",
+					"property": "name_like",
+					"value": "={{ $value }}",
+					"propertyInDotNotation": false
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Res"
+					],
+					"operation": [
+						"Search Res Partner Category"
+					]
+				}
+			}
+		},
+		{
 			"displayName": "Bearer Token",
 			"name": "security_bearerauth",
 			"type": "string",
@@ -6116,6 +6366,31 @@ export const resDescription: INodeProperties[] = [
 				"request": {
 					"headers": {
 						"Authorization": "={{ 'Bearer ' + $value }}"
+					}
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Res"
+					],
+					"operation": [
+						"Search Res Partner Category"
+					]
+				}
+			}
+		},
+		{
+			"displayName": "Basic Auth (Base64)",
+			"name": "security_basicauth",
+			"type": "string",
+			"default": "",
+			"description": "HTTP Basic Auth using Odoo email and password.",
+			"required": false,
+			"routing": {
+				"request": {
+					"headers": {
+						"Authorization": "={{ 'Basic ' + $value }}"
 					}
 				}
 			},
@@ -6336,6 +6611,31 @@ export const resDescription: INodeProperties[] = [
 				"request": {
 					"headers": {
 						"Authorization": "={{ 'Bearer ' + $value }}"
+					}
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Res"
+					],
+					"operation": [
+						"Upsert Res Partner Category"
+					]
+				}
+			}
+		},
+		{
+			"displayName": "Basic Auth (Base64)",
+			"name": "security_basicauth",
+			"type": "string",
+			"default": "",
+			"description": "HTTP Basic Auth using Odoo email and password.",
+			"required": false,
+			"routing": {
+				"request": {
+					"headers": {
+						"Authorization": "={{ 'Basic ' + $value }}"
 					}
 				}
 			},

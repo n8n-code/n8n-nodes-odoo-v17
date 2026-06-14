@@ -13,7 +13,7 @@ Every time you connect n8n to odoo-v17, you waste hours mapping endpoints, defin
 
 **What if connecting n8n to odoo-v17 took 5 minutes, not half a day?**
 
-This node gives you **13+ resources** out of the box: **Account**, **Crm**, **Hr**, **Mail**, **Mrp**, and 8 more: with full CRUD operations, typed parameters, and zero manual configuration.
+This node gives you **14+ resources** out of the box: **Account**, **Crm**, **Hr**, **Mail**, **Mrp**, and 9 more: with full CRUD operations, typed parameters, and zero manual configuration.
 
 ---
 
@@ -218,6 +218,57 @@ That's it. No configuration files. No code. It just works.
 - Put Upsert Category
 - Get Search read Product Unit of Measure
 - Put Upsert Uom
+
+</details>
+
+<details>
+<summary><b>Fields</b> (45 operations)</summary>
+
+- Get account account field metadata
+- Get account journal field metadata
+- Get account move field metadata
+- Get account move line field metadata
+- Get account payment field metadata
+- Get account tax field metadata
+- Get account tax group field metadata
+- Get crm lead field metadata
+- Get crm stage field metadata
+- Get crm tag field metadata
+- Get hr department field metadata
+- Get hr employee field metadata
+- Get hr job field metadata
+- Get mail message field metadata
+- Get mail thread field metadata
+- Get mrp bom field metadata
+- Get mrp production field metadata
+- Get mrp workorder field metadata
+- Get pos config field metadata
+- Get pos order field metadata
+- Get pos order line field metadata
+- Get pos session field metadata
+- Get product attribute field metadata
+- Get product attribute value field metadata
+- Get product category field metadata
+- Get product product field metadata
+- Get product template field metadata
+- Get project project field metadata
+- Get project task field metadata
+- Get purchase order field metadata
+- Get purchase order line field metadata
+- Get res partner field metadata
+- Get res partner bank field metadata
+- Get res partner category field metadata
+- Get sale order field metadata
+- Get sale order line field metadata
+- Get stock location field metadata
+- Get stock move field metadata
+- Get stock move line field metadata
+- Get stock picking field metadata
+- Get stock picking type field metadata
+- Get stock quant field metadata
+- Get stock warehouse field metadata
+- Get uom category field metadata
+- Get uom uom field metadata
 
 </details>
 

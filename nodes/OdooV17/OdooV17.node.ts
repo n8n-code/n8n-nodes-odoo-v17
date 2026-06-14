@@ -12,6 +12,7 @@ import { resDescription } from './resources/res';
 import { saleDescription } from './resources/sale';
 import { stockDescription } from './resources/stock';
 import { uomDescription } from './resources/uom';
+import { fieldsDescription } from './resources/fields';
 
 export class OdooV17 implements INodeType {
         description: INodeTypeDescription = {
@@ -110,6 +111,11 @@ export class OdooV17 implements INodeType {
 					"name": "Uom",
 					"value": "Uom",
 					"description": "Operations on uom.* models"
+				},
+				{
+					"name": "Fields",
+					"value": "Fields",
+					"description": ""
 				}
 			],
 			"default": ""
@@ -126,7 +132,8 @@ export class OdooV17 implements INodeType {
 		...resDescription,
 		...saleDescription,
 		...stockDescription,
-		...uomDescription
+		...uomDescription,
+		...fieldsDescription
                 ],
         };
 }

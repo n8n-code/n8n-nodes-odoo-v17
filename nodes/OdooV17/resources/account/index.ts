@@ -328,6 +328,56 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"displayName": "Name",
+			"name": "name",
+			"description": "Exact match on name field",
+			"default": "John Doe",
+			"type": "string",
+			"routing": {
+				"send": {
+					"type": "query",
+					"property": "name",
+					"value": "={{ $value }}",
+					"propertyInDotNotation": false
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Account"
+					],
+					"operation": [
+						"Search Account Account"
+					]
+				}
+			}
+		},
+		{
+			"displayName": "Name Like",
+			"name": "name_like",
+			"description": "Search name (case-insensitive partial match)",
+			"default": "john",
+			"type": "string",
+			"routing": {
+				"send": {
+					"type": "query",
+					"property": "name_like",
+					"value": "={{ $value }}",
+					"propertyInDotNotation": false
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Account"
+					],
+					"operation": [
+						"Search Account Account"
+					]
+				}
+			}
+		},
+		{
 			"displayName": "Bearer Token",
 			"name": "security_bearerauth",
 			"type": "string",
@@ -338,6 +388,31 @@ export const accountDescription: INodeProperties[] = [
 				"request": {
 					"headers": {
 						"Authorization": "={{ 'Bearer ' + $value }}"
+					}
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Account"
+					],
+					"operation": [
+						"Search Account Account"
+					]
+				}
+			}
+		},
+		{
+			"displayName": "Basic Auth (Base64)",
+			"name": "security_basicauth",
+			"type": "string",
+			"default": "",
+			"description": "HTTP Basic Auth using Odoo email and password.",
+			"required": false,
+			"routing": {
+				"request": {
+					"headers": {
+						"Authorization": "={{ 'Basic ' + $value }}"
 					}
 				}
 			},
@@ -1223,6 +1298,31 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"displayName": "Basic Auth (Base64)",
+			"name": "security_basicauth",
+			"type": "string",
+			"default": "",
+			"description": "HTTP Basic Auth using Odoo email and password.",
+			"required": false,
+			"routing": {
+				"request": {
+					"headers": {
+						"Authorization": "={{ 'Basic ' + $value }}"
+					}
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Account"
+					],
+					"operation": [
+						"Upsert Account Account"
+					]
+				}
+			}
+		},
+		{
 			"displayName": "GET /api/account.journal",
 			"name": "operation",
 			"type": "notice",
@@ -1365,6 +1465,56 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"displayName": "Name",
+			"name": "name",
+			"description": "Exact match on name field",
+			"default": "John Doe",
+			"type": "string",
+			"routing": {
+				"send": {
+					"type": "query",
+					"property": "name",
+					"value": "={{ $value }}",
+					"propertyInDotNotation": false
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Account"
+					],
+					"operation": [
+						"Search Account Journal"
+					]
+				}
+			}
+		},
+		{
+			"displayName": "Name Like",
+			"name": "name_like",
+			"description": "Search name (case-insensitive partial match)",
+			"default": "john",
+			"type": "string",
+			"routing": {
+				"send": {
+					"type": "query",
+					"property": "name_like",
+					"value": "={{ $value }}",
+					"propertyInDotNotation": false
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Account"
+					],
+					"operation": [
+						"Search Account Journal"
+					]
+				}
+			}
+		},
+		{
 			"displayName": "Bearer Token",
 			"name": "security_bearerauth",
 			"type": "string",
@@ -1375,6 +1525,31 @@ export const accountDescription: INodeProperties[] = [
 				"request": {
 					"headers": {
 						"Authorization": "={{ 'Bearer ' + $value }}"
+					}
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Account"
+					],
+					"operation": [
+						"Search Account Journal"
+					]
+				}
+			}
+		},
+		{
+			"displayName": "Basic Auth (Base64)",
+			"name": "security_basicauth",
+			"type": "string",
+			"default": "",
+			"description": "HTTP Basic Auth using Odoo email and password.",
+			"required": false,
+			"routing": {
+				"request": {
+					"headers": {
+						"Authorization": "={{ 'Basic ' + $value }}"
 					}
 				}
 			},
@@ -3260,6 +3435,31 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"displayName": "Basic Auth (Base64)",
+			"name": "security_basicauth",
+			"type": "string",
+			"default": "",
+			"description": "HTTP Basic Auth using Odoo email and password.",
+			"required": false,
+			"routing": {
+				"request": {
+					"headers": {
+						"Authorization": "={{ 'Basic ' + $value }}"
+					}
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Account"
+					],
+					"operation": [
+						"Upsert Account Journal"
+					]
+				}
+			}
+		},
+		{
 			"displayName": "GET /api/account.move",
 			"name": "operation",
 			"type": "notice",
@@ -3402,6 +3602,56 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"displayName": "Name",
+			"name": "name",
+			"description": "Exact match on name field",
+			"default": "John Doe",
+			"type": "string",
+			"routing": {
+				"send": {
+					"type": "query",
+					"property": "name",
+					"value": "={{ $value }}",
+					"propertyInDotNotation": false
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Account"
+					],
+					"operation": [
+						"Search Account Move"
+					]
+				}
+			}
+		},
+		{
+			"displayName": "Name Like",
+			"name": "name_like",
+			"description": "Search name (case-insensitive partial match)",
+			"default": "john",
+			"type": "string",
+			"routing": {
+				"send": {
+					"type": "query",
+					"property": "name_like",
+					"value": "={{ $value }}",
+					"propertyInDotNotation": false
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Account"
+					],
+					"operation": [
+						"Search Account Move"
+					]
+				}
+			}
+		},
+		{
 			"displayName": "Bearer Token",
 			"name": "security_bearerauth",
 			"type": "string",
@@ -3412,6 +3662,31 @@ export const accountDescription: INodeProperties[] = [
 				"request": {
 					"headers": {
 						"Authorization": "={{ 'Bearer ' + $value }}"
+					}
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Account"
+					],
+					"operation": [
+						"Search Account Move"
+					]
+				}
+			}
+		},
+		{
+			"displayName": "Basic Auth (Base64)",
+			"name": "security_basicauth",
+			"type": "string",
+			"default": "",
+			"description": "HTTP Basic Auth using Odoo email and password.",
+			"required": false,
+			"routing": {
+				"request": {
+					"headers": {
+						"Authorization": "={{ 'Basic ' + $value }}"
 					}
 				}
 			},
@@ -7372,6 +7647,31 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"displayName": "Basic Auth (Base64)",
+			"name": "security_basicauth",
+			"type": "string",
+			"default": "",
+			"description": "HTTP Basic Auth using Odoo email and password.",
+			"required": false,
+			"routing": {
+				"request": {
+					"headers": {
+						"Authorization": "={{ 'Basic ' + $value }}"
+					}
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Account"
+					],
+					"operation": [
+						"Upsert Account Move"
+					]
+				}
+			}
+		},
+		{
 			"displayName": "GET /api/account.move.line",
 			"name": "operation",
 			"type": "notice",
@@ -7514,6 +7814,56 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"displayName": "Name",
+			"name": "name",
+			"description": "Exact match on name field",
+			"default": "John Doe",
+			"type": "string",
+			"routing": {
+				"send": {
+					"type": "query",
+					"property": "name",
+					"value": "={{ $value }}",
+					"propertyInDotNotation": false
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Account"
+					],
+					"operation": [
+						"Search Account Move Line"
+					]
+				}
+			}
+		},
+		{
+			"displayName": "Name Like",
+			"name": "name_like",
+			"description": "Search name (case-insensitive partial match)",
+			"default": "john",
+			"type": "string",
+			"routing": {
+				"send": {
+					"type": "query",
+					"property": "name_like",
+					"value": "={{ $value }}",
+					"propertyInDotNotation": false
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Account"
+					],
+					"operation": [
+						"Search Account Move Line"
+					]
+				}
+			}
+		},
+		{
 			"displayName": "Bearer Token",
 			"name": "security_bearerauth",
 			"type": "string",
@@ -7524,6 +7874,31 @@ export const accountDescription: INodeProperties[] = [
 				"request": {
 					"headers": {
 						"Authorization": "={{ 'Bearer ' + $value }}"
+					}
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Account"
+					],
+					"operation": [
+						"Search Account Move Line"
+					]
+				}
+			}
+		},
+		{
+			"displayName": "Basic Auth (Base64)",
+			"name": "security_basicauth",
+			"type": "string",
+			"default": "",
+			"description": "HTTP Basic Auth using Odoo email and password.",
+			"required": false,
+			"routing": {
+				"request": {
+					"headers": {
+						"Authorization": "={{ 'Basic ' + $value }}"
 					}
 				}
 			},
@@ -9684,6 +10059,31 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"displayName": "Basic Auth (Base64)",
+			"name": "security_basicauth",
+			"type": "string",
+			"default": "",
+			"description": "HTTP Basic Auth using Odoo email and password.",
+			"required": false,
+			"routing": {
+				"request": {
+					"headers": {
+						"Authorization": "={{ 'Basic ' + $value }}"
+					}
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Account"
+					],
+					"operation": [
+						"Upsert Account Move Line"
+					]
+				}
+			}
+		},
+		{
 			"displayName": "GET /api/account.payment",
 			"name": "operation",
 			"type": "notice",
@@ -9826,6 +10226,56 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"displayName": "Name",
+			"name": "name",
+			"description": "Exact match on name field",
+			"default": "John Doe",
+			"type": "string",
+			"routing": {
+				"send": {
+					"type": "query",
+					"property": "name",
+					"value": "={{ $value }}",
+					"propertyInDotNotation": false
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Account"
+					],
+					"operation": [
+						"Search Account Payment"
+					]
+				}
+			}
+		},
+		{
+			"displayName": "Name Like",
+			"name": "name_like",
+			"description": "Search name (case-insensitive partial match)",
+			"default": "john",
+			"type": "string",
+			"routing": {
+				"send": {
+					"type": "query",
+					"property": "name_like",
+					"value": "={{ $value }}",
+					"propertyInDotNotation": false
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Account"
+					],
+					"operation": [
+						"Search Account Payment"
+					]
+				}
+			}
+		},
+		{
 			"displayName": "Bearer Token",
 			"name": "security_bearerauth",
 			"type": "string",
@@ -9836,6 +10286,31 @@ export const accountDescription: INodeProperties[] = [
 				"request": {
 					"headers": {
 						"Authorization": "={{ 'Bearer ' + $value }}"
+					}
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Account"
+					],
+					"operation": [
+						"Search Account Payment"
+					]
+				}
+			}
+		},
+		{
+			"displayName": "Basic Auth (Base64)",
+			"name": "security_basicauth",
+			"type": "string",
+			"default": "",
+			"description": "HTTP Basic Auth using Odoo email and password.",
+			"required": false,
+			"routing": {
+				"request": {
+					"headers": {
+						"Authorization": "={{ 'Basic ' + $value }}"
 					}
 				}
 			},
@@ -14821,6 +15296,31 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"displayName": "Basic Auth (Base64)",
+			"name": "security_basicauth",
+			"type": "string",
+			"default": "",
+			"description": "HTTP Basic Auth using Odoo email and password.",
+			"required": false,
+			"routing": {
+				"request": {
+					"headers": {
+						"Authorization": "={{ 'Basic ' + $value }}"
+					}
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Account"
+					],
+					"operation": [
+						"Upsert Account Payment"
+					]
+				}
+			}
+		},
+		{
 			"displayName": "GET /api/account.tax",
 			"name": "operation",
 			"type": "notice",
@@ -14963,6 +15463,56 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"displayName": "Name",
+			"name": "name",
+			"description": "Exact match on name field",
+			"default": "John Doe",
+			"type": "string",
+			"routing": {
+				"send": {
+					"type": "query",
+					"property": "name",
+					"value": "={{ $value }}",
+					"propertyInDotNotation": false
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Account"
+					],
+					"operation": [
+						"Search Account Tax"
+					]
+				}
+			}
+		},
+		{
+			"displayName": "Name Like",
+			"name": "name_like",
+			"description": "Search name (case-insensitive partial match)",
+			"default": "john",
+			"type": "string",
+			"routing": {
+				"send": {
+					"type": "query",
+					"property": "name_like",
+					"value": "={{ $value }}",
+					"propertyInDotNotation": false
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Account"
+					],
+					"operation": [
+						"Search Account Tax"
+					]
+				}
+			}
+		},
+		{
 			"displayName": "Bearer Token",
 			"name": "security_bearerauth",
 			"type": "string",
@@ -14973,6 +15523,31 @@ export const accountDescription: INodeProperties[] = [
 				"request": {
 					"headers": {
 						"Authorization": "={{ 'Bearer ' + $value }}"
+					}
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Account"
+					],
+					"operation": [
+						"Search Account Tax"
+					]
+				}
+			}
+		},
+		{
+			"displayName": "Basic Auth (Base64)",
+			"name": "security_basicauth",
+			"type": "string",
+			"default": "",
+			"description": "HTTP Basic Auth using Odoo email and password.",
+			"required": false,
+			"routing": {
+				"request": {
+					"headers": {
+						"Authorization": "={{ 'Basic ' + $value }}"
 					}
 				}
 			},
@@ -15883,6 +16458,31 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"displayName": "Basic Auth (Base64)",
+			"name": "security_basicauth",
+			"type": "string",
+			"default": "",
+			"description": "HTTP Basic Auth using Odoo email and password.",
+			"required": false,
+			"routing": {
+				"request": {
+					"headers": {
+						"Authorization": "={{ 'Basic ' + $value }}"
+					}
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Account"
+					],
+					"operation": [
+						"Upsert Account Tax"
+					]
+				}
+			}
+		},
+		{
 			"displayName": "GET /api/account.tax.group",
 			"name": "operation",
 			"type": "notice",
@@ -16025,6 +16625,56 @@ export const accountDescription: INodeProperties[] = [
 			}
 		},
 		{
+			"displayName": "Name",
+			"name": "name",
+			"description": "Exact match on name field",
+			"default": "John Doe",
+			"type": "string",
+			"routing": {
+				"send": {
+					"type": "query",
+					"property": "name",
+					"value": "={{ $value }}",
+					"propertyInDotNotation": false
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Account"
+					],
+					"operation": [
+						"Search Account Tax Group"
+					]
+				}
+			}
+		},
+		{
+			"displayName": "Name Like",
+			"name": "name_like",
+			"description": "Search name (case-insensitive partial match)",
+			"default": "john",
+			"type": "string",
+			"routing": {
+				"send": {
+					"type": "query",
+					"property": "name_like",
+					"value": "={{ $value }}",
+					"propertyInDotNotation": false
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Account"
+					],
+					"operation": [
+						"Search Account Tax Group"
+					]
+				}
+			}
+		},
+		{
 			"displayName": "Bearer Token",
 			"name": "security_bearerauth",
 			"type": "string",
@@ -16035,6 +16685,31 @@ export const accountDescription: INodeProperties[] = [
 				"request": {
 					"headers": {
 						"Authorization": "={{ 'Bearer ' + $value }}"
+					}
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Account"
+					],
+					"operation": [
+						"Search Account Tax Group"
+					]
+				}
+			}
+		},
+		{
+			"displayName": "Basic Auth (Base64)",
+			"name": "security_basicauth",
+			"type": "string",
+			"default": "",
+			"description": "HTTP Basic Auth using Odoo email and password.",
+			"required": false,
+			"routing": {
+				"request": {
+					"headers": {
+						"Authorization": "={{ 'Basic ' + $value }}"
 					}
 				}
 			},
@@ -16330,6 +17005,31 @@ export const accountDescription: INodeProperties[] = [
 				"request": {
 					"headers": {
 						"Authorization": "={{ 'Bearer ' + $value }}"
+					}
+				}
+			},
+			"displayOptions": {
+				"show": {
+					"resource": [
+						"Account"
+					],
+					"operation": [
+						"Upsert Account Tax Group"
+					]
+				}
+			}
+		},
+		{
+			"displayName": "Basic Auth (Base64)",
+			"name": "security_basicauth",
+			"type": "string",
+			"default": "",
+			"description": "HTTP Basic Auth using Odoo email and password.",
+			"required": false,
+			"routing": {
+				"request": {
+					"headers": {
+						"Authorization": "={{ 'Basic ' + $value }}"
 					}
 				}
 			},

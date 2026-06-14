@@ -11,3 +11,4 @@ export { resDescription } from './res';
 export { saleDescription } from './sale';
 export { stockDescription } from './stock';
 export { uomDescription } from './uom';
+export { fieldsDescription } from './fields';
