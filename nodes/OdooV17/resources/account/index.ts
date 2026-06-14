@@ -376,7 +376,7 @@ export const accountDescription: INodeProperties[] = [
 			"displayName": "Key",
 			"name": "_key",
 			"type": "json",
-			"default": "{}",
+			"default": "{\n  \"code\": \"100000\"\n}",
 			"description": "Search criteria to find existing record by Account Code (unique per company)",
 			"routing": {
 				"send": {
@@ -1413,7 +1413,7 @@ export const accountDescription: INodeProperties[] = [
 			"displayName": "Key",
 			"name": "_key",
 			"type": "json",
-			"default": "{}",
+			"default": "{\n  \"code\": \"BNK1\"\n}",
 			"description": "Search criteria to find existing record by Journal Code (unique per company)",
 			"routing": {
 				"send": {
@@ -3450,7 +3450,7 @@ export const accountDescription: INodeProperties[] = [
 			"displayName": "Key",
 			"name": "_key",
 			"type": "json",
-			"default": "{}",
+			"default": "{\n  \"name\": \"INV/2024/001\"\n}",
 			"description": "Search criteria to find existing record by Entry Number",
 			"routing": {
 				"send": {
@@ -7562,7 +7562,7 @@ export const accountDescription: INodeProperties[] = [
 			"displayName": "Key",
 			"name": "_key",
 			"type": "json",
-			"default": "{}",
+			"default": "{\n  \"name\": \"INV/2024/001-1\"\n}",
 			"description": "Search criteria to find existing record by Line Description",
 			"routing": {
 				"send": {
@@ -9874,7 +9874,7 @@ export const accountDescription: INodeProperties[] = [
 			"displayName": "Key",
 			"name": "_key",
 			"type": "json",
-			"default": "{}",
+			"default": "{\n  \"name\": \"PAY/2024/001\"\n}",
 			"description": "Search criteria to find existing record by Payment Number",
 			"routing": {
 				"send": {
@@ -15011,7 +15011,7 @@ export const accountDescription: INodeProperties[] = [
 			"displayName": "Key",
 			"name": "_key",
 			"type": "json",
-			"default": "{}",
+			"default": "{\n  \"name\": \"PPN 11%\"\n}",
 			"description": "Search criteria to find existing record by Tax Name",
 			"routing": {
 				"send": {
@@ -16073,7 +16073,7 @@ export const accountDescription: INodeProperties[] = [
 			"displayName": "Key",
 			"name": "_key",
 			"type": "json",
-			"default": "{}",
+			"default": "{\n  \"name\": \"Tax Group\"\n}",
 			"description": "Search criteria to find existing record by Tax Group Name",
 			"routing": {
 				"send": {

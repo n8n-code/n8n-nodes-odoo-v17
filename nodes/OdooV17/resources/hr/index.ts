@@ -280,7 +280,7 @@ export const hrDescription: INodeProperties[] = [
 			"displayName": "Key",
 			"name": "_key",
 			"type": "json",
-			"default": "{}",
+			"default": "{\n  \"name\": \"Engineering\"\n}",
 			"description": "Search criteria to find existing record by Department Name",
 			"routing": {
 				"send": {
@@ -1067,7 +1067,7 @@ export const hrDescription: INodeProperties[] = [
 			"displayName": "Key",
 			"name": "_key",
 			"type": "json",
-			"default": "{}",
+			"default": "{\n  \"work_email\": \"john@demo.com\"\n}",
 			"description": "Search criteria to find existing record by Work Email",
 			"routing": {
 				"send": {
@@ -4279,7 +4279,7 @@ export const hrDescription: INodeProperties[] = [
 			"displayName": "Key",
 			"name": "_key",
 			"type": "json",
-			"default": "{}",
+			"default": "{\n  \"name\": \"Developer\"\n}",
 			"description": "Search criteria to find existing record by Job Position Name",
 			"routing": {
 				"send": {

@@ -280,7 +280,7 @@ export const mrpDescription: INodeProperties[] = [
 			"displayName": "Key",
 			"name": "_key",
 			"type": "json",
-			"default": "{}",
+			"default": "{\n  \"code\": \"BOM001\"\n}",
 			"description": "Search criteria to find existing record by BoM Reference",
 			"routing": {
 				"send": {
@@ -1317,7 +1317,7 @@ export const mrpDescription: INodeProperties[] = [
 			"displayName": "Key",
 			"name": "_key",
 			"type": "json",
-			"default": "{}",
+			"default": "{\n  \"name\": \"MO/001\"\n}",
 			"description": "Search criteria to find existing record by Production Number",
 			"routing": {
 				"send": {
@@ -3879,7 +3879,7 @@ export const mrpDescription: INodeProperties[] = [
 			"displayName": "Key",
 			"name": "_key",
 			"type": "json",
-			"default": "{}",
+			"default": "{\n  \"name\": \"WO/001\"\n}",
 			"description": "Search criteria to find existing record by Work Order Name",
 			"routing": {
 				"send": {

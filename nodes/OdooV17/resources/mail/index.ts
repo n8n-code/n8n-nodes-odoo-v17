@@ -256,7 +256,7 @@ export const mailDescription: INodeProperties[] = [
 			"displayName": "Key",
 			"name": "_key",
 			"type": "json",
-			"default": "{}",
+			"default": "{\n  \"subject\": \"Hello\"\n}",
 			"description": "Search criteria to find existing record by Message Subject",
 			"routing": {
 				"send": {
@@ -1468,7 +1468,7 @@ export const mailDescription: INodeProperties[] = [
 			"displayName": "Key",
 			"name": "_key",
 			"type": "json",
-			"default": "{}",
+			"default": "{\n  \"id\": 1\n}",
 			"description": "Search criteria to find existing record by Thread ID",
 			"routing": {
 				"send": {

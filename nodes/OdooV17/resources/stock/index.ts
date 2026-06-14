@@ -376,7 +376,7 @@ export const stockDescription: INodeProperties[] = [
 			"displayName": "Key",
 			"name": "_key",
 			"type": "json",
-			"default": "{}",
+			"default": "{\n  \"complete_name\": \"WH/Stock\"\n}",
 			"description": "Search criteria to find existing record by Full Location Path",
 			"routing": {
 				"send": {
@@ -1263,7 +1263,7 @@ export const stockDescription: INodeProperties[] = [
 			"displayName": "Key",
 			"name": "_key",
 			"type": "json",
-			"default": "{}",
+			"default": "{\n  \"name\": \"Move/001\"\n}",
 			"description": "Search criteria to find existing record by Move Reference",
 			"routing": {
 				"send": {
@@ -3825,7 +3825,7 @@ export const stockDescription: INodeProperties[] = [
 			"displayName": "Key",
 			"name": "_key",
 			"type": "json",
-			"default": "{}",
+			"default": "{\n  \"name\": \"Move/001-1\"\n}",
 			"description": "Search criteria to find existing record by Move Line Description",
 			"routing": {
 				"send": {
@@ -5237,7 +5237,7 @@ export const stockDescription: INodeProperties[] = [
 			"displayName": "Key",
 			"name": "_key",
 			"type": "json",
-			"default": "{}",
+			"default": "{\n  \"name\": \"WH/OUT/001\"\n}",
 			"description": "Search criteria to find existing record by Picking Reference",
 			"routing": {
 				"send": {
@@ -7649,7 +7649,7 @@ export const stockDescription: INodeProperties[] = [
 			"displayName": "Key",
 			"name": "_key",
 			"type": "json",
-			"default": "{}",
+			"default": "{\n  \"name\": \"Delivery Orders\"\n}",
 			"description": "Search criteria to find existing record by Picking Type Name",
 			"routing": {
 				"send": {
@@ -9361,7 +9361,7 @@ export const stockDescription: INodeProperties[] = [
 			"displayName": "Key",
 			"name": "_key",
 			"type": "json",
-			"default": "{}",
+			"default": "{\n  \"id\": 1\n}",
 			"description": "Search criteria to find existing record by Quant ID",
 			"routing": {
 				"send": {
@@ -10423,7 +10423,7 @@ export const stockDescription: INodeProperties[] = [
 			"displayName": "Key",
 			"name": "_key",
 			"type": "json",
-			"default": "{}",
+			"default": "{\n  \"name\": \"Warehouse 1\"\n}",
 			"description": "Search criteria to find existing record by Warehouse Name",
 			"routing": {
 				"send": {

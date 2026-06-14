@@ -280,7 +280,7 @@ export const crmDescription: INodeProperties[] = [
 			"displayName": "Key",
 			"name": "_key",
 			"type": "json",
-			"default": "{}",
+			"default": "{\n  \"name\": \"Test Lead\"\n}",
 			"description": "Search criteria to find existing record by Opportunity Name",
 			"routing": {
 				"send": {
@@ -3167,7 +3167,7 @@ export const crmDescription: INodeProperties[] = [
 			"displayName": "Key",
 			"name": "_key",
 			"type": "json",
-			"default": "{}",
+			"default": "{\n  \"name\": \"New\"\n}",
 			"description": "Search criteria to find existing record by Stage Name",
 			"routing": {
 				"send": {
@@ -3579,7 +3579,7 @@ export const crmDescription: INodeProperties[] = [
 			"displayName": "Key",
 			"name": "_key",
 			"type": "json",
-			"default": "{}",
+			"default": "{\n  \"name\": \"VIP\"\n}",
 			"description": "Search criteria to find existing record by Tag Name",
 			"routing": {
 				"send": {

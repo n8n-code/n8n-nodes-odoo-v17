@@ -304,7 +304,7 @@ export const posDescription: INodeProperties[] = [
 			"displayName": "Key",
 			"name": "_key",
 			"type": "json",
-			"default": "{}",
+			"default": "{\n  \"name\": \"Shop 1\"\n}",
 			"description": "Search criteria to find existing record by POS Config Name",
 			"routing": {
 				"send": {
@@ -3116,7 +3116,7 @@ export const posDescription: INodeProperties[] = [
 			"displayName": "Key",
 			"name": "_key",
 			"type": "json",
-			"default": "{}",
+			"default": "{\n  \"name\": \"Order/001\"\n}",
 			"description": "Search criteria to find existing record by Order Reference",
 			"routing": {
 				"send": {
@@ -4803,7 +4803,7 @@ export const posDescription: INodeProperties[] = [
 			"displayName": "Key",
 			"name": "_key",
 			"type": "json",
-			"default": "{}",
+			"default": "{\n  \"name\": \"Line 1\"\n}",
 			"description": "Search criteria to find existing record by Order Line Reference",
 			"routing": {
 				"send": {
@@ -5840,7 +5840,7 @@ export const posDescription: INodeProperties[] = [
 			"displayName": "Key",
 			"name": "_key",
 			"type": "json",
-			"default": "{}",
+			"default": "{\n  \"name\": \"Session/001\"\n}",
 			"description": "Search criteria to find existing record by Session Name",
 			"routing": {
 				"send": {

@@ -256,7 +256,7 @@ export const uomDescription: INodeProperties[] = [
 			"displayName": "Key",
 			"name": "_key",
 			"type": "json",
-			"default": "{}",
+			"default": "{\n  \"name\": \"Unit\"\n}",
 			"description": "Search criteria to find existing record by UoM Category Name",
 			"routing": {
 				"send": {
@@ -568,7 +568,7 @@ export const uomDescription: INodeProperties[] = [
 			"displayName": "Key",
 			"name": "_key",
 			"type": "json",
-			"default": "{}",
+			"default": "{\n  \"name\": \"Units\"\n}",
 			"description": "Search criteria to find existing record by UoM Name",
 			"routing": {
 				"send": {

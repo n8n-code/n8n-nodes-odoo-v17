@@ -256,7 +256,7 @@ export const purchaseDescription: INodeProperties[] = [
 			"displayName": "Key",
 			"name": "_key",
 			"type": "json",
-			"default": "{}",
+			"default": "{\n  \"name\": \"PO/001\"\n}",
 			"description": "Search criteria to find existing record by PO Number",
 			"routing": {
 				"send": {
@@ -2193,7 +2193,7 @@ export const purchaseDescription: INodeProperties[] = [
 			"displayName": "Key",
 			"name": "_key",
 			"type": "json",
-			"default": "{}",
+			"default": "{\n  \"name\": \"PO/001-1\"\n}",
 			"description": "Search criteria to find existing record by PO Line Description",
 			"routing": {
 				"send": {

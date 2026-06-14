@@ -280,7 +280,7 @@ export const resDescription: INodeProperties[] = [
 			"displayName": "Key",
 			"name": "_key",
 			"type": "json",
-			"default": "{}",
+			"default": "{\n  \"email\": \"john@example.com\"\n}",
 			"description": "Search criteria to find existing record by Email Address",
 			"routing": {
 				"send": {
@@ -4917,7 +4917,7 @@ export const resDescription: INodeProperties[] = [
 			"displayName": "Key",
 			"name": "_key",
 			"type": "json",
-			"default": "{}",
+			"default": "{\n  \"acc_number\": \"1234567890\"\n}",
 			"description": "Search criteria to find existing record by Bank Account Number",
 			"routing": {
 				"send": {
@@ -6154,7 +6154,7 @@ export const resDescription: INodeProperties[] = [
 			"displayName": "Key",
 			"name": "_key",
 			"type": "json",
-			"default": "{}",
+			"default": "{\n  \"name\": \"VIP\"\n}",
 			"description": "Search criteria to find existing record by Partner Tag Name",
 			"routing": {
 				"send": {

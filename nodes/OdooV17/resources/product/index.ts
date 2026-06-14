@@ -328,7 +328,7 @@ export const productDescription: INodeProperties[] = [
 			"displayName": "Key",
 			"name": "_key",
 			"type": "json",
-			"default": "{}",
+			"default": "{\n  \"name\": \"Color\"\n}",
 			"description": "Search criteria to find existing record by Attribute Name",
 			"routing": {
 				"send": {
@@ -740,7 +740,7 @@ export const productDescription: INodeProperties[] = [
 			"displayName": "Key",
 			"name": "_key",
 			"type": "json",
-			"default": "{}",
+			"default": "{\n  \"name\": \"Red\"\n}",
 			"description": "Search criteria to find existing record by Attribute Value Name",
 			"routing": {
 				"send": {
@@ -1252,7 +1252,7 @@ export const productDescription: INodeProperties[] = [
 			"displayName": "Key",
 			"name": "_key",
 			"type": "json",
-			"default": "{}",
+			"default": "{\n  \"name\": \"Electronics\"\n}",
 			"description": "Search criteria to find existing record by Category Name",
 			"routing": {
 				"send": {
@@ -2014,7 +2014,7 @@ export const productDescription: INodeProperties[] = [
 			"displayName": "Key",
 			"name": "_key",
 			"type": "json",
-			"default": "{}",
+			"default": "{\n  \"barcode\": \"1234567890\"\n}",
 			"description": "Search criteria to find existing record by Barcode (unique)",
 			"routing": {
 				"send": {
@@ -7076,7 +7076,7 @@ export const productDescription: INodeProperties[] = [
 			"displayName": "Key",
 			"name": "_key",
 			"type": "json",
-			"default": "{}",
+			"default": "{\n  \"name\": \"Test Product\"\n}",
 			"description": "Search criteria to find existing record by Product Name",
 			"routing": {
 				"send": {

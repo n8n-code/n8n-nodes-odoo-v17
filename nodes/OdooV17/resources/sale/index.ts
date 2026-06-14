@@ -256,7 +256,7 @@ export const saleDescription: INodeProperties[] = [
 			"displayName": "Key",
 			"name": "_key",
 			"type": "json",
-			"default": "{}",
+			"default": "{\n  \"name\": \"S00001\"\n}",
 			"description": "Search criteria to find existing record by SO Number",
 			"routing": {
 				"send": {
@@ -3593,7 +3593,7 @@ export const saleDescription: INodeProperties[] = [
 			"displayName": "Key",
 			"name": "_key",
 			"type": "json",
-			"default": "{}",
+			"default": "{\n  \"name\": \"S00001-1\"\n}",
 			"description": "Search criteria to find existing record by SO Line Description",
 			"routing": {
 				"send": {

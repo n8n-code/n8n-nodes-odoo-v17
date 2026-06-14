@@ -256,7 +256,7 @@ export const projectDescription: INodeProperties[] = [
 			"displayName": "Key",
 			"name": "_key",
 			"type": "json",
-			"default": "{}",
+			"default": "{\n  \"name\": \"Website Redesign\"\n}",
 			"description": "Search criteria to find existing record by Project Name",
 			"routing": {
 				"send": {
@@ -2943,7 +2943,7 @@ export const projectDescription: INodeProperties[] = [
 			"displayName": "Key",
 			"name": "_key",
 			"type": "json",
-			"default": "{}",
+			"default": "{\n  \"name\": \"Design Homepage\"\n}",
 			"description": "Search criteria to find existing record by Task Title",
 			"routing": {
 				"send": {
